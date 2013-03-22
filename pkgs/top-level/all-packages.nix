@@ -2952,6 +2952,11 @@ let
 
   avrgcclibc = callPackage ../development/misc/avr-gcc-with-avr-libc {};
 
+  gcc-arm-none-eabi = callPackage ../development/misc/arm-gcc-newlib {
+    stdenv = stdenv_32bit;
+    gmp = gmpxx;
+  };
+
   avr8burnomat = callPackage ../development/misc/avr8-burn-omat { };
 
   sourceFromHead = import ../build-support/source-from-head-fun.nix {
