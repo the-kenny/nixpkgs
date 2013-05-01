@@ -8947,6 +8947,7 @@ let
   drumkv1 = callPackage ../applications/audio/drumkv1 { };
 
   dwarf_fortress = callPackage_i686 ../games/dwarf-fortress { };
+  dwarf_fortress_moddable = callPackage_i686 ../games/dwarf-fortress { copyDataDirectory = true; };
 
   d1x_rebirth = callPackage ../games/d1x-rebirth { };
 
