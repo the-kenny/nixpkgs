@@ -1577,10 +1577,10 @@ with otherPackages; rec {
 
   # Easy real time C++ syntax check and intellisense if you use CMake.
   cpputils-cmake = buildEmacsPackage {
-    name = "cpputils-cmake-0.3.0";
+    name = "cpputils-cmake-0.3.1";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/cpputils-cmake-0.3.0.tar";
-      sha256 = "1n6hp2qb4grb36g1hab04hs3mj86bgwh0b6r3k6fjyjlx6g1wbsa";
+      url = "http://marmalade-repo.org/packages/cpputils-cmake-0.3.1.tar";
+      sha256 = "0mlmncc9plwsxa463kbnhy41rs2xvf81pwfnm8w8nv10apipag8i";
     };
 
     deps = [  ];
@@ -2615,6 +2615,17 @@ with otherPackages; rec {
     src = fetchurl {
       url = "http://marmalade-repo.org/packages/emamux-0.1.el";
       sha256 = "01vd5gm6ygsifryqh32m5psi68ad55ph4y1hab2mx7lcdf9gjzl3";
+    };
+
+    deps = [  ];
+  };
+
+  # Unofficial Emmet's support for emacs
+  emmet-mode = buildEmacsPackage {
+    name = "emmet-mode-1.0.0";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/emmet-mode-1.0.0.el";
+      sha256 = "0c7b7v3kg5cpm6zbhny7mzbmrplb2msg71nkacyscl018rvjxrpr";
     };
 
     deps = [  ];
@@ -4347,6 +4358,17 @@ with otherPackages; rec {
     deps = [  ];
   };
 
+  # Commands for hiding lines based on a regexp
+  hide-lines = buildEmacsPackage {
+    name = "hide-lines-20130623.1701";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/hide-lines-20130623.1701.el";
+      sha256 = "0zv6crjdwyaz9m9rgbvibyicbh9388vhd7q08k06gin06rkl9pd4";
+    };
+
+    deps = [  ];
+  };
+
   # Add markers to the fringe for regions foldable by hideshow.el
   hideshowvis = buildEmacsPackage {
     name = "hideshowvis-0.5";
@@ -4701,10 +4723,10 @@ with otherPackages; rec {
 
   # Access gnus groups or servers using ido
   ido-gnus = buildEmacsPackage {
-    name = "ido-gnus-0.1";
+    name = "ido-gnus-0.2";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/ido-gnus-0.1.el";
-      sha256 = "0fzi4jdgkm9sijjk2r6z3pim5x7v5f19iicjmqkqcrpw25hyr059";
+      url = "http://marmalade-repo.org/packages/ido-gnus-0.2.el";
+      sha256 = "017rnfnkp12692spcsvqbgr8agky9cwi0w9zbhmbp95mkbpsykz9";
     };
 
     deps = [ gnus ];
@@ -5040,6 +5062,17 @@ with otherPackages; rec {
     deps = [  ];
   };
 
+  # Miscellaneous macros
+  jb-misc-macros = buildEmacsPackage {
+    name = "jb-misc-macros-0.1";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/jb-misc-macros-0.1.el";
+      sha256 = "1baz01sq6v6rp98fy6pw5kz95zmnl9fwb9gnrmrn4x53dn5k2vhs";
+    };
+
+    deps = [ macro-utils ];
+  };
+
   # Python auto-completion for Emacs
   jedi = buildEmacsPackage {
     name = "jedi-0.1.2";
@@ -5207,10 +5240,10 @@ with otherPackages; rec {
 
   # jump to previous insertion points
   jumpc = buildEmacsPackage {
-    name = "jumpc-2.0";
+    name = "jumpc-3.0";
     src = fetchurl {
-      url = "http://elpa.gnu.org/packages/jumpc-2.0.el";
-      sha256 = "0r3r7wyp6qfd4av61q1h4j2fwhay1d7zlg57dpfq95xi25jq4d0y";
+      url = "http://elpa.gnu.org/packages/jumpc-3.0.el";
+      sha256 = "1vhggw3mzaq33al8f16jbg5qq5f95s8365is9qqyb8yq77gqym6a";
     };
 
     deps = [  ];
@@ -5284,10 +5317,10 @@ with otherPackages; rec {
 
   # Add conditional branching to keyboard macros
   kmacro-decision = buildEmacsPackage {
-    name = "kmacro-decision-0.9";
+    name = "kmacro-decision-1.1";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/kmacro-decision-0.9.el";
-      sha256 = "1ybp8m7z913bm0n779852x380x4nd2byapykr1j6bayi207qgz72";
+      url = "http://marmalade-repo.org/packages/kmacro-decision-1.1.el";
+      sha256 = "12chyjd6825x9j9h1p9l0w79kk7x9gk13zq6bq0z348hdlcfqvz3";
     };
 
     deps = [ el-x ];
@@ -5805,6 +5838,17 @@ with otherPackages; rec {
     src = fetchurl {
       url = "http://marmalade-repo.org/packages/makefile-runner-1.1.2.el";
       sha256 = "04jgw48vsd25kyl3hlqw42anj2j0ihah9pxcb26xkdhdlrzbhv3v";
+    };
+
+    deps = [  ];
+  };
+
+  # Add interactive commands for every manpages installed in your computer.
+  man-commands = buildEmacsPackage {
+    name = "man-commands-1.0";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/man-commands-1.0.el";
+      sha256 = "1lxv5ca5jp5pafcqp4w83wvjx9pf4fjqpbl489x59rcik133fijk";
     };
 
     deps = [  ];
@@ -6626,10 +6670,10 @@ with otherPackages; rec {
 
   # Outline-based notes management and organizer
   org = buildEmacsPackage {
-    name = "org-20130617";
+    name = "org-20130624";
     src = fetchurl {
-      url = "http://elpa.gnu.org/packages/org-20130617.tar";
-      sha256 = "1izgcmskvgzv89wkm48r7rxhavmibsnh4yhv33asy9vp5xd7nkch";
+      url = "http://elpa.gnu.org/packages/org-20130624.tar";
+      sha256 = "0bz7v0smvixwgpcvl0ffrsz4zrmsbnsl5vmk8v8n1p6nn3xjwk1v";
     };
 
     deps = [  ];
@@ -9220,6 +9264,17 @@ with otherPackages; rec {
     deps = [  ];
   };
 
+  # Major-mode for viewing log files
+  syslog-mode = buildEmacsPackage {
+    name = "syslog-mode-2.0";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/syslog-mode-2.0.el";
+      sha256 = "0b9w33n07bhlxml3cl8vzfk4yv0fsn3fdxhpsibwpqcj41bkfkk4";
+    };
+
+    deps = [ hide-lines ];
+  };
+
   # A mode for SystemTap
   systemtap-mode = buildEmacsPackage {
     name = "systemtap-mode-0.2";
@@ -10014,10 +10069,10 @@ with otherPackages; rec {
 
   # General interface for text checkers
   wcheck-mode = buildEmacsPackage {
-    name = "wcheck-mode-2013.6.13";
+    name = "wcheck-mode-2013.6.25";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/wcheck-mode-2013.6.13.tar";
-      sha256 = "0bwg07yk8dm2nhvqwyygw1c7yqxh3dg86y5a3m29ih3j39zq4h5k";
+      url = "http://marmalade-repo.org/packages/wcheck-mode-2013.6.25.tar";
+      sha256 = "1vm0il4mxv22yrqiy453hbygkqj58q6la3xqd38qnjqi5ldwdwdv";
     };
 
     deps = [  ];
@@ -10051,6 +10106,17 @@ with otherPackages; rec {
     src = fetchurl {
       url = "http://marmalade-repo.org/packages/web-0.3.7.el";
       sha256 = "07ip6f58q7i8s1iyllwk0ih1mkx3wwixg75q5iq07ghlyan8j0ib";
+    };
+
+    deps = [  ];
+  };
+
+  # major mode for editing html templates
+  web-mode = buildEmacsPackage {
+    name = "web-mode-6.0.10";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/web-mode-6.0.10.el";
+      sha256 = "074n25x6kbkjkiq2i9fbpaxc0h76ngzkfmjnl91hgjmf14j7q5pg";
     };
 
     deps = [  ];
