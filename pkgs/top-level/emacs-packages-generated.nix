@@ -2556,13 +2556,13 @@ with otherPackages; rec {
 
   # The Emacs webserver.
   elnode = buildEmacsPackage {
-    name = "elnode-0.9.9.7.4";
+    name = "elnode-0.9.9.7.6";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/elnode-0.9.9.7.4.tar";
-      sha256 = "1ssrpa1l2yxjr9ixwf7g26bxb10kxq40rm6cmkx3gdl8p036bwd4";
+      url = "http://marmalade-repo.org/packages/elnode-0.9.9.7.6.tar";
+      sha256 = "1rmpw2qnfa6gs4ajlblrdzvqjw7a7s8mg1adw0ibsd2ljn6zshvx";
     };
 
-    deps = [ web dash s creole fakir db kv ];
+    deps = [ web dash noflet s creole fakir db kv ];
   };
 
   # Handy functions for inspecting and comparing package archives
@@ -3205,10 +3205,10 @@ with otherPackages; rec {
 
   # On-the-fly syntax checking (Flymake done right)
   flycheck = buildEmacsPackage {
-    name = "flycheck-0.12";
+    name = "flycheck-0.13";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/flycheck-0.12.tar";
-      sha256 = "0brp01vhxd71y6bw3dipsk6vs57857dyydz2bibqdiz7shaqdvy8";
+      url = "http://marmalade-repo.org/packages/flycheck-0.13.tar";
+      sha256 = "1vjnyn3v5ar4i0jgi93yiv4br97srf5c42r6nzqcxznqcj95j2y1";
     };
 
     deps = [ s dash cl-lib  ];
@@ -9354,10 +9354,10 @@ with otherPackages; rec {
 
   # Pretty tabbar, autohide, use both tabbar/ruler
   tabbar-ruler = buildEmacsPackage {
-    name = "tabbar-ruler-0.37";
+    name = "tabbar-ruler-0.39";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/tabbar-ruler-0.37.el";
-      sha256 = "0zr1xgzkb2rjqi5cxq0l2ibczc5aarwajly41ynzngvw4fc9hmm5";
+      url = "http://marmalade-repo.org/packages/tabbar-ruler-0.39.el";
+      sha256 = "0p96sq8qmz353ngnzczh70x6159lk70cgy9wk8qg5xiryzvc3578";
     };
 
     deps = [ tabbar ];
