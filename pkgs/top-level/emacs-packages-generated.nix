@@ -1025,6 +1025,17 @@ with otherPackages; rec {
     deps = [  ];
   };
 
+  # Replace 'the cloud' with 'my butt'
+  cloud-to-butt-erc = buildEmacsPackage {
+    name = "cloud-to-butt-erc-1.0.0";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/cloud-to-butt-erc-1.0.0.el";
+      sha256 = "1ggrkkx6ahp98crcgm4rkyz3njr4nd9mp1h34nx3vga2203hnv77";
+    };
+
+    deps = [  ];
+  };
+
   # Wrapper for CodeMirror-style Emacs modes
   cm-mode = buildEmacsPackage {
     name = "cm-mode-0.1.0";
@@ -4556,6 +4567,17 @@ with otherPackages; rec {
     deps = [  ];
   };
 
+  # Add a few utility functions for manipulating hooks
+  hook-utils = buildEmacsPackage {
+    name = "hook-utils-1.0";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/hook-utils-1.0.el";
+      sha256 = "0x4k2mbzpj6kn5cahccqwq7fka9nmyqxc461fqa5q34ags8glq8j";
+    };
+
+    deps = [  ];
+  };
+
   # The missing hash table library for Emacs
   ht = buildEmacsPackage {
     name = "ht-0.8";
@@ -5845,10 +5867,10 @@ with otherPackages; rec {
 
   # Add interactive commands for every manpages installed in your computer.
   man-commands = buildEmacsPackage {
-    name = "man-commands-1.0";
+    name = "man-commands-1.1";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/man-commands-1.0.el";
-      sha256 = "1lxv5ca5jp5pafcqp4w83wvjx9pf4fjqpbl489x59rcik133fijk";
+      url = "http://marmalade-repo.org/packages/man-commands-1.1.el";
+      sha256 = "1y953cz4lzjqdbsdr388fkapyydcgrvaig4n3bz58jsf3p07v6n2";
     };
 
     deps = [  ];
@@ -6943,6 +6965,17 @@ with otherPackages; rec {
     deps = [  ];
   };
 
+  # Add the default keybindings suggested for pager.el
+  pager-default-keybindings = buildEmacsPackage {
+    name = "pager-default-keybindings-1.0";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/pager-default-keybindings-1.0.el";
+      sha256 = "0nzbr3rahkfwcrzplrzn8g40xd029zzrsg2cy8qx3rwjayv1j9q1";
+    };
+
+    deps = [  ];
+  };
+
   # minor mode for editing parentheses  -*- Mode: Emacs-Lisp -*-
   paredit = buildEmacsPackage {
     name = "paredit-22";
@@ -7011,10 +7044,10 @@ with otherPackages; rec {
 
   # paste text to KDE's pastebin service
   paste-kde = buildEmacsPackage {
-    name = "paste-kde-0.2.1";
+    name = "paste-kde-0.2.2";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/paste-kde-0.2.1.el";
-      sha256 = "0qqjhwk0jd274zd8pgw9g20rfgi90zd61r7cb2d6q5gnvkc63vjj";
+      url = "http://marmalade-repo.org/packages/paste-kde-0.2.2.el";
+      sha256 = "1nihvrzj58fkia8ivj24zn8iiz4m3cazhp05lzmbcjqhjsjdnr0f";
     };
 
     deps = [ web ];
