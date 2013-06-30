@@ -1531,6 +1531,17 @@ with otherPackages; rec {
     deps = [ company ];
   };
 
+  # company-mode completion back-end for inf-ruby
+  company-inf-ruby = buildEmacsPackage {
+    name = "company-inf-ruby-0.1";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/company-inf-ruby-0.1.el";
+      sha256 = "13q6ww9x36s2hp1k8h3b9zybairvwy33d06gd5p53x7h650i3v0y";
+    };
+
+    deps = [ company inf-ruby ];
+  };
+
   # Concurrent utility functions for emacs lisp
   concurrent = buildEmacsPackage {
     name = "concurrent-0.3.1";
@@ -4877,10 +4888,10 @@ with otherPackages; rec {
 
   # Run a ruby process in a buffer
   inf-ruby = buildEmacsPackage {
-    name = "inf-ruby-2.2.5";
+    name = "inf-ruby-2.2.6";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/inf-ruby-2.2.5.el";
-      sha256 = "0pp8y1xvs6rhgj5av6j52yirf8w7ivxjz9xa4sibhblb5va3zjbb";
+      url = "http://marmalade-repo.org/packages/inf-ruby-2.2.6.el";
+      sha256 = "14jlzzc7siww5wqgzivjrypa3b5akpwqf50w6vj0cwhf5jk9fvj7";
     };
 
     deps = [  ];
@@ -6604,10 +6615,10 @@ with otherPackages; rec {
 
   # OAuth 2.0 Authorization Protocol
   oauth2 = buildEmacsPackage {
-    name = "oauth2-0.8";
+    name = "oauth2-0.9";
     src = fetchurl {
-      url = "http://elpa.gnu.org/packages/oauth2-0.8.el";
-      sha256 = "1gljz2c4d5zxf1a95f6mfff4f3m3prlih89nfg3sqjg7lzqh3gdl";
+      url = "http://elpa.gnu.org/packages/oauth2-0.9.el";
+      sha256 = "04z5qgycg53vwl1k35yj96l4s9v9d14zs0jpy8glglm9hb1a7636";
     };
 
     deps = [  ];
@@ -6622,6 +6633,17 @@ with otherPackages; rec {
     };
 
     deps = [ sml-mode ];
+  };
+
+  # Have M-x occur default to the word at point
+  occur-default-current-word = buildEmacsPackage {
+    name = "occur-default-current-word-1.0";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/occur-default-current-word-1.0.el";
+      sha256 = "0kd6af4knghi3jj8ammbpjs9pvhivhn5wxnc2aj4ixxc2sq3vn3f";
+    };
+
+    deps = [  ];
   };
 
   # Extra functionality for occur
@@ -8390,6 +8412,17 @@ with otherPackages; rec {
     src = fetchurl {
       url = "http://marmalade-repo.org/packages/scratch-20110708.el";
       sha256 = "0148zr8c00ffbqb7jhz4b9hgacra9fh3bjlawkascm80c0arm7sk";
+    };
+
+    deps = [  ];
+  };
+
+  # persist the scratch buffer across sessions
+  scratch-persist = buildEmacsPackage {
+    name = "scratch-persist-1.0";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/scratch-persist-1.0.el";
+      sha256 = "0cy3aqyg7fk5rxvzan3anqvngdgcgxa6vk5pfjzy6d9cn12j0ahi";
     };
 
     deps = [  ];
