@@ -103,6 +103,11 @@ pythonPackages = modules // rec {
     inherit python pycairo;
   };
 
+  pygoocanvas = import ../development/python-modules/pygoocanvas/default.nix {
+    inherit (pkgs) stdenv fetchurl pkgconfig goocanvas;
+    inherit python pygobject pygtk pycairo;
+  };
+
   pygtk = import ../development/python-modules/pygtk {
     inherit (pkgs) fetchurl stdenv pkgconfig gtk;
     inherit python buildPythonPackage pygobject pycairo;
