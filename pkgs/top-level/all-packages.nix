@@ -9469,6 +9469,8 @@ let
 
   minisat = callPackage ../applications/science/logic/minisat {};
 
+  openshot = callPackage ../applications/video/openshot { };
+
   opensmt = callPackage ../applications/science/logic/opensmt { };
 
   otter = callPackage ../applications/science/logic/otter {};
