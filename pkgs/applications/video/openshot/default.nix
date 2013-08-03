@@ -1,12 +1,13 @@
-{ stdenv, fetchurl, buildPythonPackage, python, pythonPackages, mlt, sox, ffmpeg }:
+{ stdenv, fetchbzr, buildPythonPackage, python, pythonPackages, mlt, sox, ffmpeg }:
 
 buildPythonPackage rec {
   name = "openshot-${version}";
-  version = "1.4.3";
+  version = "1.4.4-dev";
 
-  src = fetchurl {
-    url = "https://launchpad.net/openshot/1.4/${version}/+download/${name}.tar.gz";
-    sha256 = "1l2rp353j7kffrdsh96fg6my6syf4cnlym4r6lkb0rw6kb2z3ssv";
+  src = fetchbzr {
+    url = "lp:openshot";
+    revision = "740";
+    sha256 = "1h66k2kkx8wkri96dqqagqw18zwdzs1hqpby67yscsh1ckcbykad";
   };
 
   propagatedBuildInputs = [
