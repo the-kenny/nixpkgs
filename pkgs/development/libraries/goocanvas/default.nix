@@ -1,11 +1,11 @@
 { stdenv, fetchurl, gtk, cairo, glib, pkgconfig, python }:
 
 stdenv.mkDerivation rec {
-  name = "goocanvas-0.14";
+  name = "goocanvas-0.15";
 
   src = fetchurl {
-    url = "http://ftp.gnome.org/pub/GNOME/sources/goocanvas/0.14/${name}.tar.bz2";
-    sha256 = "1nrkwbp3vpijpdv2yv0kdmbg6f8faw1mrcjqv27ssg61q1xc750v";
+    url = "http://ftp.gnome.org/pub/GNOME/sources/goocanvas/0.15/${name}.tar.bz2";
+    sha256 = "0b4093vnvmzyqhmlmpjj4iivkircvmz5gvl1jddpqikyfni25daq";
   };
 
   buildInputs = [ stdenv gtk cairo glib pkgconfig python ];
