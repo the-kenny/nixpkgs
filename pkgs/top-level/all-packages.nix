@@ -3440,6 +3440,8 @@ let
 
   ddd = callPackage ../development/tools/misc/ddd { };
 
+  dfu-util = callPackage ../development/tools/misc/dfu-util { };
+
   distcc = callPackage ../development/tools/misc/distcc { };
 
   # distccWrapper: wrapper that works as gcc or g++
