@@ -1,5 +1,5 @@
 { stdenv, fetchurl, SDL, SDL_image, SDL_ttf, gtk, glib, mesa, openal, glibc, libsndfile
-, copyDataDirectory ? false}:
+, copyDataDirectory ? false }:
 
 assert stdenv.system == "i686-linux";
 
@@ -34,8 +34,8 @@ stdenv.mkDerivation rec {
      then export DF_DIR="\$XDG_DATA_HOME/df_linux"
     fi
 
-    # Recreate a directory sturctor reflecting the original distribution in the user directory
-
+    # Recreate a directory structure reflecting the original
+    # distribution in the user directory (for modding support)
     ${if copyDataDirectory then ''
       if [ ! -d "\$DF_DIR" ];
       then
