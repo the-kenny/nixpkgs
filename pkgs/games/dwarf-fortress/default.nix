@@ -27,6 +27,14 @@ stdenv.mkDerivation rec {
     patchelf --set-interpreter ${glibc}/lib/ld-linux.so.2 $out/share/df_linux/libs/Dwarf_Fortress
     ln -s ${libsndfile}/lib/libsndfile.so $out/share/df_linux/libs/
 
+    # Fix png errors by linking all png files in
+    # $out/share/df_linux/data/art to their bmp counterparts.
+    pushd $out/share/df_linux/data/art
+      for f in $(find . -name "*.bmp"); do
+        ln -vf $f $(basename -s .bmp $f).png
+      done
+    popd
+
     cat > $out/bin/dwarf-fortress << EOF
     #!${stdenv.shell}
     export DF_DIR="\$HOME/.config/df_linux"
