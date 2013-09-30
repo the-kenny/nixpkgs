@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
   propagatedUserEnvPkgs = [ xml-rpc ];
 
   buildPhase = ''
-    emacs -L . -L ${xmlRpc}/share/emacs/site-lisp --batch -f batch-byte-compile *.el
+    emacs -L . -L ${xml-rpc}/share/emacs/site-lisp --batch -f batch-byte-compile *.el
   '';
 
   installPhase = ''
