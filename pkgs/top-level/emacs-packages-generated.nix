@@ -16,6 +16,20 @@ with otherPackages; rec {
     };
   };
 
+  ac-geiser = buildEmacsPackage {
+    name = "ac-geiser-0.1";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/ac-geiser-0.1.tar";
+      sha256 = "0s7ml5kq8qm16ijxvs3x61gpf43pxcxqc4a9dwdkyg0wj8y7la6i";
+    };
+
+    deps = [ geiser auto-complete ];
+    meta = {
+      description = "Auto-complete backend for geiser";
+      repository = "marmalade";
+    };
+  };
+
   ac-ja = buildEmacsPackage {
     name = "ac-ja-0.0.1";
     src = fetchurl {
@@ -227,15 +241,15 @@ with otherPackages; rec {
   };
 
   ample-theme = buildEmacsPackage {
-    name = "ample-theme-0.2.1";
+    name = "ample-theme-0.2.4";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/ample-theme-0.2.1.el";
-      sha256 = "0navljzdaqi6dbhzj3f4mw9r8zfcxdqdkh0qddiz1bqywgxxcq42";
+      url = "http://marmalade-repo.org/packages/ample-theme-0.2.4.el";
+      sha256 = "0n9gb0famca84rc8glzd9i97f2zx0hjzk443cvh2m9y72qhjwv2y";
     };
 
     deps = [  ];
     meta = {
-      description = "Calm Dark Theme for Emacs";
+      description = "Calm Dark Theme for Emacs ";
       repository = "marmalade";
     };
   };
@@ -563,10 +577,10 @@ with otherPackages; rec {
   };
 
   auctex = buildEmacsPackage {
-    name = "auctex-11.86.1";
+    name = "auctex-11.87";
     src = fetchurl {
-      url = "http://elpa.gnu.org/packages/auctex-11.86.1.tar";
-      sha256 = "0bm3ybllw8wwy9l0mf9wb2wg50c7wddf2807m669i41ja6x0rcql";
+      url = "http://elpa.gnu.org/packages/auctex-11.87.tar";
+      sha256 = "0fcs6b7fnkdg4b97pbfcvz7wm8nbah0z96sxkrdqbar0p0qmnhy2";
     };
 
     deps = [  ];
@@ -633,10 +647,10 @@ with otherPackages; rec {
   };
 
   awk-it = buildEmacsPackage {
-    name = "awk-it-0.76";
+    name = "awk-it-0.77";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/awk-it-0.76.el";
-      sha256 = "024pi3dg0a0d144hiygw96407xndpgx7zvw6a78l2sycbc6d0xzp";
+      url = "http://marmalade-repo.org/packages/awk-it-0.77.el";
+      sha256 = "0llyy66iaa40gjxa1m38gsjnzwqq2j8hmlw6935hz41l6i546258";
     };
 
     deps = [  ];
@@ -2383,10 +2397,10 @@ with otherPackages; rec {
   };
 
   dash = buildEmacsPackage {
-    name = "dash-2.1.0";
+    name = "dash-2.2.0";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/dash-2.1.0.el";
-      sha256 = "1s4ssc0fp19j4igr0qd6d0cppbk1filj1vvapa7gcywpvg4rl5jv";
+      url = "http://marmalade-repo.org/packages/dash-2.2.0.el";
+      sha256 = "06h8h94bfpq25sb5qrsx3wc86ppgrzv711j2shlq8wlfwg7zlann";
     };
 
     deps = [  ];
@@ -3348,6 +3362,34 @@ with otherPackages; rec {
     };
   };
 
+  elfeed = buildEmacsPackage {
+    name = "elfeed-1.0.1";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/elfeed-1.0.1.tar";
+      sha256 = "0rprqdpvbf19af3ah503i8lkga1fxpszqlw2iwplmb4kjnx7i3gc";
+    };
+
+    deps = [  ];
+    meta = {
+      description = "an Emacs web feed reader";
+      repository = "marmalade";
+    };
+  };
+
+  elfeed-web = buildEmacsPackage {
+    name = "elfeed-web-1.0.1";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/elfeed-web-1.0.1.tar";
+      sha256 = "11zz0mkd85ix40fm3kmpwjl9ykwx5wvgdj3d8saj255g6kz0gkw2";
+    };
+
+    deps = [ simple-httpd elfeed  ];
+    meta = {
+      description = "web interface to Elfeed";
+      repository = "marmalade";
+    };
+  };
+
   elisp-cache = buildEmacsPackage {
     name = "elisp-cache-1.15";
     src = fetchurl {
@@ -3517,10 +3559,10 @@ with otherPackages; rec {
   };
 
   emmet-mode = buildEmacsPackage {
-    name = "emmet-mode-1.0.2";
+    name = "emmet-mode-1.0.5";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/emmet-mode-1.0.2.el";
-      sha256 = "1gflcq408s1ap6fy3a004l5gk6cjmnd76lam187151g998kmbbr8";
+      url = "http://marmalade-repo.org/packages/emmet-mode-1.0.5.el";
+      sha256 = "0fnb2ha8r4m44q70rla7ck4454s6hw9bwddzn5klkiwmkx7cvzcc";
     };
 
     deps = [  ];
@@ -3895,10 +3937,10 @@ with otherPackages; rec {
   };
 
   evil-leader = buildEmacsPackage {
-    name = "evil-leader-0.3.4";
+    name = "evil-leader-0.4.1";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/evil-leader-0.3.4.el";
-      sha256 = "1gqj631a81znjzqdc6n2q9ys5ni9fgw3i256xzlkczr5riz23hm3";
+      url = "http://marmalade-repo.org/packages/evil-leader-0.4.1.el";
+      sha256 = "1k3hmzpz40d072106wfl177kmshlxfx2q1qdjvrbbzjwn0bwwx4k";
     };
 
     deps = [ evil ];
@@ -3909,10 +3951,10 @@ with otherPackages; rec {
   };
 
   evil-nerd-commenter = buildEmacsPackage {
-    name = "evil-nerd-commenter-1.2.2";
+    name = "evil-nerd-commenter-1.2.3";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/evil-nerd-commenter-1.2.2.tar";
-      sha256 = "0vhqbxkr01yslq8g8wpwp05si1hzhwiqb5x1dr7999mfyvxswmcj";
+      url = "http://marmalade-repo.org/packages/evil-nerd-commenter-1.2.3.tar";
+      sha256 = "1gh1d904wc732phml0vy47prd1hl2rq7zkw9b300f5xcjj5pf912";
     };
 
     deps = [  ];
@@ -4021,10 +4063,10 @@ with otherPackages; rec {
   };
 
   f = buildEmacsPackage {
-    name = "f-0.6.0";
+    name = "f-0.11.0";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/f-0.6.0.el";
-      sha256 = "1rhk91crpj4536yxbxkvfpf580p2ab2dqa2hq2bidc0ii3chd30j";
+      url = "http://marmalade-repo.org/packages/f-0.11.0.el";
+      sha256 = "1p9y1qscz8g8bslj3vgqiwjy9x9lldj7mkwkrfhybnaqy5f2962i";
     };
 
     deps = [ s dash ];
@@ -4581,10 +4623,10 @@ with otherPackages; rec {
   };
 
   flymake-less = buildEmacsPackage {
-    name = "flymake-less-0.2";
+    name = "flymake-less-0.3";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/flymake-less-0.2.el";
-      sha256 = "0h3kh0p50i5127r4p2ppymy0whyxqpr2b1jnj6sq4iybnjrp498k";
+      url = "http://marmalade-repo.org/packages/flymake-less-0.3.el";
+      sha256 = "1cari6n5ds04gmqfjzv0ymgnrfrhwpcgvdh0rk70g3s45anxmn4v";
     };
 
     deps = [ less-css-mode ];
@@ -4833,10 +4875,10 @@ with otherPackages; rec {
   };
 
   frame-restore = buildEmacsPackage {
-    name = "frame-restore-0.3";
+    name = "frame-restore-0.4";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/frame-restore-0.3.el";
-      sha256 = "1jcrz595z4xx0jhvkv3mpvy8vcxvm49ggb8g2baib5185c25d4zh";
+      url = "http://marmalade-repo.org/packages/frame-restore-0.4.el";
+      sha256 = "09yvsfx7465m642xgfqxm989mswqy1x9vgr4izf3ahhrrqqdvf6w";
     };
 
     deps = [ dash f  ];
@@ -5421,10 +5463,10 @@ with otherPackages; rec {
   };
 
   god-mode = buildEmacsPackage {
-    name = "god-mode-2.7.0";
+    name = "god-mode-2.7.2";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/god-mode-2.7.0.el";
-      sha256 = "1pfh6cpiznwr5jx0bvdbq70kjbrclayqx8w0qd2hjwkgz0cy3a12";
+      url = "http://marmalade-repo.org/packages/god-mode-2.7.2.el";
+      sha256 = "0018vqyk8c5kafkygvzmdsky7gs4nf91cif01h57y6kmr0gi753z";
     };
 
     deps = [  ];
@@ -6022,6 +6064,20 @@ with otherPackages; rec {
     };
   };
 
+  highlight-current-line = buildEmacsPackage {
+    name = "highlight-current-line-0.57";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/highlight-current-line-0.57.el";
+      sha256 = "1aki7a7nnj9n7vh19k4fr0v7cqbwkrpc6b3f3yv95vcqj8a4y34c";
+    };
+
+    deps = [  ];
+    meta = {
+      description = "highlight line where the cursor is.";
+      repository = "marmalade";
+    };
+  };
+
   highlight-escape-sequences = buildEmacsPackage {
     name = "highlight-escape-sequences-0.1";
     src = fetchurl {
@@ -6204,6 +6260,20 @@ with otherPackages; rec {
     };
   };
 
+  hl-spotlight = buildEmacsPackage {
+    name = "hl-spotlight-0";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/hl-spotlight-0.el";
+      sha256 = "0xwhvx874jq9wkdi36nh66147zgpfymcbzvx91hn1g4v4bl82s0k";
+    };
+
+    deps = [  ];
+    meta = {
+      description = "Extension of hl-line.el to spotlight current few lines.";
+      repository = "marmalade";
+    };
+  };
+
   hlinum = buildEmacsPackage {
     name = "hlinum-1.0";
     src = fetchurl {
@@ -6359,10 +6429,10 @@ with otherPackages; rec {
   };
 
   ibuffer-vc = buildEmacsPackage {
-    name = "ibuffer-vc-0.6";
+    name = "ibuffer-vc-0.7";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/ibuffer-vc-0.6.el";
-      sha256 = "18c59jjpkb7sxnzaqq2z5vpxy5i1803skppvnlhvlizyr96sqyzr";
+      url = "http://marmalade-repo.org/packages/ibuffer-vc-0.7.el";
+      sha256 = "1c420cdqpphyzn16f5h9ml945m0b7m2knvhxfj2smsl8pr7ylxpv";
     };
 
     deps = [ cl-lib ];
@@ -6471,10 +6541,10 @@ with otherPackages; rec {
   };
 
   ido-ubiquitous = buildEmacsPackage {
-    name = "ido-ubiquitous-2.0.7";
+    name = "ido-ubiquitous-2.7";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/ido-ubiquitous-2.0.7.el";
-      sha256 = "15j5248fp542pb8xgblg4bpaksincdwh32mcdz2bd7d30mdkzkn1";
+      url = "http://marmalade-repo.org/packages/ido-ubiquitous-2.7.el";
+      sha256 = "1c3pzv344v8fn4mzqf59xqc3vvhmpxh5vih3cm1n40d0wl0ibgii";
     };
 
     deps = [  ];
@@ -6750,6 +6820,20 @@ with otherPackages; rec {
     };
   };
 
+  isgd = buildEmacsPackage {
+    name = "isgd-20130927";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/isgd-20130927.el";
+      sha256 = "1panxx2dpcvwm1v2wz2s7866skxay7c66mzbiqwnhbr007mwanx4";
+    };
+
+    deps = [  ];
+    meta = {
+      description = "Shorten URLs using the isgd.com shortener service";
+      repository = "marmalade";
+    };
+  };
+
   issue-tracker = buildEmacsPackage {
     name = "issue-tracker-0.0.1";
     src = fetchurl {
@@ -6834,6 +6918,20 @@ with otherPackages; rec {
     };
   };
 
+  java-file-create = buildEmacsPackage {
+    name = "java-file-create-1.0";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/java-file-create-1.0.el";
+      sha256 = "1gy8ygay7s9chxllkvrrxp2z8qd8brcg1bbrbd7f5p6rvh19x86q";
+    };
+
+    deps = [  ];
+    meta = {
+      description = "automatically insert contents of empty java files";
+      repository = "marmalade";
+    };
+  };
+
   javadoc-help = buildEmacsPackage {
     name = "javadoc-help-1.0";
     src = fetchurl {
@@ -6891,10 +6989,10 @@ with otherPackages; rec {
   };
 
   jb-misc-macros = buildEmacsPackage {
-    name = "jb-misc-macros-0.2";
+    name = "jb-misc-macros-0.4";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/jb-misc-macros-0.2.el";
-      sha256 = "185dpfg143f0wq90k9wil92hkm42agnjy9qx20n3b8xz01nq1xa0";
+      url = "http://marmalade-repo.org/packages/jb-misc-macros-0.4.el";
+      sha256 = "0lcqy6cn5ac10d1mlni5bql9r6klgr3s045fyjrn3icxlxc8bswl";
     };
 
     deps = [ macro-utils ];
@@ -7017,10 +7115,10 @@ with otherPackages; rec {
   };
 
   json-mode = buildEmacsPackage {
-    name = "json-mode-0.1.2";
+    name = "json-mode-1.1.0";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/json-mode-0.1.2.el";
-      sha256 = "1g3s8p5xw7rbxrq1mwdms938dhdh4pwmzz8i2c9mdkwrr78wyl1v";
+      url = "http://marmalade-repo.org/packages/json-mode-1.1.0.el";
+      sha256 = "1v01rcdizycwqx2navhcx82k4swa7vx5pwzgkq33f18169pas3w6";
     };
 
     deps = [  ];
@@ -7227,10 +7325,10 @@ with otherPackages; rec {
   };
 
   kmacro-decision = buildEmacsPackage {
-    name = "kmacro-decision-1.3";
+    name = "kmacro-decision-1.5";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/kmacro-decision-1.3.el";
-      sha256 = "0mmzrqchxpy58nb5v0y6azla7cwry19149kz5jikcwn3arl42kkr";
+      url = "http://marmalade-repo.org/packages/kmacro-decision-1.5.el";
+      sha256 = "0gj3kl5f4jl22qgg4a2fylpxnjk9541galgr320sy3qb50jxmwrq";
     };
 
     deps = [ el-x jb-misc-macros ];
@@ -7297,15 +7395,15 @@ with otherPackages; rec {
   };
 
   langtool = buildEmacsPackage {
-    name = "langtool-1.2.0";
+    name = "langtool-1.2.1";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/langtool-1.2.0.el";
-      sha256 = "0naakbdzzikq1i0ninccm33v09rxyszr4zcis8bg7dfs6xgxl2pg";
+      url = "http://marmalade-repo.org/packages/langtool-1.2.1.el";
+      sha256 = "1mhiaglsrzcqvww17rpq5a7zbj7czb2j057cyqpkgdjwkjfb3dzg";
     };
 
     deps = [  ];
     meta = {
-      description = "Grammer check utility using LanguageTool";
+      description = "Grammar check utility using LanguageTool";
       repository = "marmalade";
     };
   };
@@ -8375,10 +8473,10 @@ with otherPackages; rec {
   };
 
   multi = buildEmacsPackage {
-    name = "multi-1.0.1";
+    name = "multi-2.0.0";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/multi-1.0.1.el";
-      sha256 = "1rljcspmwf247qyh91c84ihiqaz4zp50rdrvjbfc91i5g75vqcf1";
+      url = "http://marmalade-repo.org/packages/multi-2.0.0.el";
+      sha256 = "1iq182mw36awxsrqpmz3jgq6yn17i05hh6d8likypf5zjxdn5prj";
     };
 
     deps = [  ];
@@ -9033,10 +9131,10 @@ with otherPackages; rec {
   };
 
   org = buildEmacsPackage {
-    name = "org-20130906";
+    name = "org-20130930";
     src = fetchurl {
-      url = "http://elpa.gnu.org/packages/org-20130906.tar";
-      sha256 = "1dgf7bqzyp71xqcdam3rqgq8aad92zglbg6dycf1zik2ybcgp3r8";
+      url = "http://elpa.gnu.org/packages/org-20130930.tar";
+      sha256 = "1p3jsj0xpspcymmw2pzdyakgl55rkng4sywp0469dc67sxwg7vfl";
     };
 
     deps = [  ];
@@ -9075,10 +9173,10 @@ with otherPackages; rec {
   };
 
   org-dotemacs = buildEmacsPackage {
-    name = "org-dotemacs-0.2";
+    name = "org-dotemacs-0.3";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/org-dotemacs-0.2.el";
-      sha256 = "1ypmzhsr1v19kib4cvk4fv72k6jjkhw0lfwgy1cy3jqikimahyxj";
+      url = "http://marmalade-repo.org/packages/org-dotemacs-0.3.el";
+      sha256 = "1pjnbyxilngy30bc33bzwxbj0gs2k65khih2frzmbqdlbrvbvjq8";
     };
 
     deps = [ org cl-lib ];
@@ -9117,10 +9215,10 @@ with otherPackages; rec {
   };
 
   org-journal = buildEmacsPackage {
-    name = "org-journal-1.4.2";
+    name = "org-journal-1.4.3";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/org-journal-1.4.2.el";
-      sha256 = "00arkz5n991bd217x6wwk4kf3q2930mkygcz54s82wa5hww4b4ab";
+      url = "http://marmalade-repo.org/packages/org-journal-1.4.3.el";
+      sha256 = "1vp5q5rlv5y17f0mjvg1z93r5yvs3n5lgvqm0g8sfnxn5xa9rr0p";
     };
 
     deps = [  ];
@@ -9229,10 +9327,10 @@ with otherPackages; rec {
   };
 
   org-trello = buildEmacsPackage {
-    name = "org-trello-0.1.9";
+    name = "org-trello-0.2.1.2";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/org-trello-0.1.9.tar";
-      sha256 = "16fa1pj61pbky09qwz4sdgyqsgh799awf3wjni3d7izjafq3sf1j";
+      url = "http://marmalade-repo.org/packages/org-trello-0.2.1.2.tar";
+      sha256 = "12ifrpr1mcmz3s6fpbcp9b7zgc1fh8a61vf5xcfr13a7vsp2izjx";
     };
 
     deps = [ org dash request cl-lib json elnode esxml s ];
@@ -9280,6 +9378,20 @@ with otherPackages; rec {
     deps = [  ];
     meta = {
       description = "Watch and respond to changes in geographical location on OS X";
+      repository = "marmalade";
+    };
+  };
+
+  osx-pseudo-daemon = buildEmacsPackage {
+    name = "osx-pseudo-daemon-1.0";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/osx-pseudo-daemon-1.0.el";
+      sha256 = "0hs3spmfi0wlpq1pjxhmprh5sdlbvsaphvn2y2p5bnp9rjnhf17z";
+    };
+
+    deps = [  ];
+    meta = {
+      description = "Daemon mode that plays nice with OSX.";
       repository = "marmalade";
     };
   };
@@ -9383,10 +9495,10 @@ with otherPackages; rec {
   };
 
   page-break-lines = buildEmacsPackage {
-    name = "page-break-lines-0.7";
+    name = "page-break-lines-0.8";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/page-break-lines-0.7.el";
-      sha256 = "0458l7nxmg9zfy6nd8bfr2lgxzm7cazam8aa8fdzx7lgp5pv55py";
+      url = "http://marmalade-repo.org/packages/page-break-lines-0.8.el";
+      sha256 = "1v4wcj0yrfn3w8w170m1nfsxhipfb7whh3466gxzqapsia1w8yw4";
     };
 
     deps = [  ];
@@ -9817,10 +9929,10 @@ with otherPackages; rec {
   };
 
   php-extras = buildEmacsPackage {
-    name = "php-extras-0.4.4.20130612";
+    name = "php-extras-1.0.0.20130923";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/php-extras-0.4.4.20130612.tar";
-      sha256 = "1f7v7zacd9ii3ql9vvf5yixm0avi12a4iyqjcw2rzyllsm6li5z0";
+      url = "http://marmalade-repo.org/packages/php-extras-1.0.0.20130923.tar";
+      sha256 = "0rwlzrrha3734w2p225zslm9zf12i7559wqsxywmm43f5n31lzww";
     };
 
     deps = [ php-mode ];
@@ -10139,10 +10251,10 @@ with otherPackages; rec {
   };
 
   processing-mode = buildEmacsPackage {
-    name = "processing-mode-1.2.0";
+    name = "processing-mode-1.2.1";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/processing-mode-1.2.0.el";
-      sha256 = "0g0c0p5qnab7gckrdw5zzflzbb5jwqhnzs11777n56k0w5y4v4yq";
+      url = "http://marmalade-repo.org/packages/processing-mode-1.2.1.el";
+      sha256 = "1ar3ardm1vilh7q0vs493a42b88fq6mnb1kp5n3yvx9rlk1cp18b";
     };
 
     deps = [  ];
@@ -10293,10 +10405,10 @@ with otherPackages; rec {
   };
 
   purple-haze-theme = buildEmacsPackage {
-    name = "purple-haze-theme-20130905.2211";
+    name = "purple-haze-theme-20130930.36";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/purple-haze-theme-20130905.2211.el";
-      sha256 = "0qm00kb2pdcwd1b3392q23m0kky41ar99mj8kc0ybbzgqf4lx8bn";
+      url = "http://marmalade-repo.org/packages/purple-haze-theme-20130930.36.el";
+      sha256 = "1qf99fzczrsvdsws8iqj7d7nnwbmzj34hjqbnify9yqf2l7affzw";
     };
 
     deps = [  ];
@@ -10726,20 +10838,6 @@ with otherPackages; rec {
     };
   };
 
-  redo-plus = buildEmacsPackage {
-    name = "redo-plus-1.15";
-    src = fetchurl {
-      url = "http://marmalade-repo.org/packages/redo+-1.15.el";
-      sha256 = "1m7ivaazfnbll68k8h9hq3fqjrpcjx0gw8wjnbpghl0744csxlbq";
-    };
-
-    deps = [  ];
-    meta = {
-      description = "Redo/undo system for Emacs";
-      repository = "marmalade";
-    };
-  };
-
   refheap = buildEmacsPackage {
     name = "refheap-0.0.3";
     src = fetchurl {
@@ -10965,10 +11063,10 @@ with otherPackages; rec {
   };
 
   rubocop = buildEmacsPackage {
-    name = "rubocop-0.1";
+    name = "rubocop-0.3";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/rubocop-0.1.el";
-      sha256 = "06mpkswlw2yxsqkn22xhlz9yn2fmwqvll53z3h3ip6kk0q644cgb";
+      url = "http://marmalade-repo.org/packages/rubocop-0.3.el";
+      sha256 = "1ck862ymyklkqgg7xpg5sz02x32ka69xrdg44zyb7wi4kgnci9wz";
     };
 
     deps = [ dash ];
@@ -11049,10 +11147,10 @@ with otherPackages; rec {
   };
 
   ruby-test-mode = buildEmacsPackage {
-    name = "ruby-test-mode-1.5";
+    name = "ruby-test-mode-1.7";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/ruby-test-mode-1.5.el";
-      sha256 = "13l8jg9ncf899n2hcld52bggig335gxsrr2wpci3nhhwpxf08b7q";
+      url = "http://marmalade-repo.org/packages/ruby-test-mode-1.7.el";
+      sha256 = "04wy0v6mfvx0yqal85fb74wwrm95mgamr30aw5720a1k7x12hmmp";
     };
 
     deps = [ ruby-mode ];
@@ -11538,6 +11636,20 @@ with otherPackages; rec {
     };
   };
 
+  shell-pop = buildEmacsPackage {
+    name = "shell-pop-0.2";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/shell-pop-0.2.el";
+      sha256 = "0nsykkwzdzxy8qzkbfhff2gzk0xcziynny978l19yrh7brq35w6d";
+    };
+
+    deps = [  ];
+    meta = {
+      description = "helps you to use shell easily on Emacs. Only one key action to work.";
+      repository = "marmalade";
+    };
+  };
+
   shell-switcher = buildEmacsPackage {
     name = "shell-switcher-0.1.5.1";
     src = fetchurl {
@@ -11650,6 +11762,20 @@ with otherPackages; rec {
     };
   };
 
+  simple-httpd = buildEmacsPackage {
+    name = "simple-httpd-1.4.4";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/simple-httpd-1.4.4.el";
+      sha256 = "1kb2ykys090hs9wxjri17ndmx5p8hnf5i2xgj444f0y1cdxsagpp";
+    };
+
+    deps = [  ];
+    meta = {
+      description = "pure elisp HTTP server";
+      repository = "marmalade";
+    };
+  };
+
   simple-mode-line = buildEmacsPackage {
     name = "simple-mode-line-0.3";
     src = fetchurl {
@@ -11703,6 +11829,20 @@ with otherPackages; rec {
     meta = {
       description = "Major mode for SiSU markup text";
       repository = "gnu";
+    };
+  };
+
+  skewer-mode = buildEmacsPackage {
+    name = "skewer-mode-1.5.3";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/skewer-mode-1.5.3.tar";
+      sha256 = "0yl9syhrh1v70bkxs1cnds2x4lxr9ms3qhizpqgp2m9lqr3azpcf";
+    };
+
+    deps = [ simple-httpd js2-mode ];
+    meta = {
+      description = "live browser JavaScript, CSS, and HTML interaction";
+      repository = "marmalade";
     };
   };
 
@@ -12043,10 +12183,10 @@ with otherPackages; rec {
   };
 
   smtpmail-multi = buildEmacsPackage {
-    name = "smtpmail-multi-0.3";
+    name = "smtpmail-multi-0.5";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/smtpmail-multi-0.3.el";
-      sha256 = "0y2id28f76m1vkmlvcdy5xm1a3j2zifffsv0kd7hsxyhz533ws2s";
+      url = "http://marmalade-repo.org/packages/smtpmail-multi-0.5.el";
+      sha256 = "0y1xyh8x7zg0vm3s2jb6l7jfv7ljli619zglxmyi4k746lgh06q0";
     };
 
     deps = [  ];
@@ -12099,10 +12239,10 @@ with otherPackages; rec {
   };
 
   sourcetalk = buildEmacsPackage {
-    name = "sourcetalk-0.0.2";
+    name = "sourcetalk-1.1.0";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/sourcetalk-0.0.2.el";
-      sha256 = "14crk0v4fg9ic37g7yf3dkamlmf5qy6r0x7ni0wdsmjafzbhcr9i";
+      url = "http://marmalade-repo.org/packages/sourcetalk-1.1.0.el";
+      sha256 = "12wwm6zzhjr1b4bcq1jk17ikwk4na6prk9n0025f1l7a3sdcpz61";
     };
 
     deps = [ request ];
@@ -13667,10 +13807,10 @@ with otherPackages; rec {
   };
 
   waher-theme = buildEmacsPackage {
-    name = "waher-theme-20130830.213";
+    name = "waher-theme-20130917.7";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/waher-theme-20130830.213.el";
-      sha256 = "1vmgk94av9h3v9azsf9sqfvz77jrakkqndk16v200x79ga1kwyml";
+      url = "http://marmalade-repo.org/packages/waher-theme-20130917.7.el";
+      sha256 = "10wn8nsydlwqdfnw9cninh3b7p66w7lxclj9ahdn89whanyh8i9r";
     };
 
     deps = [  ];
@@ -13765,15 +13905,15 @@ with otherPackages; rec {
   };
 
   web-mode = buildEmacsPackage {
-    name = "web-mode-6.0.31";
+    name = "web-mode-7.0.21";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/web-mode-6.0.31.el";
-      sha256 = "16hyhmrwqlvav1lyfaj1jnpirrnll25cs671hpzlaj6li2k37rl8";
+      url = "http://marmalade-repo.org/packages/web-mode-7.0.21.el";
+      sha256 = "0nvwl8s4kvxz4ci9blkwkcqjg98yhvxb7h9qaj4n9frr51v6r2k8";
     };
 
     deps = [  ];
     meta = {
-      description = "major mode for editing html templates";
+      description = "major mode for editing html templates -*- coding: utf-8 -*-";
       repository = "marmalade";
     };
   };
@@ -13793,10 +13933,10 @@ with otherPackages; rec {
   };
 
   wedge-ws = buildEmacsPackage {
-    name = "wedge-ws-0.1.1";
+    name = "wedge-ws-0.1.2";
     src = fetchurl {
-      url = "http://marmalade-repo.org/packages/wedge-ws-0.1.1.tar";
-      sha256 = "0ib8hxsmywlvwxk6kz73w6dsmsc6ac7m93rdyzy11q9ryrjlnvla";
+      url = "http://marmalade-repo.org/packages/wedge-ws-0.1.2.tar";
+      sha256 = "0r5i5q47dk2kcfdgd3xf2w310qwhn6nq568zgv8dmsq2nm6dlkpk";
     };
 
     deps = [  ];
@@ -13872,6 +14012,20 @@ with otherPackages; rec {
     deps = [ wgrep ];
     meta = {
       description = "Writable helm-grep-mode buffer and apply the changes to files";
+      repository = "marmalade";
+    };
+  };
+
+  whitespace-cleanup-mode = buildEmacsPackage {
+    name = "whitespace-cleanup-mode-0.4";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/whitespace-cleanup-mode-0.4.el";
+      sha256 = "1jcv5vmkkddly9qc2zk7m1k7vxgzncdy3wwjlp5qxr7a5n0rc7bb";
+    };
+
+    deps = [  ];
+    meta = {
+      description = "Intelligently call whitespace-cleanup on save";
       repository = "marmalade";
     };
   };
@@ -14040,6 +14194,20 @@ with otherPackages; rec {
     deps = [  ];
     meta = {
       description = "Poor-man's namespaces for elisp";
+      repository = "marmalade";
+    };
+  };
+
+  wonderland = buildEmacsPackage {
+    name = "wonderland-0.1.1";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/wonderland-0.1.1.el";
+      sha256 = "13gwbhh836h0vh4rg62qn470ar7jz042giyzhn9n1mjlxr5154sz";
+    };
+
+    deps = [ dash dash-functional multi  ];
+    meta = {
+      description = "declarative configuration for Emacsen -*- lexical-binding: t -*-";
       repository = "marmalade";
     };
   };
@@ -14404,6 +14572,20 @@ with otherPackages; rec {
     deps = [   ];
     meta = {
       description = "ZNC + ERC ";
+      repository = "marmalade";
+    };
+  };
+
+  zone-matrix = buildEmacsPackage {
+    name = "zone-matrix-0.0.1";
+    src = fetchurl {
+      url = "http://marmalade-repo.org/packages/zone-matrix-0.0.1.tar";
+      sha256 = "0rkwwmq4mpfflpdqbzkv694hd8bkl1gwa2dpd2ia4rzn4kr5m6q7";
+    };
+
+    deps = [  ];
+    meta = {
+      description = "Matrix themed Zone mode";
       repository = "marmalade";
     };
   };
