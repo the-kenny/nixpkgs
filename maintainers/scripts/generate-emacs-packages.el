@@ -16,9 +16,8 @@
     ;; ("org" . "http://orgmode.org/elpa/")
     ))
 
-(defvar tmpdir (concat (or (getenv "NIX_EMACS_PACKAGE_CACHE_DIR")
-                           "/tmp/nix-emacs-packages/")
-                       ""))
+(defvar tmpdir (or (getenv "NIX_EMACS_PACKAGE_CACHE_DIR")
+                   "/tmp/nix-emacs-packages/"))
 
 (require 'finder-inf)
 (defconst nix-emacs-included-packages
@@ -153,18 +152,21 @@
                            (mapcar (lambda (archive)
                                      (package--with-work-buffer
                                       (cdr archive) "archive-contents"
+                                      ;; Hack: Store repo-url as the last element of each package
                                       (mapcar (lambda (p) (cons (car p) (vconcat (cdr p) (list (cdr archive)))))
                                               (cdr (read (current-buffer))))))
                                    package-archives)))
                    (lambda (a b) (string< (symbol-name (car a)) (symbol-name (car b)))))))
         (cl-dolist (p packages)
-          (nix-prefetch-packages (aref (cdr p) 4)
-                                 (list (nix-make-package-url "" (car p) (cdr p)))))
+          (nix-prefetch-packages
+           ;; Ugly way to get last element of a vector
+           (car (last (append (cdr p) nil)))
+           (list (nix-make-package-url "" (car p) (cdr p)))))
         (cl-dolist (p packages)
           (with-current-buffer out-buffer
             (insert (nix-generate-package-expression
                      (car p) (cdr p)
-                     (aref (cdr p) 4)
+                     (car (last (append (cdr p) nil)))
                      (mapcar 'car packages)))))
         (insert "}")
         (let ((coding-system-for-write 'utf-8-emacs))
