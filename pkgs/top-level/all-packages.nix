@@ -8952,6 +8952,12 @@ let
     };
   };
 
+  # This installs a 'mod-enabled' version of the game. This means that
+  # the user can install mods in his home directory
+  # (~/.config/df_linux).
+  #
+  # Beware: This might cause problem when re-installing or installing
+  # a newer version of the game.
   dwarf_fortress_modable = appendToName "moddable" (dwarf_fortress.override {
     copyDataDirectory = true;
   });
