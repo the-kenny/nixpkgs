@@ -9,7 +9,7 @@
 */
 
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import ./all-packages.nix {};
 in {
   emacs24 = pkgs.emacs24Packages;
 }
