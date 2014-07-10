@@ -1,4 +1,4 @@
-{ stdenv, coreutils, fetchhg, qt4, dwarf_fortress, bash, makeWrapper }:
+{ stdenv, coreutils, fetchhg, qt4, dwarf-fortress, bash, makeWrapper }:
 
 stdenv.mkDerivation rec {
   name = "dwarf-therapist-${rev}";
@@ -11,9 +11,9 @@ stdenv.mkDerivation rec {
   };
 
   # Needed for hashing
-  dwarfBinary = "${dwarf_fortress}/share/df_linux/libs/Dwarf_Fortress";
+  dwarfBinary = "${dwarf-fortress}/share/df_linux/libs/Dwarf_Fortress";
 
-  buildInputs = [ coreutils qt4 dwarf_fortress makeWrapper ];
+  buildInputs = [ coreutils qt4 dwarf-fortress makeWrapper ];
   enableParallelBuilding = false;
 
   preConfigure = ''

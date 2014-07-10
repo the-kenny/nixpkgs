@@ -10159,15 +10159,21 @@ let
 
   drumkv1 = callPackage ../applications/audio/drumkv1 { };
 
-  dwarf_fortress = callPackage_i686 ../games/dwarf-fortress {
+  # June 4, 2012 release (0.34.11)
+  dwarf-fortress-0612 = callPackage_i686 ../games/dwarf-fortress {
     SDL_image = pkgsi686Linux.SDL_image.override {
       libpng = pkgsi686Linux.libpng12;
     };
   };
 
-  dwarf_fortress_modable = appendToName "moddable" (dwarf_fortress.override {
-    copyDataDirectory = true;
-  });
+  # July 7, 2014 release. (0.40.01)
+  dwarf-fortress-0714 = callPackage_i686 ../games/dwarf-fortress/0714.nix {
+      SDL_image = pkgsi686Linux.SDL_image.override {
+      libpng = pkgsi686Linux.libpng12;
+    };
+  };
+
+  dwarf-fortress = dwarf-fortress-0612; # Newest release crashes frequently
 
   dwarf-therapist = callPackage ../games/dwarf-therapist { };
 
