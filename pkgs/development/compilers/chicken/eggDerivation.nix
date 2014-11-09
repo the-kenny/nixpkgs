@@ -30,7 +30,9 @@ stdenv.mkDerivation ({
   # We override the default buildPhase because some eggs ship a
   # Makefile which we need to skip over.
   buildPhase = ''
+    runHook preBuild
     echo "doing nothing in buildPhase - build happens in installPhase"
+    runHook postBuild
   '';
 
   installPhase = ''
