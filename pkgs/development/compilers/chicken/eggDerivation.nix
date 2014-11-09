@@ -27,6 +27,12 @@ stdenv.mkDerivation ({
   CHICKEN_REPOSITORY = libPath;
   CHICKEN_INSTALL_PREFIX = "$out";
 
+  # We override the default buildPhase because some eggs ship a
+  # Makefile which we need to skip over.
+  buildPhase = ''
+    echo "doing nothing in buildPhase - build happens in installPhase"
+  '';
+
   installPhase = ''
     runHook preInstall
 
