@@ -3194,6 +3194,8 @@ rec {
 
     buildInputs = [
       bind
+      pkgs.pkgconfig
+      pkgs.glfw3
     ];
   };
 
@@ -5759,6 +5761,7 @@ rec {
     buildInputs = [
       make
       bind
+      pkgs.glew
     ];
   };
 

@@ -202,7 +202,7 @@ gl-math
 gl-type
 gl-utils
 glfw
-glfw3
+(glfw3 (native-dependencies pkgs.pkgconfig pkgs.glfw3))
 glls
 glm
 ;; (glpk (native-dependencies pkgs.pkgconfig pkgs.glpk))
@@ -368,7 +368,7 @@ oblist
 octave
 openal
 (opengl (native-dependencies pkgs.mesa_glu))
-opengl-glew
+(opengl-glew (native-dependencies pkgs.glew))
 (openssl (native-dependencies pkgs.openssl))
 operations
 options

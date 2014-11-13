@@ -17,8 +17,13 @@ in
     preBuild = ''
       substituteInPlace setup-helper.setup \
         --replace "(chicken-home)" \"$out/share/chicken/\"
+    '';
+  };
 
-        cat setup-helper.setup
+  glfw3 = {
+    preBuild = ''
+      substituteInPlace glfw3.setup \
+        --replace "-l:libglfw.so.3" "-lglfw"
     '';
   };
 } // stdenv.lib.mapAttrs (k: v: { meta.broken = v; }) broken
