@@ -1,3 +1,8 @@
+{ stdenv }:
+let
+  broken = {
+  };
+in
 {
   setup-helper = {
     preBuild = ''
@@ -7,4 +12,4 @@
         cat setup-helper.setup
     '';
   };
-}
+} // stdenv.lib.mapAttrs (k: v: { meta.broken = v; }) broken

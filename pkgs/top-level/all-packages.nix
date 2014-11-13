@@ -2890,6 +2890,10 @@ let
     bootstrap-chicken = chicken.override { bootstrap-chicken = null; };
   };
 
+  chickenEggs = recurseIntoAttrs (import ../top-level/chicken-eggs.nix { 
+    inherit pkgs stdenv;
+  });
+
   egg2nix = callPackage ../development/tools/egg2nix {
     chickenEggs = callPackage ../development/tools/egg2nix/chicken-eggs.nix { };
   };
