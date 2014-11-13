@@ -1,6 +1,12 @@
 { stdenv }:
 let
   broken = {
+    allegro = true;
+    epeg = true;
+    glpg = true;
+    macosx = true;
+    hexgrid = true;
+    win32-msgbox = true;
   };
 in
 {
