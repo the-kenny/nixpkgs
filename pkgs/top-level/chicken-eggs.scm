@@ -640,7 +640,7 @@ vector-lib
 versions
 vfs
 vlist
-webgate
+(webgate (native-dependencies pkgs.libuuid))
 (webkit (native-dependencies pkgs.pkgconfig pkgs.webkitgtk))
 websockets
 ; win32-msgbox
@@ -648,15 +648,15 @@ wmiirc
 x11-colors
 x11-keysyms
 xbmc-api
-xft
-xlib
+(xft (native-dependencies pkgs.pkgconfig pkgs.xlibs.libXft))
+(xlib (native-dependencies pkgs.xlibs.libX11))
 xml-rpc
-xosd
-xtypes
+; (xosd (native-dependencies pkgs.libxosd))
+(xtypes (native-dependencies pkgs.xlibs.libX11 pkgs.xlibs.libXrender))
 yahoo-finance
-yaml
+(yaml (native-dependencies pkgs.pkgconfig pkgs.libyaml))
 yasos
 yelp
 z3
-zlib
-zmq
+(zlib (native-dependencies pkgs.zlib))
+(zmq (native-dependencies pkgs.zeromq2))

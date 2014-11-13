@@ -806,12 +806,12 @@ rec {
   };
 
   bindings = eggDerivation {
-    name = "bindings-3.2.1";
+    name = "bindings-3.3.1";
 
     src = fetchegg {
       name = "bindings";
-      version = "3.2.1";
-      sha256 = "1bycpng4a57kpygp073ahhmzbpc47vvxl3bhmx57c29p3pfj7hvr";
+      version = "3.3.1";
+      sha256 = "1ls3d4n36906pwf021yc5i00ddq8cfg4kq72yrndnpmmn7fks10p";
     };
 
     buildInputs = [
@@ -4346,12 +4346,12 @@ rec {
   };
 
   lazy-lists = eggDerivation {
-    name = "lazy-lists-0.7";
+    name = "lazy-lists-0.8.1";
 
     src = fetchegg {
       name = "lazy-lists";
-      version = "0.7";
-      sha256 = "1j1y9c24sc9yl6wjd3j0raspmf6w4ggiv2m8sfxbxmb7mm320gmi";
+      version = "0.8.1";
+      sha256 = "0wgffn62bv2s1fgqjxg1grv327xwflqnwlp19rgj1m4jqnngzs6i";
     };
 
     buildInputs = [
@@ -7508,12 +7508,12 @@ rec {
   };
 
   sicp = eggDerivation {
-    name = "sicp-0.5.3";
+    name = "sicp-0.5.4";
 
     src = fetchegg {
       name = "sicp";
-      version = "0.5.3";
-      sha256 = "0svksbbaz98kmzwvq12iiwvv65cym2xyzay5yp5n7hy2akflijyh";
+      version = "0.5.4";
+      sha256 = "1khqkmgns37pc6173is7jv2ck4jv8lyv8jwwlmlvs4zcq7cnf58q";
     };
 
     buildInputs = [
@@ -9875,6 +9875,7 @@ rec {
 
     buildInputs = [
       srfi-99
+      pkgs.libuuid
     ];
   };
 
@@ -9984,6 +9985,8 @@ rec {
     buildInputs = [
       foreigners
       xtypes
+      pkgs.pkgconfig
+      pkgs.xlibs.libXft
     ];
   };
 
@@ -9998,6 +10001,7 @@ rec {
 
     buildInputs = [
       matchable
+      pkgs.xlibs.libX11
     ];
   };
 
@@ -10019,20 +10023,6 @@ rec {
     ];
   };
 
-  xosd = eggDerivation {
-    name = "xosd-1.7";
-
-    src = fetchegg {
-      name = "xosd";
-      version = "1.7";
-      sha256 = "18mnvmz8ax96vavdch67xqhrr2w25vphggfijggmqsn3q21szbn7";
-    };
-
-    buildInputs = [
-      easyffi
-    ];
-  };
-
   xtypes = eggDerivation {
     name = "xtypes-0.1a2";
 
@@ -10044,6 +10034,8 @@ rec {
 
     buildInputs = [
       foreigners
+      pkgs.xlibs.libX11
+      pkgs.xlibs.libXrender
     ];
   };
 
@@ -10075,6 +10067,8 @@ rec {
 
     buildInputs = [
       sql-null
+      pkgs.pkgconfig
+      pkgs.libyaml
     ];
   };
 
@@ -10133,6 +10127,7 @@ rec {
     buildInputs = [
       foreigners
       miscmacros
+      pkgs.zlib
     ];
   };
 
@@ -10147,6 +10142,7 @@ rec {
 
     buildInputs = [
       foreigners
+      pkgs.zeromq2
     ];
   };
 }

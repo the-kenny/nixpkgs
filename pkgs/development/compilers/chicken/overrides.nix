@@ -8,6 +8,7 @@ let
     srfi-19 = true;             # (install-srfi29-bundle)
     glpg = true;
     macosx = true;
+    xosd = true;                # libxosd isn't packaged
     win32-msgbox = true;
   };
 in
