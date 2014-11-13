@@ -1,4 +1,4 @@
-From 752dff853186dc334c519a86fa92f087795fea02 Mon Sep 17 00:00:00 2001
+From 2fa0566ecaf508e79f82f8923b734a77a3faf3af Mon Sep 17 00:00:00 2001
 From: Moritz Heidkamp <moritz.heidkamp@bevuta.com>
 Date: Wed, 1 Oct 2014 22:41:30 +0200
 Subject: [PATCH] Introduce CHICKEN_REPOSITORY_EXTRA
@@ -11,8 +11,8 @@ friends. It can be accessed and changed at runtime via the new procedure
 ---
  chicken-install.scm | 11 +++++++----
  chicken.import.scm  |  1 +
- eval.scm            | 37 +++++++++++++++++++++++++++++++------
- 3 files changed, 39 insertions(+), 10 deletions(-)
+ eval.scm            | 40 +++++++++++++++++++++++++++++++++-------
+ 3 files changed, 41 insertions(+), 11 deletions(-)
 
 diff --git a/chicken-install.scm b/chicken-install.scm
 index 2ef6ef4..b5c6bf8 100644
@@ -57,7 +57,7 @@ index baa7316..2839b16 100644
     reset
     reset-handler
 diff --git a/eval.scm b/eval.scm
-index bbcd86c..838588d 100644
+index bbcd86c..0019807 100644
 --- a/eval.scm
 +++ b/eval.scm
 @@ -81,6 +81,7 @@
@@ -125,6 +125,16 @@ index bbcd86c..838588d 100644
  
  (define (extension-information ext)
    (##sys#extension-information ext 'extension-information) )
+@@ -1504,7 +1529,8 @@
+ 				 (let ((rp (##sys#repository-path)))
+ 				   (if rp
+ 				       (list (##sys#repository-path))
+-				       '())))
++				       '()))
++				 (##sys#repository-extra-paths))
+ 				##sys#include-pathnames) ) )
+ 	    (cond ((eq? paths '()) fname)
+ 		  ((test (string-append (##sys#slot paths 0)
 -- 
-2.1.0
+2.1.2
 
