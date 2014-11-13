@@ -724,6 +724,9 @@ rec {
       easyffi
       matchable
       make
+      pkgs.fltk13
+      pkgs.libjpeg
+      pkgs.mesa
     ];
   };
 
@@ -737,7 +740,7 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.db
     ];
   };
 
@@ -977,7 +980,7 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.libf2c
     ];
   };
 
@@ -1034,7 +1037,8 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.pkgconfig
+      pkgs.cairo
     ];
   };
 
@@ -1917,6 +1921,8 @@ rec {
       matchable
       miscmacros
       foreigners
+      pkgs.pkgconfig
+      pkgs.dbus
     ];
   };
 
@@ -2075,7 +2081,7 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.discount
     ];
   };
 
@@ -2515,6 +2521,7 @@ rec {
 
     buildInputs = [
       foreigners
+      pkgs.libexif
     ];
   };
 
@@ -2613,7 +2620,7 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.fcgi
     ];
   };
 
@@ -3529,6 +3536,20 @@ rec {
     buildInputs = [
       http-client
       matchable
+    ];
+  };
+
+  hexgrid = eggDerivation {
+    name = "hexgrid-0.1.3";
+
+    src = fetchegg {
+      name = "hexgrid";
+      version = "0.1.3";
+      sha256 = "0gc7dqpl7xjidvm7bqd99gx498qdh24kw35v9vvfm2r3wzb2bqc7";
+    };
+
+    buildInputs = [
+      bindings
     ];
   };
 
@@ -5751,7 +5772,7 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.openssl
     ];
   };
 
@@ -6189,6 +6210,7 @@ rec {
 
     buildInputs = [
       sql-null
+      pkgs.postgresql
     ];
   };
 
@@ -7206,7 +7228,7 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.SDL
     ];
   };
 
@@ -8135,6 +8157,7 @@ rec {
       miscmacros
       matchable
       sql-null
+      pkgs.sqlite
     ];
   };
 

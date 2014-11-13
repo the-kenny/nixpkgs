@@ -41,8 +41,8 @@ awful-static-pages
 awk
 banterpixra
 base64
-bb
-berkeley-db
+(bb (native-dependencies pkgs.fltk13 pkgs.libjpeg pkgs.mesa))
+(berkeley-db (native-dependencies pkgs.db))
 big-chicken
 binary-heap
 binary-parse
@@ -58,11 +58,11 @@ blowfish
 box
 breadcrumbs
 buffer-ports
-bvsp-spline
+(bvsp-spline (native-dependencies pkgs.libf2c))
 byte-blob
 byte-blob-stream
 c3
-cairo
+(cairo (native-dependencies pkgs.pkgconfig pkgs.cairo))
 call-with-environment-variables
 call-with-query
 call-with-sqlite3-connection
@@ -118,7 +118,7 @@ data-generators
 datatype
 date-literals
 dbc
-dbus
+(dbus (native-dependencies pkgs.pkgconfig pkgs.dbus))
 debug
 define-record-and-printer
 define-structure
@@ -128,7 +128,7 @@ describe-coops
 dict
 digraph
 directory-utils
-discount
+(discount (native-dependencies pkgs.discount))
 disjoint-set
 dissector
 doctype
@@ -157,7 +157,7 @@ er-macros
 error-utils
 ersatz
 estraier-client
-exif
+(exif (native-dependencies pkgs.libexif))
 expand-full
 expat
 ;; ezxdisp
@@ -165,7 +165,7 @@ fancypants
 fann
 fast-generic
 fast-loop
-fastcgi
+(fastcgi (native-dependencies pkgs.fcgi))
 feature-test
 ffmpeg-video
 filepath
@@ -369,7 +369,7 @@ octave
 openal
 (opengl (native-dependencies pkgs.mesa_glu))
 opengl-glew
-openssl
+(openssl (native-dependencies pkgs.openssl))
 operations
 options
 osxattr
@@ -398,7 +398,7 @@ posix-extras
 posix-semaphore
 posix-shm
 posix-utils
-postgresql
+(postgresql (native-dependencies pkgs.postgresql))
 prcc
 probdist
 proccpuinfo
@@ -464,7 +464,7 @@ scsh-process
 scss
 sdbm
 sdl
-sdl-base
+(sdl-base (native-dependencies pkgs.SDL))
 sdl-img
 sdl-mixer
 sdl-ttf
@@ -525,7 +525,7 @@ spock
 sqdb
 sql-de-lite
 sql-null
-sqlite3
+(sqlite3 (native-dependencies pkgs.sqlite))
 srfi-101
 srfi-102
 srfi-19
