@@ -2551,6 +2551,7 @@ rec {
     buildInputs = [
       silex
       easyffi
+      pkgs.expat
     ];
   };
 
@@ -2659,6 +2660,8 @@ rec {
       imlib2
       linear-algebra
       foreigners
+      pkgs.ffmpeg
+      pkgs.zlib
     ];
   };
 
@@ -2951,6 +2954,7 @@ rec {
     buildInputs = [
       foreigners
       matchable
+      pkgs.freetype
     ];
   };
 
@@ -2996,6 +3000,8 @@ rec {
       concurrent-native-callbacks
       foreigners
       matchable
+      pkgs.pkgconfig
+      pkgs.fuse
     ];
   };
 
@@ -3052,6 +3058,7 @@ rec {
 
     buildInputs = [
       setup-helper
+      pkgs.gdbm
     ];
   };
 
@@ -3100,6 +3107,7 @@ rec {
 
     buildInputs = [
       foreigners
+      pkgs.libgit2
     ];
   };
 
@@ -3393,6 +3401,7 @@ rec {
       cock
       matchable
       setup-helper
+      pkgs.graphviz
     ];
   };
 
@@ -3421,7 +3430,8 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.pkgconfig
+      pkgs.gts
     ];
   };
 
@@ -3772,6 +3782,7 @@ rec {
       socket
       cock
       cock-utils
+      pkgs.i3
     ];
   };
 
@@ -3839,6 +3850,7 @@ rec {
 
     buildInputs = [
       foreigners
+      pkgs.imlib2
     ];
   };
 
@@ -4166,6 +4178,8 @@ rec {
       numbers
       make
       shell
+      pkgs.ant
+      pkgs.jdk
     ];
   };
 
@@ -4256,6 +4270,7 @@ rec {
       miscmacros
       matchable
       coops
+      pkgs.ncurses
     ];
   };
 
@@ -5759,6 +5774,7 @@ rec {
     buildInputs = [
       make
       bind
+      pkgs.glew
     ];
   };
 

@@ -5,6 +5,8 @@ let
     augeas = true;              # augeas isn't packaged
     debug = true;               # circular dep with cock?
     epeg = true;
+    git = true;
+    hfs-plus = true;
     srfi-19 = true;             # (install-srfi29-bundle)
     glpg = true;
     macosx = true;
