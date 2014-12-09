@@ -478,7 +478,7 @@ server-test
 sets
 setup-helper
 setup-helper-cock
-seulex
+(seulex (extra-dependencies pkgs.gfortran pkgs.blas pkgs.liblapack))
 sexp-diff
 sfht
 sha1
@@ -506,7 +506,7 @@ smtp
 snowdigest
 snowtar
 socket
-soil
+(soil (extra-dependencies pkgs.mesa_glu pkgs.xlibs.libX11))
 sp
 sparse-vectors
 spatial-trees
@@ -523,7 +523,7 @@ spiffy-sexpr-log
 spiffy-uri-match
 spock
 sqdb
-sql-de-lite
+(sql-de-lite (extra-dependencies pkgs.sqlite))
 sql-null
 (sqlite3 (extra-dependencies pkgs.sqlite))
 srfi-101
@@ -556,7 +556,7 @@ ssql-postgresql
 stack
 stalin
 static-modules
-statistics
+(statistics (extra-dependencies pkgs.gsl))
 statvfs
 stemmer
 strictly-pretty
@@ -601,7 +601,7 @@ tinyclos
 tinyclos-xerox
 tk
 token-substitution
-tokyocabinet
+(tokyocabinet (extra-dependencies pkgs.tokyocabinet))
 trace
 traversal
 treap
@@ -628,11 +628,11 @@ uri-dispatch
 uri-generic
 uri-match
 usage
-usb
+(usb (extra-dependencies pkgs.pkgconfig pkgs.libusb1))
 utf8
 uuid
 (uuid-lib (extra-dependencies pkgs.libuuid))
-uuid-ossp
+(uuid-ossp (extra-dependencies pkgs.libossp_uuid))
 vandusen
 variable-item
 varsubst
@@ -643,7 +643,7 @@ vlist
 (webgate (extra-dependencies pkgs.libuuid))
 (webkit (extra-dependencies pkgs.pkgconfig pkgs.webkitgtk))
 websockets
-; win32-msgbox
+win32-msgbox
 wmiirc
 x11-colors
 x11-keysyms
@@ -651,7 +651,7 @@ xbmc-api
 (xft (extra-dependencies pkgs.pkgconfig pkgs.xlibs.libXft))
 (xlib (extra-dependencies pkgs.xlibs.libX11))
 xml-rpc
-; (xosd (extra-dependencies pkgs.libxosd))
+(xosd (extra-dependencies pkgs.libxosd))
 (xtypes (extra-dependencies pkgs.xlibs.libX11 pkgs.xlibs.libXrender))
 yahoo-finance
 (yaml (extra-dependencies pkgs.pkgconfig pkgs.libyaml))

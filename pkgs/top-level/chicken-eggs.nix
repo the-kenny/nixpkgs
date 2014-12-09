@@ -7445,7 +7445,9 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.gfortran
+      pkgs.blas
+      pkgs.liblapack
     ];
   };
 
@@ -7875,7 +7877,8 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.mesa_glu
+      pkgs.xlibs.libX11
     ];
   };
 
@@ -8140,6 +8143,7 @@ rec {
     buildInputs = [
       lru-cache
       foreigners
+      pkgs.sqlite
     ];
   };
 
@@ -8641,6 +8645,7 @@ rec {
       vector-lib
       numbers
       format
+      pkgs.gsl
     ];
   };
 
@@ -9305,6 +9310,7 @@ rec {
 
     buildInputs = [
       easyffi
+      pkgs.tokyocabinet
     ];
   };
 
@@ -9710,7 +9716,8 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.pkgconfig
+      pkgs.libusb1
     ];
   };
 
@@ -9770,6 +9777,7 @@ rec {
 
     buildInputs = [
       setup-helper
+      pkgs.libossp_uuid
     ];
   };
 
@@ -9930,6 +9938,20 @@ rec {
     ];
   };
 
+  win32-msgbox = eggDerivation {
+    name = "win32-msgbox-1.1";
+
+    src = fetchegg {
+      name = "win32-msgbox";
+      version = "1.1";
+      sha256 = "0b5l39kzs53yy65w17l27lrzl8pfgnhznkfc10p476hqmb2p55gh";
+    };
+
+    buildInputs = [
+      
+    ];
+  };
+
   wmiirc = eggDerivation {
     name = "wmiirc-0.5";
 
@@ -10034,6 +10056,21 @@ rec {
       intarweb
       ssax
       sxpath
+    ];
+  };
+
+  xosd = eggDerivation {
+    name = "xosd-1.7";
+
+    src = fetchegg {
+      name = "xosd";
+      version = "1.7";
+      sha256 = "18mnvmz8ax96vavdch67xqhrr2w25vphggfijggmqsn3q21szbn7";
+    };
+
+    buildInputs = [
+      easyffi
+      pkgs.libxosd
     ];
   };
 

@@ -15,6 +15,13 @@ let
   };
 in
 {
+  glfw3 = {
+    preBuild = ''
+      substituteInPlace glfw3.setup \
+        --replace "-l:libglfw.so.3" "-lglfw"
+    '';
+  };
+
   setup-helper = {
     preBuild = ''
       substituteInPlace setup-helper.setup \
@@ -22,10 +29,11 @@ in
     '';
   };
 
-  glfw3 = {
+  seulex = {
     preBuild = ''
-      substituteInPlace glfw3.setup \
-        --replace "-l:libglfw.so.3" "-lglfw"
+      export NIX_LDFLAGS=-L"$(dirname `gfortran --print-file-name libgfortran.so`)";
+    '';
+  };
     '';
   };
 } // stdenv.lib.mapAttrs (k: v: { meta.broken = v; }) broken
