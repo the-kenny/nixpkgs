@@ -567,7 +567,7 @@ sublevel
 suffix-tree
 sundials
 suspension
-svn-client
+(svn-client (extra-dependencies pkgs.subversion pkgs.apr pkgs.aprutil pkgs.which))
 svn-egg-author
 svnwiki-sxml
 sxml-fu

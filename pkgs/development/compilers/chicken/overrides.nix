@@ -36,6 +36,11 @@ in
       export NIX_LDFLAGS=-L"$(dirname `gfortran --print-file-name libgfortran.so`)";
     '';
   };
+
+  svn-client = {
+    preBuild = ''
+      SVN_INCLUDE_DIR=$(dirname -- "$(which svn)")/../include/subversion-1
+      CSC_OPTIONS="$(apr-1-config --includes) $(apu-1-config --includes) -I$SVN_INCLUDE_DIR $CSC_OPTIONS"
     '';
   };
 } // stdenv.lib.mapAttrs (k: v: { meta.broken = v; }) broken

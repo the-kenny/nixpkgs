@@ -8811,7 +8811,10 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.subversion
+      pkgs.apr
+      pkgs.aprutil
+      pkgs.which
     ];
   };
 
