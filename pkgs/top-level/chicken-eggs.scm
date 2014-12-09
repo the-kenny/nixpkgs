@@ -159,7 +159,7 @@ ersatz
 estraier-client
 (exif (native-dependencies pkgs.libexif))
 expand-full
-expat
+(expat (native-dependencies pkgs.expat))
 ;; ezxdisp
 fancypants
 fann
@@ -167,7 +167,7 @@ fast-generic
 fast-loop
 (fastcgi (native-dependencies pkgs.fcgi))
 feature-test
-ffmpeg-video
+(ffmpeg-video (native-dependencies pkgs.ffmpeg pkgs.zlib))
 filepath
 flsim
 fluids
@@ -186,17 +186,17 @@ fpio
 fps
 free-gettext
 freetds
-freetype
+(freetype (native-dependencies pkgs.freetype))
 ftl
 ftp
-fuse
+(fuse (native-dependencies pkgs.pkgconfig pkgs.fuse))
 g2
 gap-buffer
 gather-egg-information
-gdbm
+(gdbm (native-dependencies pkgs.gdbm))
 genturfahi
 getopt-long
-git
+(git (native-dependencies pkgs.libgit2))
 git-egg-author
 gl-math
 gl-type
@@ -216,9 +216,9 @@ graph-dominators
 graph-scc
 graph-separators
 graph-ssa
-graphviz
+(graphviz (native-dependencies pkgs.graphviz))
 groc
-gts
+(gts (native-dependencies pkgs.pkgconfig pkgs.gts))
 hardwood
 hashes
 heap
@@ -240,11 +240,11 @@ htmlprag
 http-client
 http-session
 hyde
-i3
+(i3 (native-dependencies pkgs.i3))
 iconv
 iexpr
 image-processing
-imlib2
+(imlib2 (native-dependencies pkgs.imlib2))
 imperative-command-line-a
 impromptu
 inclub
@@ -266,13 +266,13 @@ isbn
 iset
 iup
 javahack
-jni
+(jni (native-dependencies pkgs.ant pkgs.jdk))
 jsmin
 jso
 json
 json-abnf
 json-rpc
-kalaha
+(kalaha (native-dependencies pkgs.ncurses))
 kanren
 kd-tree
 kvlists
