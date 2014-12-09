@@ -6461,6 +6461,8 @@ rec {
       protobj
       matchable
       miscmacros
+      pkgs.pkgconfig
+      pkgs.qt4
     ];
   };
 
@@ -6478,6 +6480,8 @@ rec {
       protobj
       matchable
       miscmacros
+      pkgs.pkgconfig
+      pkgs.qt4
     ];
   };
 
@@ -6649,7 +6653,7 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.readline
     ];
   };
 
@@ -7228,7 +7232,11 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.SDL
+      pkgs.SDL_image
+      pkgs.SDL_ttf
+      pkgs.SDL_gfx
+      pkgs.SDL_net
     ];
   };
 
@@ -7257,6 +7265,7 @@ rec {
 
     buildInputs = [
       sdl-base
+      pkgs.SDL_image
     ];
   };
 
@@ -7270,7 +7279,8 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.SDL
+      pkgs.SDL_mixer
     ];
   };
 
@@ -7285,6 +7295,7 @@ rec {
 
     buildInputs = [
       sdl-base
+      pkgs.SDL_ttf
     ];
   };
 

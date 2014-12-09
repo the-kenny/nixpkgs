@@ -413,8 +413,8 @@ pstk
 pty
 pyffi
 qobischeme-ui
-qt
-qt-light
+(qt (extra-dependencies pkgs.pkgconfig pkgs.qt4))
+(qt-light (extra-dependencies pkgs.pkgconfig pkgs.qt4))
 quaternions
 qwiki
 r7rs
@@ -425,7 +425,7 @@ random-swb
 random-test
 raspberry-pi-gpio
 rb-tree
-readline
+(readline (extra-dependencies pkgs.readline))
 record-variants
 records
 redis
@@ -463,11 +463,11 @@ scron
 scsh-process
 scss
 sdbm
-sdl
+(sdl (extra-dependencies pkgs.SDL pkgs.SDL_image pkgs.SDL_ttf pkgs.SDL_gfx pkgs.SDL_net))
 (sdl-base (extra-dependencies pkgs.SDL))
-sdl-img
-sdl-mixer
-sdl-ttf
+(sdl-img (extra-dependencies pkgs.SDL_image))
+(sdl-mixer (extra-dependencies pkgs.SDL pkgs.SDL_mixer))
+(sdl-ttf (extra-dependencies pkgs.SDL_ttf))
 sedna
 selenium
 send-grid

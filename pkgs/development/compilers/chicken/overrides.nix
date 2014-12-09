@@ -12,16 +12,39 @@ let
     macosx = true;
     xosd = true;                # libxosd isn't packaged
     win32-msgbox = true;
+    setup-helper-cock = true;   # obsolete
     sundials = true;            # sundials isn't packaged
     stemmer = true;             # libstemmer / snowball isn't packaged
+    raspberry-pi-gpio = true;   # wiringPi isn't packaged
   };
+  sdlPrebuild = egg: ''
+    SDL_BASE_REPO_PATH=$(csi -R files -e "(write (pathname-directory (##sys#find-extension \"sdl-base\" #f)))")
+    substituteInPlace ${egg}.setup \
+      --replace ",(repository-path)" "$SDL_BASE_REPO_PATH"
+  '';
 in
-{
+rec {
   glfw3 = {
     preBuild = ''
       substituteInPlace glfw3.setup \
         --replace "-l:libglfw.so.3" "-lglfw"
     '';
+  };
+
+  qt = {
+    preBuild = ''
+      export QTDIR=$(expr match "$(pkg-config --libs-only-L QtCore)" "-L\([^ ]\+\)")/..
+    '';
+  };
+
+  qt-light = qt;
+
+  sdl-ttf = {
+    preBuild = sdlPrebuild "sdl-ttf";
+  };
+
+  sdl-img = {
+    preBuild = sdlPrebuild "sdl-img";
   };
 
   setup-helper = {
