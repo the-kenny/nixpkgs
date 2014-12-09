@@ -4,7 +4,7 @@
 # the tarball. Is there a nicer way than duplicating code?
 
 let
-  version = "0.4";
+  version = "0.5";
 in
 eggDerivation {
   src = fetchurl {

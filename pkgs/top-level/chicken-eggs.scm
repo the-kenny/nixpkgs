@@ -12,7 +12,7 @@ aes
 agrep
 aima
 alist-lib
-(allegro (native-dependencies pkgs.pkgconfig pkgs.allegro5))
+(allegro (extra-dependencies pkgs.pkgconfig pkgs.allegro5))
 amazon-s3
 amb
 anaphora
@@ -41,8 +41,8 @@ awful-static-pages
 awk
 banterpixra
 base64
-(bb (native-dependencies pkgs.fltk13 pkgs.libjpeg pkgs.mesa))
-(berkeley-db (native-dependencies pkgs.db))
+(bb (extra-dependencies pkgs.fltk13 pkgs.libjpeg pkgs.mesa))
+(berkeley-db (extra-dependencies pkgs.db))
 big-chicken
 binary-heap
 binary-parse
@@ -50,7 +50,7 @@ bind
 bindings
 bitcoin
 bitstring
-(blas (native-dependencies pkgs.pkgconfig pkgs.blas))
+(blas (extra-dependencies pkgs.pkgconfig pkgs.blas))
 blob-record
 blob-utils
 bloom-filter
@@ -58,11 +58,11 @@ blowfish
 box
 breadcrumbs
 buffer-ports
-(bvsp-spline (native-dependencies pkgs.libf2c))
+(bvsp-spline (extra-dependencies pkgs.libf2c))
 byte-blob
 byte-blob-stream
 c3
-(cairo (native-dependencies pkgs.pkgconfig pkgs.cairo))
+(cairo (extra-dependencies pkgs.pkgconfig pkgs.cairo))
 call-with-environment-variables
 call-with-query
 call-with-sqlite3-connection
@@ -118,7 +118,7 @@ data-generators
 datatype
 date-literals
 dbc
-(dbus (native-dependencies pkgs.pkgconfig pkgs.dbus))
+(dbus (extra-dependencies pkgs.pkgconfig pkgs.dbus))
 debug
 define-record-and-printer
 define-structure
@@ -128,7 +128,7 @@ describe-coops
 dict
 digraph
 directory-utils
-(discount (native-dependencies pkgs.discount))
+(discount (extra-dependencies pkgs.discount))
 disjoint-set
 dissector
 doctype
@@ -157,17 +157,17 @@ er-macros
 error-utils
 ersatz
 estraier-client
-(exif (native-dependencies pkgs.libexif))
+(exif (extra-dependencies pkgs.libexif))
 expand-full
-(expat (native-dependencies pkgs.expat))
+(expat (extra-dependencies pkgs.expat))
 ;; ezxdisp
 fancypants
 fann
 fast-generic
 fast-loop
-(fastcgi (native-dependencies pkgs.fcgi))
+(fastcgi (extra-dependencies pkgs.fcgi))
 feature-test
-(ffmpeg-video (native-dependencies pkgs.ffmpeg pkgs.zlib))
+(ffmpeg-video (extra-dependencies pkgs.ffmpeg pkgs.zlib))
 filepath
 flsim
 fluids
@@ -186,27 +186,27 @@ fpio
 fps
 free-gettext
 freetds
-(freetype (native-dependencies pkgs.freetype))
+(freetype (extra-dependencies pkgs.freetype))
 ftl
 ftp
-(fuse (native-dependencies pkgs.pkgconfig pkgs.fuse))
+(fuse (extra-dependencies pkgs.pkgconfig pkgs.fuse))
 g2
 gap-buffer
 gather-egg-information
-(gdbm (native-dependencies pkgs.gdbm))
+(gdbm (extra-dependencies pkgs.gdbm))
 genturfahi
 getopt-long
-(git (native-dependencies pkgs.libgit2))
+(git (extra-dependencies pkgs.libgit2))
 git-egg-author
 gl-math
 gl-type
 gl-utils
-glfw
-(glfw3 (native-dependencies pkgs.pkgconfig pkgs.glfw3))
+(glfw (extra-dependencies pkgs.pkgconfig pkgs.glfw2 pkgs.mesa_glu))
+(glfw3 (extra-dependencies pkgs.pkgconfig pkgs.glfw3))
 glls
 glm
-;; (glpk (native-dependencies pkgs.pkgconfig pkgs.glpk))
-(glut (native-dependencies pkgs.freeglut pkgs.mesa_glu))
+;; (glpk (extra-dependencies pkgs.pkgconfig pkgs.glpk))
+(glut (extra-dependencies pkgs.freeglut pkgs.mesa_glu))
 gochan
 gopher
 graph-bfs
@@ -216,9 +216,9 @@ graph-dominators
 graph-scc
 graph-separators
 graph-ssa
-(graphviz (native-dependencies pkgs.graphviz))
+(graphviz (extra-dependencies pkgs.graphviz))
 groc
-(gts (native-dependencies pkgs.pkgconfig pkgs.gts))
+(gts (extra-dependencies pkgs.pkgconfig pkgs.gts))
 hardwood
 hashes
 heap
@@ -240,11 +240,11 @@ htmlprag
 http-client
 http-session
 hyde
-(i3 (native-dependencies pkgs.i3))
+(i3 (extra-dependencies pkgs.i3))
 iconv
 iexpr
 image-processing
-(imlib2 (native-dependencies pkgs.imlib2))
+(imlib2 (extra-dependencies pkgs.imlib2))
 imperative-command-line-a
 impromptu
 inclub
@@ -266,13 +266,13 @@ isbn
 iset
 iup
 javahack
-(jni (native-dependencies pkgs.ant pkgs.jdk))
+(jni (extra-dependencies pkgs.ant pkgs.jdk))
 jsmin
 jso
 json
 json-abnf
 json-rpc
-(kalaha (native-dependencies pkgs.ncurses))
+(kalaha (extra-dependencies pkgs.ncurses))
 kanren
 kd-tree
 kvlists
@@ -306,7 +306,7 @@ lowdown
 lru-cache
 lua
 lz4
-(lzma (native-dependencies pkgs.lzma))
+(lzma (extra-dependencies pkgs.lzma))
 ;; macosx
 magic
 mailbox
@@ -367,9 +367,9 @@ object-graph
 oblist
 octave
 openal
-(opengl (native-dependencies pkgs.mesa_glu))
-(opengl-glew (native-dependencies pkgs.glew))
-(openssl (native-dependencies pkgs.openssl))
+(opengl (extra-dependencies pkgs.mesa_glu))
+(opengl-glew (extra-dependencies pkgs.glew))
+(openssl (extra-dependencies pkgs.openssl))
 operations
 options
 osxattr
@@ -385,7 +385,7 @@ pdf
 peep
 persistent-hash-map
 phoghorn
-;; (php-s11n (native-dependencies: regex-literals))
+;; (php-s11n (extra-dependencies: regex-literals))
 phricken
 physfs
 picnic
@@ -398,7 +398,7 @@ posix-extras
 posix-semaphore
 posix-shm
 posix-utils
-(postgresql (native-dependencies pkgs.postgresql))
+(postgresql (extra-dependencies pkgs.postgresql))
 prcc
 probdist
 proccpuinfo
@@ -464,7 +464,7 @@ scsh-process
 scss
 sdbm
 sdl
-(sdl-base (native-dependencies pkgs.SDL))
+(sdl-base (extra-dependencies pkgs.SDL))
 sdl-img
 sdl-mixer
 sdl-ttf
@@ -525,7 +525,7 @@ spock
 sqdb
 sql-de-lite
 sql-null
-(sqlite3 (native-dependencies pkgs.sqlite))
+(sqlite3 (extra-dependencies pkgs.sqlite))
 srfi-101
 srfi-102
 srfi-19
@@ -617,7 +617,7 @@ typeclass
 typed-lists
 typed-modules
 typed-records
-(udev (native-dependencies pkgs.udev))
+(udev (extra-dependencies pkgs.udev))
 udp
 udp6
 ugarit
@@ -631,7 +631,7 @@ usage
 usb
 utf8
 uuid
-(uuid-lib (native-dependencies pkgs.libuuid))
+(uuid-lib (extra-dependencies pkgs.libuuid))
 uuid-ossp
 vandusen
 variable-item
@@ -640,23 +640,23 @@ vector-lib
 versions
 vfs
 vlist
-(webgate (native-dependencies pkgs.libuuid))
-(webkit (native-dependencies pkgs.pkgconfig pkgs.webkitgtk))
+(webgate (extra-dependencies pkgs.libuuid))
+(webkit (extra-dependencies pkgs.pkgconfig pkgs.webkitgtk))
 websockets
 ; win32-msgbox
 wmiirc
 x11-colors
 x11-keysyms
 xbmc-api
-(xft (native-dependencies pkgs.pkgconfig pkgs.xlibs.libXft))
-(xlib (native-dependencies pkgs.xlibs.libX11))
+(xft (extra-dependencies pkgs.pkgconfig pkgs.xlibs.libXft))
+(xlib (extra-dependencies pkgs.xlibs.libX11))
 xml-rpc
-; (xosd (native-dependencies pkgs.libxosd))
-(xtypes (native-dependencies pkgs.xlibs.libX11 pkgs.xlibs.libXrender))
+; (xosd (extra-dependencies pkgs.libxosd))
+(xtypes (extra-dependencies pkgs.xlibs.libX11 pkgs.xlibs.libXrender))
 yahoo-finance
-(yaml (native-dependencies pkgs.pkgconfig pkgs.libyaml))
+(yaml (extra-dependencies pkgs.pkgconfig pkgs.libyaml))
 yasos
 yelp
 z3
-(zlib (native-dependencies pkgs.zlib))
-(zmq (native-dependencies pkgs.zeromq2))
+(zlib (extra-dependencies pkgs.zlib))
+(zmq (extra-dependencies pkgs.zeromq2))

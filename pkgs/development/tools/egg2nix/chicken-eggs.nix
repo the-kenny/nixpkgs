@@ -188,12 +188,12 @@ rec {
   };
 
   sendfile = eggDerivation {
-    name = "sendfile-1.7.29";
+    name = "sendfile-1.7.30";
 
     src = fetchegg {
       name = "sendfile";
-      version = "1.7.29";
-      sha256 = "1dc02cbkx5kixhbqjy26g6gs680vy7krc9qis1p1v4aa0b2lgj7k";
+      version = "1.7.30";
+      sha256 = "165cdjm24ysvrzrw85cv02mcd0xlscx00bv6rjgya7svqhzbzhhs";
     };
 
     buildInputs = [
