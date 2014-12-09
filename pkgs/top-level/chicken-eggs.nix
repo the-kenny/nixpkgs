@@ -3,12 +3,12 @@ rec {
   inherit (pkgs) eggDerivation fetchegg;
 
   two-d-primitives = eggDerivation {
-    name = "2d-primitives-v0.2.3";
+    name = "2d-primitives-v0.2.3.2";
 
     src = fetchegg {
       name = "2d-primitives";
-      version = "v0.2.3";
-      sha256 = "161w4g9ybrw360sv5j5n09c7mclj7jzihp2y39h849dlznjijp8h";
+      version = "v0.2.3.2";
+      sha256 = "0cwp97w3h9pss61vj2wj7cchiwrjqv020l5y6dh9k05jxafp5bxy";
     };
 
     buildInputs = [
@@ -113,19 +113,18 @@ rec {
   };
 
   R = eggDerivation {
-    name = "R-0.3.6";
+    name = "R-0.3.9";
 
     src = fetchegg {
       name = "R";
-      version = "0.3.6";
-      sha256 = "022ilv3wznqkx064f59yq7vfv0pvng16rcfznqz2zhlqa730mvbq";
+      version = "0.3.9";
+      sha256 = "1rdfn3jvv5i87wa2cv65zjqxjn8jp6nry9v79sjmj08i4afvw4wk";
     };
 
     buildInputs = [
       big-chicken
       call-with-environment-variables
       cock
-      debug
       define-record-and-printer
       matchable
       moremacros
@@ -209,17 +208,16 @@ rec {
   };
 
   aima = eggDerivation {
-    name = "aima-0.9.10";
+    name = "aima-0.9.12";
 
     src = fetchegg {
       name = "aima";
-      version = "0.9.10";
-      sha256 = "1s1ql9lbzh5kny37xsy2iwg8wkwkpakdgnmzlrk8kq3brndp7iiw";
+      version = "0.9.12";
+      sha256 = "0hzyvl27w2pdf70x32ajfa11js6nvhfwxzw10yn4kqxvxr43brwv";
     };
 
     buildInputs = [
       cock
-      debug
       define-record-and-printer
       foof-loop
       format
@@ -239,17 +237,16 @@ rec {
   };
 
   alist-lib = eggDerivation {
-    name = "alist-lib-0.2.7";
+    name = "alist-lib-0.2.9";
 
     src = fetchegg {
       name = "alist-lib";
-      version = "0.2.7";
-      sha256 = "1v1ri06mq6r8hh79dc04glqfkh3dkb98f5ljn86pmzwrn7ny4hi7";
+      version = "0.2.9";
+      sha256 = "0skcn8l6k1804nl81h3xd6qx1hl93p4lv5vkn96fzwkcmja2zk3a";
     };
 
     buildInputs = [
       cock
-      debug
       matchable
       setup-helper
     ];
@@ -325,17 +322,16 @@ rec {
   };
 
   animation = eggDerivation {
-    name = "animation-0.3";
+    name = "animation-0.3.2";
 
     src = fetchegg {
       name = "animation";
-      version = "0.3";
-      sha256 = "095pckrj390k86fmjarb042hrs0fi0rf3qpzxb6rgk3fryihifwk";
+      version = "0.3.2";
+      sha256 = "0br7fapb7b620wmlna0v1b5np3afx8753krfzkj4mrzwskrkqfqa";
     };
 
     buildInputs = [
       cock
-      debug
       format
       matchable
       miscmacros
@@ -1028,12 +1024,12 @@ rec {
   };
 
   cairo = eggDerivation {
-    name = "cairo-0.1.15";
+    name = "cairo-0.1.16";
 
     src = fetchegg {
       name = "cairo";
-      version = "0.1.15";
-      sha256 = "0fngmkkr22a7y4lim0k1plmcz2sjn5i2vkv6rvn0vvv53vvsb8yq";
+      version = "0.1.16";
+      sha256 = "0f0dghlm0iad8ri9sbp0fdd9g1yy1ywikcj8wc6xqqf7hhjnnvhm";
     };
 
     buildInputs = [
@@ -1058,12 +1054,12 @@ rec {
   };
 
   call-with-query = eggDerivation {
-    name = "call-with-query-0.2.6";
+    name = "call-with-query-0.2.8";
 
     src = fetchegg {
       name = "call-with-query";
-      version = "0.2.6";
-      sha256 = "1l78vnb4pj3lw13zb9vna5i8hh9j5rgc61v54wnhims6hj8rycya";
+      version = "0.2.8";
+      sha256 = "1hlllmv8fw4p28gs2bqb8n3x298b50vhc8zaacbgz7srnim5f7id";
     };
 
     buildInputs = [
@@ -1413,12 +1409,12 @@ rec {
   };
 
   cock = eggDerivation {
-    name = "cock-0.6";
+    name = "cock-0.9.1";
 
     src = fetchegg {
       name = "cock";
-      version = "0.6";
-      sha256 = "0qww5c7rw3r8jbhhl449x74y7g9a0gl8nza962p90g8n6jahd37b";
+      version = "0.9.1";
+      sha256 = "15m55aakkizdm3l5q39mkc9bbby0n7xp1019jkyj4xvshcxp5lbz";
     };
 
     buildInputs = [
@@ -1427,18 +1423,17 @@ rec {
   };
 
   cock-utils = eggDerivation {
-    name = "cock-utils-0.4.2";
+    name = "cock-utils-0.4.8";
 
     src = fetchegg {
       name = "cock-utils";
-      version = "0.4.2";
-      sha256 = "1d5fn5mbgncshk1pkw1k2gq0d38n63ci10fzvpd9xqimsrpvzamr";
+      version = "0.4.8";
+      sha256 = "0yq2620x49jlq8fkkjnwsv6j7gs8bxsbd5qir7kgw1rqvzzic28a";
     };
 
     buildInputs = [
       alist-lib
       args
-      debug
       define-record-and-printer
       environments
       fmt
@@ -1498,12 +1493,12 @@ rec {
   };
 
   combinatorics = eggDerivation {
-    name = "combinatorics-0.3.3";
+    name = "combinatorics-0.3.7";
 
     src = fetchegg {
       name = "combinatorics";
-      version = "0.3.3";
-      sha256 = "13ilm70rrni7jzmkihh8z9sy8d5ymhmhyvsgsw049v8zdqg11jqg";
+      version = "0.3.7";
+      sha256 = "04afn11xx22q627xm64ghphvbgs0j1f2vsm93v42y63dvb0l0d70";
     };
 
     buildInputs = [
@@ -1927,30 +1922,29 @@ rec {
   };
 
   debug = eggDerivation {
-    name = "debug-0.3.11";
+    name = "debug-0.3.13";
 
     src = fetchegg {
       name = "debug";
-      version = "0.3.11";
-      sha256 = "1fzpmmhskwfx7x8prk3fyg5pvhdnaskf6yp1r6x5nhrxmfpv3x4q";
+      version = "0.3.13";
+      sha256 = "0hwppza4apy876yc8nz0lak85vydf90wbn3y0qvg9pig79kdjgm9";
     };
 
     buildInputs = [
       cock
       matchable
       setup-helper
-      setup-helper-cock
       syslog
     ];
   };
 
   define-record-and-printer = eggDerivation {
-    name = "define-record-and-printer-0.1.2";
+    name = "define-record-and-printer-0.1.3";
 
     src = fetchegg {
       name = "define-record-and-printer";
-      version = "0.1.2";
-      sha256 = "14q4cdhv4ghqdzj951l5i3ha76dwfm70fmzvjpqndc02w5h0ypny";
+      version = "0.1.3";
+      sha256 = "1ky8v7awmsfnf0d0p7ngid8vyiz986508p35vg0xmb2f9gn4px8m";
     };
 
     buildInputs = [
@@ -2476,12 +2470,12 @@ rec {
   };
 
   ersatz = eggDerivation {
-    name = "ersatz-1.22";
+    name = "ersatz-1.23";
 
     src = fetchegg {
       name = "ersatz";
-      version = "1.22";
-      sha256 = "1s61i9d9dz79gwiqkasbvlfr2c1p2d49fjsk9ghwkiaiybqzpm9x";
+      version = "1.23";
+      sha256 = "18x8fz5aws500c5axbrgpwy2ixxq7id2bbxd3z2cbj09r2ch6cnp";
     };
 
     buildInputs = [
@@ -2924,12 +2918,12 @@ rec {
   };
 
   freetds = eggDerivation {
-    name = "freetds-0.1.7";
+    name = "freetds-0.1.8";
 
     src = fetchegg {
       name = "freetds";
-      version = "0.1.7";
-      sha256 = "1q5mm0lgccj04nj2lawca5mds6b90hxqp1yyyf9x2r55a8vfraxr";
+      version = "0.1.8";
+      sha256 = "1bn1zqjj471k8731ic29jxmj22x8najliigzdcq1jvjc70zw46kg";
     };
 
     buildInputs = [
@@ -3157,12 +3151,12 @@ rec {
   };
 
   gl-utils = eggDerivation {
-    name = "gl-utils-0.3.1";
+    name = "gl-utils-0.4.0";
 
     src = fetchegg {
       name = "gl-utils";
-      version = "0.3.1";
-      sha256 = "0vks8sij84h2ibkflg7n22ilqdzpx00a898b5z4j9jkla4xywqs6";
+      version = "0.4.0";
+      sha256 = "0d5fxgskcg4qds53lvp3afga6sx697fccbwf3z243ai69mhkvapd";
     };
 
     buildInputs = [
@@ -3187,17 +3181,19 @@ rec {
     };
 
     buildInputs = [
-      
+      pkgs.pkgconfig
+      pkgs.glfw2
+      pkgs.mesa_glu
     ];
   };
 
   glfw3 = eggDerivation {
-    name = "glfw3-0.5.2";
+    name = "glfw3-0.6.1";
 
     src = fetchegg {
       name = "glfw3";
-      version = "0.5.2";
-      sha256 = "1f1v4f9x1qwd6a92l8kyzmnvxkgz82jfjd4yr1f00z0jmxgz46ch";
+      version = "0.6.1";
+      sha256 = "1xsa07a0n6yvi5shmny0bcp6ild0dv40ils109227lwskh7j24sh";
     };
 
     buildInputs = [
@@ -3208,12 +3204,12 @@ rec {
   };
 
   glls = eggDerivation {
-    name = "glls-0.7.0";
+    name = "glls-0.8.0";
 
     src = fetchegg {
       name = "glls";
-      version = "0.7.0";
-      sha256 = "17nlwkg01gijfa393342wbm5s6jkbqk96051ya3hyx6clk1lhyvr";
+      version = "0.8.0";
+      sha256 = "0rq97dsg8a143irdwk1w9kbry1pilj5kby9bk0v4nyi79wfdmhq1";
     };
 
     buildInputs = [
@@ -3473,17 +3469,16 @@ rec {
   };
 
   heap = eggDerivation {
-    name = "heap-0.4.9";
+    name = "heap-0.4.11";
 
     src = fetchegg {
       name = "heap";
-      version = "0.4.9";
-      sha256 = "160dkll55qs3gfs3z5yhafhp771lqrdzfxp1vj84wqpdk38q7hry";
+      version = "0.4.11";
+      sha256 = "1pfh5y0nq629nkg9j2ds948qaa7bc9q2yswldlca3024i3hd4x7a";
     };
 
     buildInputs = [
       cock
-      debug
       define-record-and-printer
       miscmacros
       vector-lib
@@ -3743,12 +3738,12 @@ rec {
   };
 
   hyde = eggDerivation {
-    name = "hyde-0.20.0";
+    name = "hyde-0.21.0";
 
     src = fetchegg {
       name = "hyde";
-      version = "0.20.0";
-      sha256 = "1k75dvmahr13y1xj62nyq1rby0lyr12dgm50h8b0xv7xldf05299";
+      version = "0.21.0";
+      sha256 = "0vqh90a39sbikzjlk8458yrpjjq3klw85cq712d9x1amqpzdxs08";
     };
 
     buildInputs = [
@@ -4307,16 +4302,16 @@ rec {
   };
 
   kvlists = eggDerivation {
-    name = "kvlists-1.0.3";
+    name = "kvlists-1.0.5";
 
     src = fetchegg {
       name = "kvlists";
-      version = "1.0.3";
-      sha256 = "1i6xqykwdhrhq8jw7xnpgv6ihixk1vp0f62ifzsj2nzfwbb90dca";
+      version = "1.0.5";
+      sha256 = "1d9niaxfi4jpz6y2l5zpbf96am16yrsg483lblaps3xmghpb2j7i";
     };
 
     buildInputs = [
-      
+      setup-helper
     ];
   };
 
@@ -4377,12 +4372,12 @@ rec {
   };
 
   lazy-seq = eggDerivation {
-    name = "lazy-seq-0.0.5";
+    name = "lazy-seq-0.0.6";
 
     src = fetchegg {
       name = "lazy-seq";
-      version = "0.0.5";
-      sha256 = "14ac8zsbj4jz71vx353sn2gn0sa9f6cza62pjrfdhp6pv8z3fd9p";
+      version = "0.0.6";
+      sha256 = "02ddpwwhlnsb7ln7vgyvj2kq5glcwsgzx8b5lxrn9wb44gs3rm7d";
     };
 
     buildInputs = [
@@ -5447,17 +5442,16 @@ rec {
   };
 
   neo4j = eggDerivation {
-    name = "neo4j-0.1.2";
+    name = "neo4j-0.1.3";
 
     src = fetchegg {
       name = "neo4j";
-      version = "0.1.2";
-      sha256 = "0bnhcpsvm7vlj6z4s3y27yiaiyzl83nhgivii0fp2slzac55j0fv";
+      version = "0.1.3";
+      sha256 = "08fhf2jg30fw7121nj42cqdrx28krknj1dhidrgscjf0hsidwp0c";
     };
 
     buildInputs = [
       alist-lib
-      debug
       http-client
       intarweb
       json
@@ -5632,12 +5626,12 @@ rec {
   };
 
   numbers = eggDerivation {
-    name = "numbers-3.0.1";
+    name = "numbers-3.1";
 
     src = fetchegg {
       name = "numbers";
-      version = "3.0.1";
-      sha256 = "0a7xbizs5swxbhkzhvxljnyypwnv46pcisl6p9a80jwq10x98bsp";
+      version = "3.1";
+      sha256 = "0gpy61gj9nr7q3cl6n2f995qr2vmb01mybbp9pmsypbvz2hb2gky";
     };
 
     buildInputs = [
@@ -5765,12 +5759,12 @@ rec {
   };
 
   opengl-glew = eggDerivation {
-    name = "opengl-glew-0.8.0";
+    name = "opengl-glew-0.9.1";
 
     src = fetchegg {
       name = "opengl-glew";
-      version = "0.8.0";
-      sha256 = "187gcwz8dfw2hyy12in6agbpyxcsdv9m3d94a96q2hj9npwa9rrr";
+      version = "0.9.1";
+      sha256 = "0naw6mp57bibc6irg3h8024hbvczxbplic58mxmhin5ag6cgql0j";
     };
 
     buildInputs = [
@@ -5882,26 +5876,28 @@ rec {
   };
 
   parley = eggDerivation {
-    name = "parley-0.8.2";
+    name = "parley-0.9";
 
     src = fetchegg {
       name = "parley";
-      version = "0.8.2";
-      sha256 = "1bb2kds3jnw7wsshd4nb2175jymfam6j0p8hdc5zd7f7dxcqwimk";
+      version = "0.9";
+      sha256 = "08finxxs2flsprqbi32s1fhpw1xvpq7xw1zmkifc9q7cjjsda6zb";
     };
 
     buildInputs = [
       stty
+      srfi-71
+      miscmacros
     ];
   };
 
   pastiche = eggDerivation {
-    name = "pastiche-0.21";
+    name = "pastiche-0.22";
 
     src = fetchegg {
       name = "pastiche";
-      version = "0.21";
-      sha256 = "0a8sdd4bbfmhr5rnc1apshdr1961h2ndwv5shy01izpxsrw0qlwk";
+      version = "0.22";
+      sha256 = "1xw0igx2yq7mvm1b87wv102l0gifdckixsazyzfb7cp851dy5arw";
     };
 
     buildInputs = [
@@ -6469,12 +6465,12 @@ rec {
   };
 
   qt-light = eggDerivation {
-    name = "qt-light-0.98";
+    name = "qt-light-0.99";
 
     src = fetchegg {
       name = "qt-light";
-      version = "0.98";
-      sha256 = "1j5qhiy36qkma966hxpagy3s17z7mwpminghh3vs27dc6mqgi7vk";
+      version = "0.99";
+      sha256 = "0zrjm0a0cm98qfdb771r4kg60vdkrq3kf16sixf8af77nrknd1cp";
     };
 
     buildInputs = [
@@ -7195,16 +7191,16 @@ rec {
   };
 
   scss = eggDerivation {
-    name = "scss-0.4";
+    name = "scss-0.5.0";
 
     src = fetchegg {
       name = "scss";
-      version = "0.4";
-      sha256 = "10xp559w18xl9dpr7blsv3b8jphcc449zah70kzlf2r15ps3lj12";
+      version = "0.5.0";
+      sha256 = "12pl4asjpj5pjck8w5dbqd857w318xyvyyqwwb5xivs53lz7j1rr";
     };
 
     buildInputs = [
-      
+      matchable
     ];
   };
 
@@ -7341,12 +7337,12 @@ rec {
   };
 
   sendfile = eggDerivation {
-    name = "sendfile-1.7.29";
+    name = "sendfile-1.7.30";
 
     src = fetchegg {
       name = "sendfile";
-      version = "1.7.29";
-      sha256 = "1dc02cbkx5kixhbqjy26g6gs680vy7krc9qis1p1v4aa0b2lgj7k";
+      version = "1.7.30";
+      sha256 = "165cdjm24ysvrzrw85cv02mcd0xlscx00bv6rjgya7svqhzbzhhs";
     };
 
     buildInputs = [
@@ -7426,12 +7422,12 @@ rec {
   };
 
   setup-helper-cock = eggDerivation {
-    name = "setup-helper-cock-0.2";
+    name = "setup-helper-cock-0.3";
 
     src = fetchegg {
       name = "setup-helper-cock";
-      version = "0.2";
-      sha256 = "15vv4x4wbd3ylniij10nmsm53z7yx86lc2d3q7f74k2p28wf76pn";
+      version = "0.3";
+      sha256 = "1h9nv5172iqczd91z1ybm2biw0xn8anzh0qhpad8rpb0bcdfckgj";
     };
 
     buildInputs = [
@@ -7526,15 +7522,16 @@ rec {
   };
 
   sicp = eggDerivation {
-    name = "sicp-0.5.4";
+    name = "sicp-0.7.3";
 
     src = fetchegg {
       name = "sicp";
-      version = "0.5.4";
-      sha256 = "1khqkmgns37pc6173is7jv2ck4jv8lyv8jwwlmlvs4zcq7cnf58q";
+      version = "0.7.3";
+      sha256 = "0dpcp2xh8x6mzw9i44gf6sshg430h51nvscsxlf30q6a0dgfv5d5";
     };
 
     buildInputs = [
+      cock
       htmlprag
       setup-helper
       shell
@@ -8355,12 +8352,12 @@ rec {
   };
 
   srfi-40 = eggDerivation {
-    name = "srfi-40-0.2";
+    name = "srfi-40-0.3";
 
     src = fetchegg {
       name = "srfi-40";
-      version = "0.2";
-      sha256 = "1ri3s676xb1vawjgfv75p154bm2dxy36pcsnig2lcqria5bh34g3";
+      version = "0.3";
+      sha256 = "0wb5w6hp4jqqaqh0gzshahpswnzakb836k258q2zy6f40ggjgpz3";
     };
 
     buildInputs = [
@@ -9283,18 +9280,17 @@ rec {
   };
 
   token-substitution = eggDerivation {
-    name = "token-substitution-0.1.1";
+    name = "token-substitution-0.2.2";
 
     src = fetchegg {
       name = "token-substitution";
-      version = "0.1.1";
-      sha256 = "0rsppc8iyylf95ml6qmfvincbqxhzy6cbs1qk0ps5j0wnqg73f75";
+      version = "0.2.2";
+      sha256 = "0g8804gmqh216aifs2g2mp811fzpi8dd8mpynmh5cgyrzpxv7y64";
     };
 
     buildInputs = [
       setup-helper
       vector-lib
-      debug
     ];
   };
 
@@ -9430,16 +9426,16 @@ rec {
   };
 
   twilio = eggDerivation {
-    name = "twilio-0.2.1";
+    name = "twilio-0.2.4";
 
     src = fetchegg {
       name = "twilio";
-      version = "0.2.1";
-      sha256 = "0hlm5ajrv11yddv2gag2sq547w929gr3pdhqhkcki8bnf2pmq5iy";
+      version = "0.2.4";
+      sha256 = "0p209mzx4kwv4ca1l1fly24i00aw9qflbn9f5d1261gviy3xmjkm";
     };
 
     buildInputs = [
-      debug
+      cock
       htmlprag
       http-client
       matchable
