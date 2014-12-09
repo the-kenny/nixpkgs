@@ -12,6 +12,8 @@ let
     macosx = true;
     xosd = true;                # libxosd isn't packaged
     win32-msgbox = true;
+    sundials = true;            # sundials isn't packaged
+    stemmer = true;             # libstemmer / snowball isn't packaged
   };
 in
 {
