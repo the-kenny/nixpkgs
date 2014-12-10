@@ -31,6 +31,14 @@ rec {
     '';
   };
 
+  pyffi = {
+    preBuild = ''
+      export PYTHON_CFLAGS=$(python-config --cflags)
+      export PYTHON_LFLAGS=$(python-config --ldflags python)
+      export PYTHON_LIBS=$(python-config --libs python)
+    '';
+  };
+
   qt = {
     preBuild = ''
       export QTDIR=$(expr match "$(pkg-config --libs-only-L QtCore)" "-L\([^ ]\+\)")/..

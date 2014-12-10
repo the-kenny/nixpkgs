@@ -411,7 +411,7 @@ protolk
 pseudo-meta-egg-info
 pstk
 pty
-pyffi
+(pyffi (extra-dependencies pkgs.python))
 qobischeme-ui
 (qt (extra-dependencies pkgs.pkgconfig pkgs.qt4))
 (qt-light (extra-dependencies pkgs.pkgconfig pkgs.qt4))

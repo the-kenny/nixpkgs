@@ -6420,6 +6420,7 @@ rec {
     buildInputs = [
       bind
       utf8
+      pkgs.python
     ];
   };
 
