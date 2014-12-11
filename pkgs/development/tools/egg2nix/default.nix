@@ -9,7 +9,7 @@ in
 eggDerivation {
   src = fetchurl {
     url = "https://github.com/the-kenny/egg2nix/archive/${version}.tar.gz";
-    sha256 = "1xn79fgqxg0i47asjah31zi56v60is1n8d0cy8w4gbj0i41z7pvm";
+    sha256 = "0adal428v4i7h9lzs7sfq75q2mxhsbf1qqwzrsjv8j41paars20y";
   };
 
   name = "egg2nix-${version}";
