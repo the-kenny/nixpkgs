@@ -1,5 +1,5 @@
-{ stdenv, icu, expat, zlib, bzip2, python, fixDarwinDylibNames, makeSetupHook
-, toolset ? null
+{ stdenv, icu, expat, zlib, bzip2, python, fixDarwinDylibNames
+, toolset ? if stdenv.isDarwin then "clang" else null
 , enableRelease ? true
 , enableDebug ? false
 , enableSingleThreaded ? false
@@ -9,6 +9,7 @@
 , enablePIC ? false
 , enableExceptions ? false
 , taggedLayout ? ((enableRelease && enableDebug) || (enableSingleThreaded && enableMultiThreaded) || (enableShared && enableStatic))
+, mpi ? null
 
 # Attributes inherit from specific versions
 , version, src
@@ -64,7 +65,8 @@ let
   nativeB2Flags = [
     "-sEXPAT_INCLUDE=${expat}/include"
     "-sEXPAT_LIBPATH=${expat}/lib"
-  ] ++ optional (toolset != null) "toolset=${toolset}";
+  ] ++ optional (toolset != null) "toolset=${toolset}"
+    ++ optional (mpi != null) "--user-config=user-config.jam";
   nativeB2Args = concatStringsSep " " (genericB2Flags ++ nativeB2Flags);
 
   crossB2Flags = [
@@ -90,7 +92,7 @@ let
 
     # Create a derivation which encompasses everything, making buildInputs nicer
     mkdir -p $out/nix-support
-    echo "${stripHeaderPathHook} $dev $lib" > $out/nix-support/propagated-native-build-inputs
+    echo "$dev $lib" > $out/nix-support/propagated-native-build-inputs
   '';
 
   commonConfigureFlags = [
@@ -98,7 +100,14 @@ let
     "--libdir=$(lib)/lib"
   ];
 
-  stripHeaderPathHook = makeSetupHook { } ./strip-header-path.sh;
+  fixup = ''
+    # Make boost header paths relative so that they are not runtime dependencies
+    (
+      cd "$dev"
+      find include \( -name '*.hpp' -or -name '*.h' -or -name '*.ipp' \) \
+        -exec sed '1i#line 1 "{}"' -i '{}' \;
+    )
+  '';
 
 in
 
@@ -122,6 +131,10 @@ stdenv.mkDerivation {
         substituteInPlace tools/build/src/tools/clang-darwin.jam \
           --replace '$(<[1]:D=)' "$lib/lib/\$(<[1]:D=)";
     fi;
+  '' + optionalString (mpi != null) ''
+    cat << EOF > user-config.jam
+    using mpi : ${mpi}/bin/mpiCC ;
+    EOF
   '';
 
   NIX_CFLAGS_LINK = stdenv.lib.optionalString stdenv.isDarwin
@@ -138,11 +151,11 @@ stdenv.mkDerivation {
     "--with-python=${python}/bin/python"
   ] ++ optional (toolset != null) "--with-toolset=${toolset}";
 
-  buildPhase = ''
-    ${stdenv.lib.optionalString (toolset == "clang") "unset NIX_ENFORCE_PURITY"}
-  '' + builder nativeB2Args;
+  buildPhase = builder nativeB2Args;
 
   installPhase = installer nativeB2Args;
+
+  postFixup = fixup;
 
   outputs = [ "out" "dev" "lib" ];
 
@@ -162,5 +175,6 @@ stdenv.mkDerivation {
     '';
     buildPhase = builder crossB2Args;
     installPhase = installer crossB2Args;
+    postFixup = fixup;
   };
 }
