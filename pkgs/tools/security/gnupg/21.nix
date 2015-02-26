@@ -5,14 +5,14 @@
 
 with stdenv.lib;
 stdenv.mkDerivation rec {
-  name = "gnupg-2.1.0";
+  name = "gnupg-2.1.2";
 
   src = fetchurl {
     url = "mirror://gnupg/gnupg/${name}.tar.bz2";
-    sha256 = "12q5shx6ldqad3rky154nv8f2cy57sxy9idivz93ggqm1bsw7a0n";
+    sha256 = "14k7c5spai3yppz6izf1ggbnffskl54ln87v1wgy9pwism1mlks0";
   };
 
-  patches = [ ./socket-activate.patch ];
+  patches = [ ./socket-activate-2.1.1.patch ];
 
   buildInputs = [
     pkgconfig libgcrypt libassuan libksba npth

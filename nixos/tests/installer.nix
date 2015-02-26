@@ -24,10 +24,15 @@ let
                 pkgs.sudo
                 pkgs.docbook5
                 pkgs.docbook5_xsl
-                pkgs.grub
-                pkgs.perlPackages.XMLLibXML
                 pkgs.unionfs-fuse
+
+                # Bootloader support
+                pkgs.grub
+                pkgs.grub2
+                pkgs.grub2_efi
                 pkgs.gummiboot
+                pkgs.perlPackages.XMLLibXML
+                pkgs.perlPackages.ListCompare
               ];
 
             # Don't use https://cache.nixos.org since the fake
@@ -189,6 +194,9 @@ let
       $machine->waitForUnit("local-fs.target");
 
       $machine->succeed("test -e /boot/grub");
+
+      # Check whether /root has correct permissions.
+      $machine->succeed("stat -c '%a' /root") =~ /700/ or die;
 
       # Did the swap device get activated?
       # uncomment once https://bugs.freedesktop.org/show_bug.cgi?id=86930 is resolved

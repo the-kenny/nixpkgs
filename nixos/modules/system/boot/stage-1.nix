@@ -46,7 +46,7 @@ let
       cp -pv ${pkgs.glibc}/lib/libpthread.so.* $out/lib
       cp -pv ${pkgs.glibc}/lib/librt.so.* $out/lib
       cp -pv ${pkgs.glibc}/lib/libdl.so.* $out/lib
-      cp -pv ${pkgs.gcc.gcc}/lib*/libgcc_s.so.* $out/lib
+      cp -pv ${pkgs.gcc.cc}/lib*/libgcc_s.so.* $out/lib
 
       # Copy BusyBox.
       cp -pvd ${pkgs.busybox}/bin/* ${pkgs.busybox}/sbin/* $out/bin/
@@ -326,7 +326,7 @@ in
 
     boot.initrd.compressor = mkOption {
       internal = true;
-      default = "gzip -9";
+      default = "gzip -9n";
       type = types.str;
       description = "The compressor to use on the initrd image.";
       example = "xz";

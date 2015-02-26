@@ -1,11 +1,11 @@
 {stdenv, fetchurl, zlib, openssl, tcl, readline, sqlite, withJson ? true}:
 
 stdenv.mkDerivation {
-  name = "fossil-1.28";
+  name = "fossil-1.30";
 
   src = fetchurl {
-    url = http://www.fossil-scm.org/download/fossil-src-20140127173344.tar.gz;
-    sha256 = "105a3f3wiqshmkw8q7f7ask3nm0jkjf0h3h2283qiqlsqfkwb9xc";
+    url = http://www.fossil-scm.org/download/fossil-src-20150119112900.tar.gz;
+    sha256 = "1p4jxd67m2a5rl85hb9gl0vxcvvkxnj1hd8yjaci2qf115d9x5ip";
   };
 
   buildInputs = [ zlib openssl readline sqlite ];
@@ -40,7 +40,7 @@ stdenv.mkDerivation {
       from the others by being extremely simple to setup and operate.
     '';
     homepage = http://www.fossil-scm.org/;
-    license = "BSD";
+    license = stdenv.lib.licenses.bsd2;
     platforms = with stdenv.lib.platforms; all;
     maintainers = [ #Add your name here!
       stdenv.lib.maintainers.z77z

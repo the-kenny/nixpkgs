@@ -1,8 +1,8 @@
 { stdenv, fetchFromGitHub, nodejs, which, python27, utillinux }:
 
 let
-  version = "12"; # see ${src}/util/version/Version.h
-  date = "20141121";
+  version = "15"; # see ${src}/util/version/Version.h
+  date = "20150207";
 in
 stdenv.mkDerivation {
   name = "cjdns-${version}-${date}";
@@ -10,15 +10,17 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "cjdelisle";
     repo = "cjdns";
-    rev = "f176d2c0271d764412bd13c7adf7ea475fa25e0f";
-    sha256 = "02vp917pr0kkcg41ani2azfbmdv1rjghmlrc7nc07ckkcqg6sk0y";
+    rev = "0fc585e15e25b1bd39be24a534f47bb966485a4a";
+    sha256 = "090zx30bgfk6wyh10wbjqpkvjq9l30jc7fh2iagajsmpjs9iipqm";
   };
 
   buildInputs = [ which python27 nodejs ] ++
     # for flock
     stdenv.lib.optional stdenv.isLinux [ utillinux ];
 
-  buildPhase = "bash do";
+  buildPhase =
+    stdenv.lib.optionalString stdenv.isArm "Seccomp_NO=1 "
+    + "bash do";
   installPhase = ''
     installBin cjdroute makekeys privatetopublic publictoip6
     sed -i 's,/usr/bin/env node,'$(type -P node), \
@@ -26,7 +28,7 @@ stdenv.mkDerivation {
     sed -i 's,/usr/bin/env python,'$(type -P python), \
       $(find contrib -type f)
     mkdir -p $out/share/cjdns
-    cp -R contrib node_build node_modules $out/share/cjdns/
+    cp -R contrib tools node_build node_modules $out/share/cjdns/
   '';
 
   meta = with stdenv.lib; {

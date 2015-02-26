@@ -24,6 +24,9 @@ let
       # doesn't work in Nix because Nix changes the mtime of files in
       # the Nix store to 1.  So treat that as a special case.
       ./nix-store-mtime.patch
+
+      # http://bugs.python.org/issue10013
+      ./python2.6-fix-parallel-make.patch
     ];
     
   preConfigure = ''
@@ -31,9 +34,9 @@ let
       for i in /usr /sw /opt /pkg; do
         substituteInPlace ./setup.py --replace $i /no-such-path
       done
-    '' + optionalString (stdenv ? gcc && stdenv.gcc.libc != null) ''
+    '' + optionalString (stdenv ? cc && stdenv.cc.libc != null) ''
       for i in Lib/plat-*/regen; do
-        substituteInPlace $i --replace /usr/include/ ${stdenv.gcc.libc}/include/
+        substituteInPlace $i --replace /usr/include/ ${stdenv.cc.libc}/include/
       done
     '' + optionalString stdenv.isCygwin ''
       # On Cygwin, `make install' tries to read this Makefile.
@@ -44,7 +47,7 @@ let
     '';
 
   buildInputs =
-    optional (stdenv ? gcc && stdenv.gcc.libc != null) stdenv.gcc.libc ++
+    optional (stdenv ? cc && stdenv.cc.libc != null) stdenv.cc.libc ++
     [ bzip2 openssl ]++ optionals includeModules [ db openssl ncurses gdbm readline x11 tcl tk sqlite ]
     ++ optional zlibSupport zlib;
 
@@ -53,6 +56,7 @@ let
   # external dependencies.
   python = stdenv.mkDerivation {
     name = "python${if includeModules then "" else "-minimal"}-${version}";
+    pythonVersion = majorVersion;
 
     inherit majorVersion version src patches buildInputs preConfigure;
 

@@ -10,22 +10,22 @@
 , bison, flex, zip, unzip, gtk, libmspack, getopt, file, cairo, which
 , icu, boost, jdk, ant, cups, xorg
 , openssl, gperf, cppunit, GConf, ORBit2, poppler
-, librsvg, gnome_vfs, gstreamer, gst_plugins_base, mesa
+, librsvg, gnome_vfs, mesa
 , autoconf, automake, openldap, bash, hunspell, librdf_redland, nss, nspr
 , libwpg, dbus_glib, glibc, qt4, kde4, clucene_core, libcdr, lcms, vigra
 , unixODBC, mdds, saneBackends, mythes, libexttextcat, libvisio
 , fontsConf, pkgconfig, libzip, bluez5, libtool, maven
-, libatomic_ops, graphite2, harfbuzz
-, librevenge, libe-book, libmwaw, glm, glew
+, libatomic_ops, graphite2, harfbuzz, libodfgen
+, librevenge, libe-book, libmwaw, glm, glew, gst_all_1
 , langs ? [ "en-US" "en-GB" "ca" "ru" "eo" "fr" "nl" "de" "sl" ]
 }:
 
 let
   langsSpaces = stdenv.lib.concatStringsSep " " langs;
   major = "4";
-  minor = "3";
-  patch = "3";
-  tweak = "2";
+  minor = "4";
+  patch = "0";
+  tweak = "3";
   subdir = "${major}.${minor}.${patch}";
   version = "${subdir}${if tweak == "" then "" else "."}${tweak}";
 
@@ -80,14 +80,14 @@ let
 
     translations = fetchSrc {
       name = "translations";
-      sha256 = "0jpkkb71fbiid12r2dpvak304hlvx4ws1bk2yrb3narz15wzcvjr";
+      sha256 = "0y94sry2cghc82628smka7qb1xqlgrgvy98bxd2fpqfkd1llcqfg";
     };
 
     # TODO: dictionaries
 
     help = fetchSrc {
       name = "help";
-      sha256 = "0vd4ndnqy7xjlxh9flfp84jy82bvaq80pxcsx6lsarxsb4cvw7sz";
+      sha256 = "05al25vcz2z6fhm8vx77wa47nyi3r0hwll6mg2aclx7yp0s5k01d";
     };
 
   };
@@ -97,7 +97,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "http://download.documentfoundation.org/libreoffice/src/${subdir}/libreoffice-${version}.tar.xz";
-    sha256 = "0abmrn8iwwsbvi9dxq1pnirclxvfb33ngg7lpsj0y5lf0jpgpbb0";
+    sha256 = "1xqc60ckay6xpljipcbm4915qqwk81dm2fbpxwfqc2l4gv9g6s6i";
   };
 
   # Openoffice will open libcups dynamically, so we link it directly
@@ -176,9 +176,14 @@ stdenv.mkDerivation rec {
 
     ln -s $out/lib/libreoffice/share/xdg $out/share/applications
     for f in $out/share/applications/*.desktop; do
-      substituteInPlace "$f" --replace "Exec=libreoffice4.0" "Exec=$out/bin/soffice"
+      substituteInPlace "$f" --replace "Exec=libreofficedev${major}.${minor}" "Exec=$out/bin/soffice"
+      substituteInPlace "$f" --replace "Exec=libreoffice${major}.${minor}" "Exec=$out/bin/soffice"
       substituteInPlace "$f" --replace "Exec=libreoffice" "Exec=$out/bin/soffice"
     done
+
+    mkdir -p "$out/share/desktop"
+    cp -r sysui/desktop/icons  "$out/share/desktop"
+    sed -re 's@Icon=libreofficedev[0-9.]*-?@Icon=@' -i "$out/share/applications/"*.desktop
   '';
 
   configureFlags = [
@@ -206,13 +211,12 @@ stdenv.mkDerivation rec {
     # Modified on every upgrade, though
     "--disable-kde"
     "--disable-postgresql-sdbc"
-    "--with-package-format=native"
+    "--with-package-format=installed"
     "--enable-epm"
-    "--with-jdk-home=${jdk}/lib/openjdk"
+    "--with-jdk-home=${jdk.home}"
     "--with-ant-home=${ant}/lib/ant"
     "--without-fonts"
     "--without-myspell-dicts"
-    "--without-ppds"
     "--without-system-beanshell"
     "--without-system-hsqldb"
     "--without-system-jars"
@@ -223,11 +227,14 @@ stdenv.mkDerivation rec {
 
     "--without-system-libetonyek"
     "--without-system-libfreehand"
-    "--without-system-libodfgen"
     "--without-system-libabw"
     "--without-system-firebird"
     "--without-system-liblangtag"
     "--without-system-libmspub"
+
+    "--without-system-libpagemaker"
+    "--without-system-coinmp"
+    "--without-system-libgltf"
   ];
 
   checkPhase = ''
@@ -238,17 +245,18 @@ stdenv.mkDerivation rec {
   buildInputs = with xorg;
     [ ant ArchiveZip autoconf automake bison boost cairo clucene_core
       CompressZlib cppunit cups curl db dbus_glib expat file flex fontconfig
-      freetype GConf getopt gnome_vfs gperf gst_plugins_base gstreamer gtk
+      freetype GConf getopt gnome_vfs gperf gtk
       hunspell icu jdk kde4.kdelibs lcms libcdr libexttextcat unixODBC libjpeg
       libmspack librdf_redland librsvg libsndfile libvisio libwpd libwpg libX11
       libXaw libXext libXi libXinerama libxml2 libxslt libXtst
-      libXdmcp libpthreadstubs mesa mythes
+      libXdmcp libpthreadstubs mesa mythes gst_all_1.gstreamer 
+      gst_all_1.gst-plugins-base
       neon nspr nss openldap openssl ORBit2 pam perl pkgconfigUpstream poppler
       python3 sablotron saneBackends tcsh unzip vigra which zip zlib
       mdds bluez5 glibc libixion
       libxshmfence libatomic_ops graphite2 harfbuzz
       librevenge libe-book libmwaw glm glew
-      liborcus
+      liborcus libodfgen
     ];
 
   meta = with stdenv.lib; {

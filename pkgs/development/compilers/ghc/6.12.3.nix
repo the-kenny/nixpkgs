@@ -15,6 +15,8 @@ stdenv.mkDerivation rec {
   buildMK = ''
     libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libraries="${gmp}/lib"
     libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-includes="${gmp}/include"
+    libraries/terminfo_CONFIGURE_OPTS += --configure-option=--with-curses-includes="${ncurses}/include"
+    libraries/terminfo_CONFIGURE_OPTS += --configure-option=--with-curses-libraries="${ncurses}/lib"
   '';
 
   preConfigure = ''
@@ -22,7 +24,7 @@ stdenv.mkDerivation rec {
   '';
 
   configureFlags=[
-    "--with-gcc=${stdenv.gcc}/bin/gcc"
+    "--with-gcc=${stdenv.cc}/bin/gcc"
   ];
 
   NIX_CFLAGS_COMPILE = "-fomit-frame-pointer";

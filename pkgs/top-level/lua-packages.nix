@@ -5,8 +5,9 @@
    for each package in a separate file: the call to the function would
    be almost as must code as the function itself. */
 
-{ fetchurl, stdenv, lua, callPackage, unzip, zziplib
-, pcre, oniguruma, gnulib, tre, glibc, sqlite, openssl, expat
+{ fetchurl, stdenv, lua, callPackage, unzip, zziplib, pkgconfig, libtool
+, pcre, oniguruma, gnulib, tre, glibc, sqlite, openssl, expat, cairo
+, perl, gtk, python, glib, gobjectIntrospection, libevent
 }:
 
 let
@@ -14,6 +15,7 @@ let
   isLua52 = lua.luaversion == "5.2";
   self = _self;
   _self = with self; {
+  inherit lua;
   inherit (stdenv.lib) maintainers;
 
   #define build lua package function
@@ -45,6 +47,36 @@ let
     meta = {
       homepage = "http://bitop.luajit.org";
       maintainers = with maintainers; [ flosse ];
+    };
+  };
+
+  luaevent = buildLuaPackage rec {
+    version = "0.4.3";
+    name = "luaevent-${version}";
+    disabled = isLua52;
+
+    src = fetchurl {
+      url = "https://github.com/harningt/luaevent/archive/v${version}.tar.gz";
+      sha256 = "1ifr949j9xaas0jk0nxpilb44dqvk4c5h4m7ccksz5da3iksfgls";
+    };
+
+    preBuild = ''
+      makeFlagsArray=(
+        INSTALL_DIR_LUA="$out/share/lua/${lua.luaversion}"
+        INSTALL_DIR_BIN="$out/lib/lua/${lua.luaversion}"
+        LUA_INC_DIR="${lua}/include"
+      );
+    '';
+
+    buildInputs = [ libevent ];
+
+    propagatedBuildInputs = [ luasocket ];
+
+    meta = with stdenv.lib; {
+      homepage = http://luaforge.net/projects/luaevent/;
+      description = "Binding of libevent to Lua.";
+      license = licenses.mit;
+      maintainers = [ maintainers.koral ];
     };
   };
 
@@ -84,6 +116,29 @@ let
       hydraPlatforms = stdenv.lib.platforms.linux;
       maintainers = with maintainers; [ flosse ];
     };
+  };
+
+  lpty = buildLuaPackage rec {
+    name = "lpty-${version}";
+    version = "1.1.1";
+    src = fetchurl {
+      url = "http://www.tset.de/downloads/lpty-1.1-1.tar.gz";
+      sha256 = "0d4ffda654dcf37dd8c99bcd100d0ee0dde7782cbd0ba9200ef8711c5cab02f1";
+    };
+    meta = {
+      homepage = "http://www.tset.de/lpty";
+      hydraPlatforms = stdenv.lib.platforms.linux;
+      license = stdenv.lib.licenses.mit;
+    };
+    preBuild = ''
+      makeFlagsArray=(
+        INST_LIBDIR="$out/lib/lua/${lua.luaversion}"
+        INST_LUADIR="$out/share/lua/${lua.luaversion}"
+        LUA_BINDIR="${lua}/bin"
+        LUA_INCDIR="-I${lua}/include"
+        LUA_LIBDIR="-L${lua}/lib"
+        );
+    '';
   };
 
   luasec = buildLuaPackage rec {
@@ -240,6 +295,27 @@ let
     };
   };
 
+  cjson = buildLuaPackage rec {
+    name = "cjson-${version}";
+    version = "2.1.0";
+    src = fetchurl {
+      url = "http://www.kyne.com.au/~mark/software/download/lua-cjson-2.1.0.tar.gz";
+      sha256 = "0y67yqlsivbhshg8ma535llz90r4zag9xqza5jx0q7lkap6nkg2i";
+    };
+    preBuild = ''
+      sed -i "s|/usr/local|$out|" Makefile
+    '';
+    makeFlags = [ "LUA_VERSION=${lua.luaversion}" ];
+    postInstall = ''
+      rm -rf $out/share/lua/${lua.luaversion}/cjson/tests
+    '';
+    installTargets = "install install-extra";
+    meta = {
+      description = "Lua C extension module for JSON support";
+      license = stdenv.lib.licenses.mit;
+    };
+  };
+
   luaMessagePack = buildLuaPackage rec {
     name = "lua-MessagePack-${version}";
     version = "0.3.1";
@@ -255,4 +331,31 @@ let
       license = stdenv.lib.licenses.mit;
     };
   };
+
+  lgi = stdenv.mkDerivation rec {
+    name = "lgi-${version}";
+    version = "0.7.2";
+
+    src = fetchurl {
+      url    = "https://github.com/pavouk/lgi/archive/${version}.tar.gz";
+      sha256 = "0ihl7gg77b042vsfh0k7l53b7sl3d7mmrq8ns5lrsf71dzrr19bn";
+    };
+
+    meta = with stdenv.lib; {
+      description = "GObject-introspection based dynamic Lua binding to GObject based libraries";
+      homepage    = https://github.com/pavouk/lgi;
+      license     = "custom";
+      maintainers = with maintainers; [ lovek323 ];
+      platforms   = platforms.unix;
+    };
+
+    buildInputs = [ glib gobjectIntrospection lua pkgconfig ];
+
+    makeFlags = [ "LUA_VERSION=${lua.luaversion}" ];
+
+    preBuild = ''
+      sed -i "s|/usr/local|$out|" lgi/Makefile
+    '';
+  };
+
 }; in self

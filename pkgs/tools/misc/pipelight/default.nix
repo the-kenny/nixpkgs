@@ -3,13 +3,13 @@
   }:
 
 let
-  wine_patches_version = "1.7.30";
-  wine_hash = "0v08w2av46y4wxrl8q4k9fhbi2cgawjaxclahqnpfw098bqcmxqh";
+  wine_patches_version = "1.7.36";
+  wine_hash = "1gg3xzccbsxfmvp7r09mq7q9904p7h97nr3pdkk5l1f6n8xbzai1";
 
   wine_patches = fetchgit {
     url = "git://github.com/compholio/wine-compholio.git";
     rev = "refs/tags/v${wine_patches_version}";
-    sha256 = "02i0bpxxiyxavlcd5qm7wv0q4bm9bxr3ng3w2k234ww7cyndm0ws";
+    sha256 = "1nnwhd7m1wwipg72dzjhzhk9fgcf1ynknncj89ab0pabn4wmib2i";
   };
 
   wine_custom =
@@ -33,10 +33,10 @@ let
       postPatch = ''
         export wineDir=$(pwd)
         patchShebangs $wineDir/tools/
-	chmod u+w $wineDir/../git-export/debian/tools/
-        patchShebangs $wineDir/../git-export/debian/tools/
-        chmod -R +rwx ../git-export/
-        make -C ../git-export/patches DESTDIR=$wineDir install
+        chmod u+w $wineDir/../${wine_patches.name}/debian/tools/
+        patchShebangs $wineDir/../${wine_patches.name}/debian/tools/
+        chmod -R +rwx ../${wine_patches.name}/
+        make -C ../${wine_patches.name}/patches DESTDIR=$wineDir install
       '';
     });
 
@@ -45,13 +45,13 @@ let
 
 in stdenv.mkDerivation rec {
 
-  version = "0.2.7.3";
+  version = "0.2.8";
 
   name = "pipelight-${version}";
 
   src = fetchurl {
     url = "https://bitbucket.org/mmueller2012/pipelight/get/v${version}.tar.gz";
-    sha256 = "0lifgs3aakyxfk6r2f2p27z0iqzgz1dinqfgwx3vdh3l93s8aifv";
+    sha256 = "1i440rf22fmd2w86dlm1mpi3nb7410rfczc0yldnhgsvp5p3sm5f";
   };
 
   buildInputs = [ wine_custom xlibs.libX11 gcc48_multi mesa curl ];

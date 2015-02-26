@@ -54,6 +54,14 @@ in
       '';
     };
 
+    boot.enableContainers = mkOption {
+      type = types.bool;
+      default = !config.boot.isContainer;
+      description = ''
+        Whether to enable support for nixos containers.
+      '';
+    };
+
     containers = mkOption {
       type = types.attrsOf (types.submodule (
         { config, options, name, ... }:
@@ -111,6 +119,13 @@ in
               '';
             };
 
+            autoStart = mkOption {
+              type = types.bool;
+              default = false;
+              description = ''
+                Wether the container is automatically started at boot-time.
+              '';
+            };
           };
 
           config = mkMerge
@@ -157,7 +172,7 @@ in
   };
 
 
-  config = mkIf (!config.boot.isContainer) {
+  config = mkIf (config.boot.enableContainers) {
 
     systemd.services."container@" =
       { description = "Container '%i'";
@@ -187,7 +202,7 @@ in
         script =
           ''
             mkdir -p -m 0755 "$root/etc" "$root/var/lib"
-            mkdir -p -m 0700 "$root/var/lib/private"
+            mkdir -p -m 0700 "$root/var/lib/private" "$root/root"
             if ! [ -e "$root/etc/os-release" ]; then
               touch "$root/etc/os-release"
             fi
@@ -305,6 +320,9 @@ in
                 LOCAL_ADDRESS=${cfg.localAddress}
               ''}
             ''}
+           ${optionalString cfg.autoStart ''
+             AUTO_START=1
+           ''}
           '';
       }) config.containers;
 

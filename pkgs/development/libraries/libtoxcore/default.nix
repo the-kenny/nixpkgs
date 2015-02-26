@@ -1,17 +1,18 @@
-{ stdenv, fetchurl, autoconf, libtool, automake, libsodium, ncurses, libopus
+{ stdenv, fetchFromGitHub, autoconf, libtool, automake, libsodium, ncurses, libopus
 , libvpx, check, libconfig, pkgconfig }:
 
 let
-  version = "f6b3e6e8fe98d2457827ac6da944e715f008a08a";
-  date = "20141203";
+  version = "4c220e336330213b151a0c20307d0a1fce04ac9e";
+  date = "20150126";
 in
 stdenv.mkDerivation rec {
-  name = "tox-core-${date}-${version}";
+  name = "tox-core-${date}-${builtins.substring 0 7 version}";
 
-  src = fetchurl {
-    url = "https://github.com/irungentoo/toxcore/tarball/${version}";
-    name = "${name}.tar.gz";
-    sha256 = "1zsx7saqs25vva3pp0bw31yqzrn40fx84w42ig6fiv723k9gpdzy";
+  src = fetchFromGitHub {
+    owner  = "irungentoo";
+    repo   = "toxcore";
+    rev    = version;
+    sha256 = "152yamak9ykl8dgkx1qzyrpa3f4xr1s8lgcb5k58r9lb1iwnhvqc";
   };
 
   NIX_LDFLAGS = "-lgcc_s";
@@ -33,6 +34,7 @@ stdenv.mkDerivation rec {
     "--with-libsodium-headers=${libsodium}/include"
     "--with-libsodium-libs=${libsodium}/lib"
     "--enable-ntox"
+    "--enable-daemon"
   ];
 
   buildInputs = [

@@ -8,12 +8,14 @@ import ./make-test.nix {
       virtualisation.memorySize = 768;
       services.gitlab.enable = true;
       services.gitlab.databasePassword = "gitlab";
+      systemd.services.gitlab.serviceConfig.TimeoutStartSec = "10min";
     };
   };
 
   testScript = ''
     $gitlab->start();
     $gitlab->waitForUnit("gitlab.service");
-    $gitlab->waitUntilSucceeds("curl http://localhost:8080");
+    $gitlab->waitForUnit("gitlab-sidekiq.service");
+    $gitlab->waitUntilSucceeds("curl http://localhost:8080/users/sign_in");
   '';
 }

@@ -188,7 +188,7 @@ stdenv.mkDerivation ({
     NM_FOR_TARGET = "${stdenv.cross.config}-nm";
     CXX_FOR_TARGET = "${stdenv.cross.config}-g++";
     # If we are making a cross compiler, cross != null
-    NIX_GCC_CROSS = if cross == null then "${stdenv.gccCross}" else "";
+    NIX_CC_CROSS = if cross == null then "${stdenv.ccCross}" else "";
     configureFlags = "
       ${if enableMultilib then "" else "--disable-multilib"}
       ${if enableShared then "" else "--disable-shared"}
@@ -265,7 +265,6 @@ stdenv.mkDerivation ({
 
     maintainers = [
       # Add your name here!
-      stdenv.lib.maintainers.ludo
       stdenv.lib.maintainers.viric
     ];
 

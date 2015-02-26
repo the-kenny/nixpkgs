@@ -4,8 +4,19 @@
 
 with lib;
 
-let cfg  = config.programs.ssh;
-    cfgd = config.services.openssh;
+let
+
+  cfg  = config.programs.ssh;
+  cfgd = config.services.openssh;
+
+  askPassword = "${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass";
+
+  askPasswordWrapper = pkgs.writeScript "ssh-askpass-wrapper"
+    ''
+      #! ${pkgs.stdenv.shell} -e
+      export DISPLAY="$(systemctl --user show-environment | ${pkgs.gnused}/bin/sed 's/^DISPLAY=\(.*\)/\1/; t; d')"
+      exec ${askPassword}
+    '';
 
 in
 {
@@ -61,7 +72,8 @@ in
 
       agentTimeout = mkOption {
         type = types.nullOr types.string;
-        default = "1h";
+        default = null;
+        example = "1h";
         description = ''
           How long to keep the private keys in memory. Use null to keep them forever.
         '';
@@ -116,6 +128,11 @@ in
             Restart = "on-failure";
             SuccessExitStatus = "0 2";
           };
+        # Allow ssh-agent to ask for confirmation. This requires the
+        # unit to know about the user's $DISPLAY (via ‘systemctl
+        # import-environment’).
+        environment.SSH_ASKPASS = optionalString config.services.xserver.enable askPasswordWrapper;
+        environment.DISPLAY = "fake"; # required to make ssh-agent start $SSH_ASKPASS
       };
 
     environment.extraInit = optionalString cfg.startAgent
@@ -123,6 +140,11 @@ in
         if [ -z "$SSH_AUTH_SOCK" -a -n "$XDG_RUNTIME_DIR" ]; then
           export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
         fi
+      '';
+
+    environment.interactiveShellInit = optionalString config.services.xserver.enable
+      ''
+        export SSH_ASKPASS=${askPassword}
       '';
 
   };

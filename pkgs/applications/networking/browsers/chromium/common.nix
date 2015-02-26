@@ -8,7 +8,7 @@
 , libusb1, libexif, pciutils
 
 , python, pythonPackages, perl, pkgconfig
-, nspr, udev, krb5
+, nspr, udev, kerberos
 , utillinux, alsaLib
 , bison, gperf
 , glib, gtk, dbus_glib
@@ -109,7 +109,7 @@ let
       nspr udev
       (if useOpenSSL then openssl else nss)
       utillinux alsaLib
-      bison gperf krb5
+      bison gperf kerberos
       glib gtk dbus_glib
       libXScrnSaver libXcursor libXtst mesa
       pciutils protobuf speechd libXdamage
@@ -135,14 +135,20 @@ let
         -exec chmod u+w {} +
     '';
 
-    postPatch = ''
+    postPatch = optionalString (versionOlder version "42.0.0.0") ''
       sed -i -e '/base::FilePath exe_dir/,/^ *} *$/c \
         sandbox_binary = base::FilePath(getenv("CHROMIUM_SANDBOX_BINARY_PATH"));
       ' sandbox/linux/suid/client/setuid_sandbox_client.cc
-
+    '' + ''
       sed -i -e '/module_path *=.*libexif.so/ {
         s|= [^;]*|= base::FilePath().AppendASCII("${libexif}/lib/libexif.so")|
       }' chrome/utility/media_galleries/image_metadata_extractor.cc
+
+      sed -i -e '/lib_loader.*Load/s!"\(libudev\.so\)!"${udev}/lib/\1!' \
+        device/udev_linux/udev?_loader.cc
+
+      sed -i -e '/libpci_loader.*Load/s!"\(libpci\.so\)!"${pciutils}/lib/\1!' \
+        gpu/config/gpu_info_collector_linux.cc
     '';
 
     gypFlags = mkGypFlags (gypFlagsUseSystemLibs // {
@@ -160,7 +166,9 @@ let
       use_openssl = useOpenSSL;
       selinux = enableSELinux;
       use_cups = cupsSupport;
+    } // optionalAttrs (versionOlder version "42.0.0.0") {
       linux_sandbox_chrome_path="${libExecPath}/${packageName}";
+    } // {
       werror = "";
       clang = false;
       enable_hidpi = hiDPISupport;
@@ -186,11 +194,13 @@ let
     } // (extraAttrs.gypFlags or {}));
 
     configurePhase = ''
+      # Precompile .pyc files to prevent race conditions during build
+      python -m compileall -q -f . || : # ignore errors
+
       # This is to ensure expansion of $out.
       libExecPath="${libExecPath}"
       python build/linux/unbundle/replace_gyp_files.py ${gypFlags}
       python build/gyp_chromium -f ninja --depth "$(pwd)" ${gypFlags}
-      find . -iname '*.py[co]' -delete
     '';
 
     buildPhase = let

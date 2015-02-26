@@ -3,11 +3,11 @@ let
   s = # Generated upstream information
   rec {
     baseName="slimerjs";
-    version="0.9.3";
+    version="0.9.5";
     name="${baseName}-${version}";
-    hash="17vfnz6njn8zk39ywpg7bd9wp98ppxjvna6gn2443ylgh428v707";
-    url="http://download.slimerjs.org/releases/0.9.3/slimerjs-0.9.3.zip";
-    sha256="17vfnz6njn8zk39ywpg7bd9wp98ppxjvna6gn2443ylgh428v707";
+    hash="05p7cwbr2jly6sd6h69j577y48yr05zm2nj7wgnxw0rhyrhkl22s";
+    url="http://download.slimerjs.org/releases/0.9.5/slimerjs-0.9.5.zip";
+    sha256="05p7cwbr2jly6sd6h69j577y48yr05zm2nj7wgnxw0rhyrhkl22s";
   };
   buildInputs = [
     unzip zip
@@ -34,7 +34,7 @@ stdenv.mkDerivation {
     echo 'export SLIMERJSLAUNCHER=${firefox}/bin/firefox' >>  "$out/bin/slimerjs"
     echo "'$out/lib/slimerjs/slimerjs' \"\$@\"" >> "$out/bin/slimerjs"
     chmod a+x "$out/bin/slimerjs"
-    sed -e 's@MaxVersion=32[.]@MaxVersion=33.@' -i "$out/lib/slimerjs/application.ini"
+    sed -e 's@MaxVersion=3[0-9][.]@MaxVersion=40.@' -i "$out/lib/slimerjs/application.ini"
   '';
   meta = {
     inherit (s) version;

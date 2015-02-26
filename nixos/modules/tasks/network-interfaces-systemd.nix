@@ -35,7 +35,10 @@ in
     assertions = [ {
       assertion = cfg.defaultGatewayWindowSize == null;
       message = "networking.defaultGatewayWindowSize is not supported by networkd.";
-    } ];
+    } ] ++ flip mapAttrsToList cfg.bridges (n: { rstp, ... }: {
+      assertion = !rstp;
+      message = "networking.bridges.${n}.rstp is not supported by networkd.";
+    });
 
     systemd.services.dhcpcd.enable = mkDefault false;
 
@@ -51,6 +54,8 @@ in
           DHCP = override (dhcpStr cfg.useDHCP);
         } // optionalAttrs (cfg.defaultGateway != null) {
           gateway = override [ cfg.defaultGateway ];
+        } // optionalAttrs (cfg.defaultGateway6 != null) {
+          gateway = override [ cfg.defaultGateway6 ];
         } // optionalAttrs (domains != [ ]) {
           domains = override domains;
         };

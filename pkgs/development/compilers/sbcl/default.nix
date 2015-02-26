@@ -2,11 +2,11 @@
 
 stdenv.mkDerivation rec {
   name    = "sbcl-${version}";
-  version = "1.2.5";
+  version = "1.2.8";
 
   src = fetchurl {
     url    = "mirror://sourceforge/project/sbcl/sbcl/${version}/${name}-source.tar.bz2";
-    sha256 = "0nmb9amygr5flzk2z9fa6wzwqknbgd2qrkybxkxkamvbdwyayvzr";
+    sha256 = "0ab9lw056yf6y0rjmx3iirn5n59pmssqxf00fbmpyl6qsnpaja1d";
   };
 
   buildInputs = [ which ]
@@ -50,6 +50,12 @@ stdenv.mkDerivation rec {
 
     sed -e '5,$d' -i contrib/sb-bsd-sockets/tests.lisp
     sed -e '5,$d' -i contrib/sb-simple-streams/*test*.lisp
+
+    # Use whatever `cc` the stdenv provides
+    substituteInPlace src/runtime/Config.x86-64-darwin --replace gcc cc
+
+    substituteInPlace src/runtime/Config.x86-64-darwin \
+      --replace mmacosx-version-min=10.4 mmacosx-version-min=10.5
   '';
 
   preBuild = ''

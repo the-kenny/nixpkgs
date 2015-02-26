@@ -9,7 +9,7 @@ in
 
 composableDerivation.composableDerivation {} ( fixed : let inherit (fixed.fixed) version; in {
 
-  version = "5.4.35";
+  version = "5.4.37";
 
   name = "php-${version}";
 
@@ -41,8 +41,12 @@ composableDerivation.composableDerivation {} ( fixed : let inherit (fixed.fixed)
       };
 
       curl = {
-        configureFlags = ["--with-curl=${curl}" "--with-curlwrappers"];
+        configureFlags = ["--with-curl=${curl}"];
         buildInputs = [curl openssl];
+      };
+
+      curlWrappers = {
+        configureFlags = ["--with-curlwrappers"];
       };
 
       zlib = {
@@ -181,6 +185,10 @@ composableDerivation.composableDerivation {} ( fixed : let inherit (fixed.fixed)
         buildInputs = [freetds];
       };
 
+      zts = {
+        configureFlags = ["--enable-maintainer-zts"];
+      };
+
       /*
          php is build within this derivation in order to add the xdebug lines to the php.ini.
          So both Apache and command line php both use xdebug without having to configure anything.
@@ -199,6 +207,7 @@ composableDerivation.composableDerivation {} ( fixed : let inherit (fixed.fixed)
     bcmathSupport = config.php.bcmath or true;
     socketsSupport = config.php.sockets or true;
     curlSupport = config.php.curl or true;
+    curlWrappersSupport = config.php.curlWrappers or false;
     gettextSupport = config.php.gettext or true;
     pcntlSupport = config.php.pcntl or true;
     postgresqlSupport = config.php.postgresql or true;
@@ -219,6 +228,7 @@ composableDerivation.composableDerivation {} ( fixed : let inherit (fixed.fixed)
     ftpSupport = config.php.ftp or true;
     fpmSupport = config.php.fpm or true;
     mssqlSupport = config.php.mssql or (!stdenv.isDarwin);
+    ztsSupport = config.php.zts or false;
   };
 
   configurePhase = ''
@@ -243,7 +253,7 @@ composableDerivation.composableDerivation {} ( fixed : let inherit (fixed.fixed)
 
   src = fetchurl {
     url = "http://www.php.net/distributions/php-${version}.tar.bz2";
-    sha256 = "0svlp5alqvm3fxzf2044ygziacy2ks9vbrnimkpqnxqgrmjl5nwc";
+    sha256 = "1bd8yciy13v3aw4aiw57zpf8kgxpm6rcv73grp1yj2pbbrkzcyw5";
   };
 
   meta = {

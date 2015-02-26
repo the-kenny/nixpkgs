@@ -1,14 +1,15 @@
 { stdenv, makeWrapper, fetchgit, pkgconfig, ninja, ocaml, findlib, mupdf, lablgl
-, gtk3, openjpeg, jbig2dec, mujs }:
+, gtk3, openjpeg, jbig2dec, mujs, xsel }:
 
 let ocamlVersion = (builtins.parseDrvName (ocaml.name)).version;
 in stdenv.mkDerivation rec {
-  name = "llpp-2014-11-29";
+  name = "llpp-${version}";
+  version = "21";
 
   src = fetchgit {
     url = "git://repo.or.cz/llpp.git";
-    rev  = "481c8398b2c5dc4589738f5f80104ed75b9c73ff";
-    sha256 = "13zi5mzpd9j4mmm68m3zkv49xgkhswhqvmp4bbyi0psmhxak8y5l";
+    rev  = "refs/tags/v${version}";
+    sha256 = "0rxdq6j3bs4drnhlxgm0gcwkhxi98vmxm22lnkpic7h67lgsz51q";
   };
 
   buildInputs = [ pkgconfig ninja makeWrapper ocaml findlib mupdf lablgl
@@ -28,7 +29,8 @@ in stdenv.mkDerivation rec {
     install link.so $out/lib
     wrapProgram $out/bin/llpp \
         --prefix CAML_LD_LIBRARY_PATH ":" "${lablgl}/lib/ocaml/${ocamlVersion}/site-lib/lablgl" \
-        --prefix CAML_LD_LIBRARY_PATH ":" "$out/lib"
+        --prefix CAML_LD_LIBRARY_PATH ":" "$out/lib" \
+        --prefix PATH ":" "${xsel}/bin"
   '';
 
   meta = with stdenv.lib; {

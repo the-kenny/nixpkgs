@@ -356,7 +356,7 @@ in
         ''
           If pings are allowed, this allows setting rate limits
           on them. If non-null, this option should be in the form
-          of flags like "-limit 1/minute -limit-burst 5"
+          of flags like "--limit 1/minute --limit-burst 5"
         '';
     };
 
@@ -443,7 +443,7 @@ in
 
     networking.firewall.trustedInterfaces = [ "lo" ];
 
-    environment.systemPackages = [ pkgs.iptables ];
+    environment.systemPackages = [ pkgs.iptables pkgs.ipset ];
 
     boot.kernelModules = map (x: "nf_conntrack_${x}") cfg.connectionTrackingModules;
     boot.extraModprobeConfig = optionalString (!cfg.autoLoadConntrackHelpers) ''
@@ -462,7 +462,7 @@ in
       before = [ "network-pre.target" ];
       after = [ "systemd-modules-load.service" ];
 
-      path = [ pkgs.iptables ];
+      path = [ pkgs.iptables pkgs.ipset ];
 
       # FIXME: this module may also try to load kernel modules, but
       # containers don't have CAP_SYS_MODULE. So the host system had

@@ -80,7 +80,6 @@ in {
     services.telepathy.enable = mkDefault true;
     networking.networkmanager.enable = mkDefault true;
     services.upower.enable = config.powerManagement.enable;
-    services.upower.package = gnome3.upower;
 
     fonts.fonts = [ pkgs.dejavu_fonts pkgs.cantarell_fonts ];
 
@@ -114,6 +113,9 @@ in {
 
           # Let nautilus find extensions
           export NAUTILUS_EXTENSION_DIR=${config.system.path}/lib/nautilus/extensions-3.0/
+
+          # Find the mouse
+          export XCURSOR_PATH=~/.icons:${config.system.path}/share/icons
 
           # Update user dirs as described in http://freedesktop.org/wiki/Software/xdg-user-dirs/
           ${pkgs.xdg-user-dirs}/bin/xdg-user-dirs-update

@@ -1,5 +1,5 @@
 { fetchurl, stdenv, readline, zlib, libgpgerror, pth, libgcrypt, libassuan
-, libksba, coreutils, libiconvOrEmpty
+, libksba, coreutils, libiconv
 # Each of the dependencies below are optional.
 # Gnupg can be built without them at the cost of reduced functionality.
 , pinentry ? null, openldap ? null, bzip2 ? null, libusb ? null, curl ? null
@@ -15,11 +15,13 @@ stdenv.mkDerivation rec {
 
   buildInputs
     = [ readline zlib libgpgerror libgcrypt libassuan libksba pth
-        openldap bzip2 libusb curl ]
-    ++ libiconvOrEmpty;
+        openldap bzip2 libusb curl libiconv ];
 
   patchPhase = ''
     find tests -type f | xargs sed -e 's@/bin/pwd@${coreutils}&@g' -i
+  '' + stdenv.lib.optionalString stdenv.isDarwin ''
+    find . -name pcsc-wrapper.c | xargs sed -i 's/typedef unsinged int pcsc_dword_t/typedef unsigned int pcsc_dword_t/'
+  '' + ''
     patch gl/stdint_.h < ${./clang.patch}
   '';
 
@@ -40,7 +42,7 @@ stdenv.mkDerivation rec {
       GnuPG is the GNU project's complete and free implementation of
       the OpenPGP standard as defined by RFC4880.  GnuPG allows to
       encrypt and sign your data and communication, features a
-      versatile key managment system as well as access modules for all
+      versatile key management system as well as access modules for all
       kind of public key directories.  GnuPG, also known as GPG, is a
       command line tool with features for easy integration with other
       applications.  A wealth of frontend applications and libraries

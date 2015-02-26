@@ -12,7 +12,7 @@
 { nixpkgs ? { outPath = (import ./all-packages.nix {}).lib.cleanSource ../..; revCount = 1234; shortRev = "abcdef"; }
 , officialRelease ? false
 , # The platforms for which we build Nixpkgs.
-  supportedSystems ? [ "x86_64-linux" "i686-linux" /* "x86_64-darwin" */ ]
+  supportedSystems ? [ "x86_64-linux" "i686-linux" "x86_64-darwin" ]
 }:
 
 with import ./release-lib.nix { inherit supportedSystems; };
@@ -23,6 +23,7 @@ let
     { tarball = import ./make-tarball.nix { inherit nixpkgs officialRelease; };
 
       manual = import ../../doc;
+      lib.tests = import ../../lib/tests/release.nix { inherit nixpkgs; };
 
       unstable = pkgs.releaseTools.aggregate
         { name = "nixpkgs-${jobs.tarball.version}";
@@ -30,9 +31,10 @@ let
           constituents =
             [ jobs.tarball
               jobs.manual
+              jobs.lib.tests
               jobs.stdenv.x86_64-linux
               jobs.stdenv.i686-linux
-              #jobs.stdenv.x86_64-darwin
+              jobs.stdenv.x86_64-darwin
               jobs.linux.x86_64-linux
               jobs.linux.i686-linux
               # Ensure that X11/GTK+ are in order.
@@ -207,7 +209,7 @@ let
       spidermonkey = linux;
       squid = linux;
       ssmtp = linux;
-      stdenv = prio 175 all;
+      stdenv = all;
       stlport = linux;
       su = linux;
       sudo = linux;
@@ -270,29 +272,7 @@ let
         gnome_vfs = linux;
       };
 
-      haskellPackages_ghc6104 = {
-        ghc = ghcSupported;
-      };
-
-      haskellPackages_ghc6123 = {
-        ghc = ghcSupported;
-      };
-
-      haskellPackages_ghc704 = {
-        ghc = ghcSupported;
-      };
-
-      haskellPackages_ghc722 = {
-        ghc = ghcSupported;
-      };
-
-      haskellPackages_ghc742 = {
-        ghc = ghcSupported;
-      };
-
-      haskellPackages_ghc763 = {
-        ghc = ghcSupported;
-      };
+      haskell-ng.compiler = packagesWithMetaPlatform pkgs.haskell-ng.compiler;
 
       strategoPackages = {
         sdf = linux;

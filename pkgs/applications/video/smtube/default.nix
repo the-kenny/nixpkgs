@@ -1,13 +1,13 @@
-{stdenv, fetchurl, qt4}:
+{ stdenv, fetchurl, qt4 }:
 
-stdenv.mkDerivation {
-  name = "smtube-14.8.0";
+stdenv.mkDerivation rec {
+  name = "smtube-15.1.0";
   src = fetchurl {
-    url = mirror://sourceforge/smplayer/smtube-14.8.0.tar.bz2;
-    sha256 = "0h0kw4dvdj9sbxp0p6bdib9y8i7854f45lsmrdkykzk6rmgrf1cw";
+    url = "mirror://sourceforge/smplayer/${name}.tar.bz2";
+    sha256 = "0l87afj1fwhq8lnhv0djqdc8fy0kvs4q4jrvyiz46ifq7q10qyaf";
   };
 
-  buildInputs = [qt4];
+  buildInputs = [ qt4 ];
 
   preConfigure = ''
     makeFlags="PREFIX=$out"

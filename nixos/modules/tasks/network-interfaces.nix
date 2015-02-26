@@ -16,6 +16,35 @@ let
 
   slaveIfs = map (i: cfg.interfaces.${i}) (filter (i: cfg.interfaces ? ${i}) slaves);
 
+  rstpBridges = flip filterAttrs cfg.bridges (_: { rstp, ... }: rstp);
+
+  needsMstpd = rstpBridges != { };
+
+  bridgeStp = optional needsMstpd (pkgs.writeTextFile {
+    name = "bridge-stp";
+    executable = true;
+    destination = "/bin/bridge-stp";
+    text = ''
+      #!${pkgs.stdenv.shell} -e
+      export PATH="${pkgs.mstpd}/bin"
+
+      BRIDGES=(${concatStringsSep " " (attrNames rstpBridges)})
+      for BRIDGE in $BRIDGES; do
+        if [ "$BRIDGE" = "$1" ]; then
+          if [ "$2" = "start" ]; then
+            mstpctl addbridge "$BRIDGE"
+            exit 0
+          elif [ "$2" = "stop" ]; then
+            mstpctl delbridge "$BRIDGE"
+            exit 0
+          fi
+          exit 1
+        fi
+      done
+      exit 1
+    '';
+  });
+
   # We must escape interfaces due to the systemd interpretation
   subsystemDevice = interface:
     "sys-subsystem-net-devices-${escapeSystemdPath interface}.device";
@@ -233,8 +262,12 @@ in
         The 32-bit host ID of the machine, formatted as 8 hexadecimal characters.
 
         You should try to make this ID unique among your machines. You can
-        generate a random 32-bit ID using the following command:
+        generate a random 32-bit ID using the following commands:
 
+        <literal>cksum /etc/machine-id | while read c rest; do printf "%x" $c; done</literal>
+        
+        (this derives it from the machine-id that systemd generates) or
+        
         <literal>head -c4 /dev/urandom | od -A none -t x4</literal>
       '';
     };
@@ -253,6 +286,15 @@ in
       type = types.nullOr types.str;
       description = ''
         The default gateway.  It can be left empty if it is auto-detected through DHCP.
+      '';
+    };
+
+    networking.defaultGateway6 = mkOption {
+      default = null;
+      example = "2001:4d0:1e04:895::1";
+      type = types.nullOr types.str;
+      description = ''
+        The default ipv6 gateway.  It can be left empty if it is auto-detected through DHCP.
       '';
     };
 
@@ -353,6 +395,13 @@ in
           type = types.listOf types.string;
           description =
             "The physical network interfaces connected by the bridge.";
+        };
+
+        rstp = mkOption {
+          example = true;
+          default = false;
+          type = types.bool;
+          description = "Whether the bridge interface should enable rstp.";
         };
 
       };
@@ -663,7 +712,7 @@ in
         pkgs.iw
         pkgs.rfkill
         pkgs.openresolv
-      ];
+      ] ++ bridgeStp;
 
     systemd.targets."network-interfaces" =
       { description = "All Network Interfaces";
@@ -711,6 +760,9 @@ in
             ip link set "${i.name}" mtu "${toString i.mtu}"
           '';
       })));
+
+    services.mstpd = mkIf needsMstpd { enable = true; };
+
   };
 
 }

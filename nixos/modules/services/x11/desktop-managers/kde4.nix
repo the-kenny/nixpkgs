@@ -70,14 +70,6 @@ in
         description = "Custom kde-workspace, used for NixOS rebranding.";
       };
     };
-
-    environment.kdePackages = mkOption {
-      default = [];
-      example = literalExample "[ pkgs.kde4.kdesdk ]";
-      type = types.listOf types.package;
-      description = "This option is obsolete.  Please use <option>environment.systemPackages</option> instead.";
-    };
-
   };
 
 
@@ -152,7 +144,9 @@ in
           xorg.xauth # used by kdesu
           pkgs.shared_desktop_ontologies # used by nepomuk
           pkgs.strigi # used by nepomuk
+          pkgs.kde4.akonadi
           pkgs.mysql # used by akonadi
+          pkgs.kde4.kdepim_runtime
         ]
       ++ lib.optional config.hardware.pulseaudio.enable pkgs.kde4.kmix  # Perhaps this should always be enabled
       ++ lib.optional config.hardware.bluetooth.enable pkgs.kde4.bluedevil

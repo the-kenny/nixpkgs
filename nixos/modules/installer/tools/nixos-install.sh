@@ -30,8 +30,7 @@ while [ "$#" -gt 0 ]; do
     case "$i" in
         -I)
             given_path="$1"; shift 1
-            absolute_path=$(readlink -m $given_path)
-            extraBuildFlags+=("$i" "/mnt$absolute_path")
+            extraBuildFlags+=("$i" "$given_path")
             ;;
         --root)
             mountPoint="$1"; shift 1
@@ -78,6 +77,7 @@ mkdir -m 0755 -p $mountPoint/dev $mountPoint/proc $mountPoint/sys $mountPoint/et
 mkdir -m 01777 -p $mountPoint/tmp
 mkdir -m 0755 -p $mountPoint/tmp/root
 mkdir -m 0755 -p $mountPoint/var/setuid-wrappers
+mkdir -m 0700 -p $mountPoint/root
 mount --rbind /dev $mountPoint/dev
 mount --rbind /proc $mountPoint/proc
 mount --rbind /sys $mountPoint/sys
@@ -250,7 +250,7 @@ chroot $mountPoint /nix/var/nix/profiles/system/activate
 
 
 # Ask the user to set a root password.
-if [ -t 0 ] ; then
+if [ "$(chroot $mountPoint nix-instantiate --eval '<nixos>' -A config.users.mutableUsers)" = true ] && [ -t 0 ] ; then
     echo "setting root password..."
     chroot $mountPoint /var/setuid-wrappers/passwd
 fi

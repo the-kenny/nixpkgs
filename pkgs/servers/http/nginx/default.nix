@@ -5,7 +5,9 @@
 , syslog ? false
 , moreheaders ? false
 , echo ? false
-, ngx_lua ? false }:
+, ngx_lua ? false
+, set_misc ? false
+}:
 
 with stdenv.lib;
 
@@ -33,8 +35,8 @@ let
   syslog-ext = fetchFromGitHub {
     owner = "yaoweibin";
     repo = "nginx_syslog_patch";
-    rev = "v0.25";
-    sha256 = "0734f884838wcjyrrddn8wzj834wid1zffrk093jrx18447cryxl";
+    rev = "3ca5ba65541637f74467038aa032e2586321d0cb";
+    sha256 = "0y8dxkx8m1jw4v5zsvw1gfah9vh3ryq0hfmrcbjzcmwp5b5lb1i8";
   };
 
   moreheaders-ext = fetchFromGitHub {
@@ -63,6 +65,13 @@ let
     repo = "lua-nginx-module";
     rev = "v0.9.12";
     sha256 = "0r07q1n3nvi7m3l8zk7nfk0z9kjhqknav61ys9lshh2ylsmz1lf4";
+  };
+
+  set-misc-ext = fetchFromGitHub {
+    owner = "openresty";
+    repo = "set-misc-nginx-module";
+    rev = "v0.27";
+    sha256 = "1bd1isacsiay73nc2jlp0wky32l42a3sjskvfa1082l12g0p1x39";
   };
 
 in
@@ -109,6 +118,7 @@ stdenv.mkDerivation rec {
     ++ optional moreheaders "--add-module=${moreheaders-ext}"
     ++ optional echo "--add-module=${echo-ext}"
     ++ optional ngx_lua "--add-module=${develkit-ext} --add-module=${lua-ext}"
+    ++ optional set_misc "--add-module=${set-misc-ext}"
     ++ optional (elem stdenv.system (with platforms; linux ++ freebsd)) "--with-file-aio";
 
 

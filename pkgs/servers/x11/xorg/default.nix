@@ -1555,14 +1555,14 @@ let
   }) // {inherit fontsproto libpciaccess randrproto renderproto videoproto xextproto xorgserver xproto ;};
 
   xf86videointel = (mkDerivation "xf86videointel" {
-    name = "xf86-video-intel-2.99.916";
+    name = "xf86-video-intel-2.99.917";
     builder = ./builder.sh;
     src = fetchurl {
-      url = mirror://xorg/individual/driver/xf86-video-intel-2.99.916.tar.bz2;
-      sha256 = "00gd3v3xgrmj8aliwjxkml13gfqvcbjazb6l5m1wkry39agq36j0";
+      url = mirror://xorg/individual/driver/xf86-video-intel-2.99.917.tar.bz2;
+      sha256 = "1jb7jspmzidfixbc0gghyjmnmpqv85i7pi13l4h2hn2ml3p83dq0";
     };
-    buildInputs = [pkgconfig dri2proto dri3proto fontsproto glamoregl libdrm libpng udev libpciaccess presentproto randrproto renderproto libX11 xcbutil libxcb libXext xextproto xf86driproto libXfixes xorgserver xproto libXrandr libXrender libxshmfence libXvMC ];
-  }) // {inherit dri2proto dri3proto fontsproto glamoregl libdrm libpng udev libpciaccess presentproto randrproto renderproto libX11 xcbutil libxcb libXext xextproto xf86driproto libXfixes xorgserver xproto libXrandr libXrender libxshmfence libXvMC ;};
+    buildInputs = [pkgconfig dri2proto dri3proto fontsproto glamoregl libdrm libpng udev libpciaccess presentproto randrproto renderproto libX11 xcbutil libxcb libXcursor libXdamage libXext xextproto xf86driproto libXfixes xorgserver xproto libXrandr libXrender libxshmfence libXtst libXvMC ];
+  }) // {inherit dri2proto dri3proto fontsproto glamoregl libdrm libpng udev libpciaccess presentproto randrproto renderproto libX11 xcbutil libxcb libXcursor libXdamage libXext xextproto xf86driproto libXfixes xorgserver xproto libXrandr libXrender libxshmfence libXtst libXvMC ;};
 
   xf86videomach64 = (mkDerivation "xf86videomach64" {
     name = "xf86-video-mach64-6.9.4";
@@ -1985,14 +1985,14 @@ let
   }) // {inherit ;};
 
   xorgserver = (mkDerivation "xorgserver" {
-    name = "xorg-server-1.16.2";
+    name = "xorg-server-1.16.4";
     builder = ./builder.sh;
     src = fetchurl {
-      url = mirror://xorg/individual/xserver/xorg-server-1.16.2.tar.bz2;
-      sha256 = "0r6fhyvlifmg4zw9gm0pf4qybwbkmslhn060ivbwwsjmplz0qvj4";
+      url = mirror://xorg/individual/xserver/xorg-server-1.16.4.tar.bz2;
+      sha256 = "0wf8xykcjhvpk9ppjcixvf60p6kkyrpmfj0z29d93a8kjb6f3dmb";
     };
-    buildInputs = [pkgconfig renderproto libdrm openssl libX11 libXau libXaw libxcb xcbutil xcbutilwm xcbutilimage xcbutilkeysyms libXdmcp libXfixes libxkbfile libXmu libXpm libXrender libXres libxshmfence libXt ];
-  }) // {inherit renderproto libdrm openssl libX11 libXau libXaw libxcb xcbutil xcbutilwm xcbutilimage xcbutilkeysyms libXdmcp libXfixes libxkbfile libXmu libXpm libXrender libXres libxshmfence libXt ;};
+    buildInputs = [pkgconfig dri2proto dri3proto renderproto libdrm openssl libX11 libXau libXaw libxcb xcbutil xcbutilwm xcbutilimage xcbutilkeysyms libXdmcp libXfixes libxkbfile libXmu libXpm libXrender libXres libxshmfence libXt ];
+  }) // {inherit dri2proto dri3proto renderproto libdrm openssl libX11 libXau libXaw libxcb xcbutil xcbutilwm xcbutilimage xcbutilkeysyms libXdmcp libXfixes libxkbfile libXmu libXpm libXrender libXres libxshmfence libXt ;};
 
   xorgsgmldoctools = (mkDerivation "xorgsgmldoctools" {
     name = "xorg-sgml-doctools-1.11";

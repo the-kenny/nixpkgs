@@ -1,5 +1,5 @@
 { stdenv, fetchurl, pkgconfig, gettext, perl, python
-, libiconvOrEmpty, libintlOrEmpty, zlib, libffi, pcre, libelf
+, libiconv, libintlOrEmpty, zlib, libffi, pcre, libelf
 
 # this is just for tests (not in closure of any regular package)
 , coreutils, dbus_daemon, libxml2, tzdata, desktop_file_utils, shared_mime_info, doCheck ? false
@@ -7,7 +7,7 @@
 
 with stdenv.lib;
 
-assert stdenv.gcc.gcc != null;
+assert !stdenv.isDarwin -> stdenv.cc.cc.isGNU or false;
 
 # TODO:
 # * Add gio-module-fam
@@ -60,8 +60,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ pkgconfig gettext perl python ];
 
-  propagatedBuildInputs = [ pcre zlib libffi ]
-    ++ optional (!stdenv.isDarwin) libiconvOrEmpty
+  propagatedBuildInputs = [ pcre zlib libffi libiconv ]
     ++ libintlOrEmpty;
 
   configureFlags =
@@ -81,9 +80,7 @@ stdenv.mkDerivation rec {
 
   inherit doCheck;
   preCheck = optionalString doCheck
-    # libgcc_s.so.1 must be installed for pthread_cancel to work
-    # also point to the glib/.libs path
-    '' export LD_LIBRARY_PATH="${stdenv.gcc.gcc}/lib:$NIX_BUILD_TOP/${name}/glib/.libs:$LD_LIBRARY_PATH"
+    '' export LD_LIBRARY_PATH="$NIX_BUILD_TOP/${name}/glib/.libs:$LD_LIBRARY_PATH"
        export TZDIR="${tzdata}/share/zoneinfo"
        export XDG_CACHE_HOME="$TMP"
        export XDG_RUNTIME_HOME="$TMP"

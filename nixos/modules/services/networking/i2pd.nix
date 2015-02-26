@@ -8,7 +8,7 @@ let
 
   homeDir = "/var/lib/i2pd";
 
-  extip = "EXTIP=$(${pkgs.curl}/bin/curl -sf "http://jsonip.com" | ${pkgs.gawk}/bin/awk -F'\"' '{print $4}')";
+  extip = "EXTIP=\$(${pkgs.curl}/bin/curl -sf \"http://jsonip.com\" | ${pkgs.gawk}/bin/awk -F'\"' '{print $4}')";
 
   i2pSh = pkgs.writeScriptBin "i2pd" ''
     #!/bin/sh
@@ -142,7 +142,7 @@ in
           type = types.int;
           default = 80;
           description = ''
-            Port to forward incoming trafic to. 80 by default.
+            Port to forward incoming traffic to. 80 by default.
           '';
         };
         keyFile = mkOption {
