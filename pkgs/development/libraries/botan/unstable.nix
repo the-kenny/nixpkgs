@@ -2,7 +2,7 @@
 
 callPackage ./generic.nix (args // {
   baseVersion = "1.11";
-  revision = "13";
-  sha256 = "1jg36k376w6d6g7hgs2d67sr84pail5qf6yy1s5ys7pc16k2dy41";
+  revision = "15";
+  sha256 = "1rkv84v09llbxyvh33szi7zsjm19l02j7h60n9g7jhhc2w667jk0";
   openssl = null;
 })

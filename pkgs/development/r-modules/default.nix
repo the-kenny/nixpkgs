@@ -198,131 +198,132 @@ let
   # tweaks for the individual packages and "in self" follow
 
   packagesWithRDepends = {
-    # sort -t '=' -k 2
     FactoMineR = [ self.car ];
   };
 
   packagesWithNativeBuildInputs = {
-    # sort -t '=' -k 2
-    graphscan = [ pkgs.gsl ];
-    RAppArmor = [ pkgs.apparmor ];
-    BNSP = [ pkgs.gsl ];
-    SOD = [ pkgs.cudatoolkit ]; # requres CL/cl.h
-    curl = [ pkgs.curl pkgs.openldap ];
-    Rssa = [ pkgs.fftw ];
-    fftw = [ pkgs.fftw ];
-    fftwtools = [ pkgs.fftw ];
-    kza = [ pkgs.fftw ];
-    mwaved = [ pkgs.fftw ];
-    spate = [ pkgs.fftw ];
-    chebpol = [ pkgs.fftw ];
-    seewave = [ pkgs.fftw pkgs.libsndfile ];
-    rgeos = [ pkgs.geos ];
-    Rglpk = [ pkgs.glpk ];
-    RCA = [ pkgs.gmp ];
-    gmp = [ pkgs.gmp ];
-    rcdd = [ pkgs.gmp ];
-    Rlibeemd = [ pkgs.gsl ];
-    igraph = [ pkgs.gmp ];
-    glpkAPI = [ pkgs.gmp pkgs.glpk ];
-    sdcTable = [ pkgs.gmp pkgs.glpk ];
-    Rmpfr = [ pkgs.gmp pkgs.mpfr ];
-    Formula = [ pkgs.gmp ];
+    abn = [ pkgs.gsl ];
+    adimpro = [ pkgs.imagemagick ];
+    audio = [ pkgs.portaudio ];
     BayesSAE = [ pkgs.gsl ];
     BayesVarSel = [ pkgs.gsl ];
-    HiCseg = [ pkgs.gsl ];
-    KFKSDS = [ pkgs.gsl ];
-    R2GUESS = [ pkgs.gsl ];
-    RcppZiggurat = [ pkgs.gsl ];
-    SemiCompRisks = [ pkgs.gsl ];
-    VBLPCM = [ pkgs.gsl ];
-    abn = [ pkgs.gsl ];
+    BayesXsrc = [ pkgs.readline pkgs.ncurses ];
+    bigGP = [ pkgs.openmpi ];
+    bnpmr = [ pkgs.gsl ];
+    BNSP = [ pkgs.gsl ];
+    cairoDevice = [ pkgs.gtk2 ];
+    Cairo = [ pkgs.libtiff pkgs.libjpeg pkgs.cairo ];
+    CARramps = [ pkgs.linuxPackages.nvidia_x11 pkgs.liblapack ];
+    chebpol = [ pkgs.fftw ];
     cit = [ pkgs.gsl ];
+    curl = [ pkgs.curl pkgs.openldap ];
+    devEMF = [ pkgs.xlibs.libXft ];
+    diversitree = [ pkgs.gsl pkgs.fftw ];
+    EMCluster = [ pkgs.liblapack ];
+    fftw = [ pkgs.fftw ];
+    fftwtools = [ pkgs.fftw ];
+    Formula = [ pkgs.gmp ];
+    geoCount = [ pkgs.gsl ];
+    git2r = [ pkgs.zlib ];
+    glpkAPI = [ pkgs.gmp pkgs.glpk ];
+    gmp = [ pkgs.gmp ];
+    graphscan = [ pkgs.gsl ];
+    gsl = [ pkgs.gsl ];
+    HiCseg = [ pkgs.gsl ];
+    igraph = [ pkgs.gmp ];
+    JavaGD = [ pkgs.jdk ];
+    jpeg = [ pkgs.libjpeg ];
+    KFKSDS = [ pkgs.gsl ];
+    kza = [ pkgs.fftw ];
     libamtrack = [ pkgs.gsl ];
     mixcat = [ pkgs.gsl ];
-    outbreaker = [ pkgs.gsl ];
-    ridge = [ pkgs.gsl ];
-    simplexreg = [ pkgs.gsl ];
-    stsm = [ pkgs.gsl ];
-    survSNP = [ pkgs.gsl ];
-    topicmodels = [ pkgs.gsl ];
-    RcppGSL = [ pkgs.gsl ];
-    bnpmr = [ pkgs.gsl ];
-    V8 = [ pkgs.v8 ];
-    geoCount = [ pkgs.gsl ];
-    devEMF = [ pkgs.xlibs.libXft ];
-    gsl = [ pkgs.gsl ];
     mvabund = [ pkgs.gsl ];
-    diversitree = [ pkgs.gsl pkgs.fftw ];
-    TKF = [ pkgs.gsl ];
-    VBmix = [ pkgs.gsl pkgs.fftw pkgs.qt4 ];
-    RGtk2 = [ pkgs.gtk2 ];
-    cairoDevice = [ pkgs.gtk2 ];
-    adimpro = [ pkgs.imagemagick ];
-    rjags = [ pkgs.jags ];
-    runjags = [ pkgs.jags ];
-    JavaGD = [ pkgs.jdk ];
-    RODBC = [ pkgs.libiodbc ];
-    RODBCext = [ pkgs.libiodbc ];
-    jpeg = [ pkgs.libjpeg ];
-    EMCluster = [ pkgs.liblapack ];
-    png = [ pkgs.libpng ];
-    pbdMPI = [ pkgs.openmpi ];
-    bigGP = [ pkgs.openmpi ];
-    rtiff = [ pkgs.libtiff ];
-    tiff = [ pkgs.libtiff ];
-    Cairo = [ pkgs.libtiff pkgs.libjpeg pkgs.cairo ];
-    XML = [ pkgs.libtool pkgs.libxml2 pkgs.xmlsec pkgs.libxslt ];
-    rpud = [ pkgs.linuxPackages.nvidia_x11 ];
-    CARramps = [ pkgs.linuxPackages.nvidia_x11 pkgs.liblapack ];
-    rgl = [ pkgs.mesa pkgs.x11 ];
-    ncdf = [ pkgs.netcdf ];
+    mwaved = [ pkgs.fftw ];
     ncdf4 = [ pkgs.netcdf ];
-    pbdNCDF4 = [ pkgs.netcdf ];
-    RNetCDF = [ pkgs.netcdf pkgs.udunits ];
+    ncdf = [ pkgs.netcdf ];
     nloptr = [ pkgs.nlopt ];
-    npRmpi = [ pkgs.openmpi ];
-    pbdPROF = [ pkgs.openmpi ];
-    sprint = [ pkgs.openmpi ];
-    Rmpi = [ pkgs.openmpi ];
     openssl = [ pkgs.openssl ];
+    outbreaker = [ pkgs.gsl ];
+    pbdMPI = [ pkgs.openmpi ];
+    pbdNCDF4 = [ pkgs.netcdf ];
+    pbdPROF = [ pkgs.openmpi ];
     PKI = [ pkgs.openssl ];
+    png = [ pkgs.libpng ];
+    PopGenome = [ pkgs.zlib ];
+    proj4 = [ pkgs.proj ];
+    qtbase = [ pkgs.qt4 ];
+    qtpaint = [ pkgs.qt4 ];
+    R2GUESS = [ pkgs.gsl ];
+    R2SWF = [ pkgs.zlib pkgs.libpng pkgs.freetype ];
+    RAppArmor = [ pkgs.libapparmor ];
+    rbamtools = [ pkgs.zlib ];
+    RCA = [ pkgs.gmp ];
+    rcdd = [ pkgs.gmp ];
+    RcppCNPy = [ pkgs.zlib ];
+    RcppGSL = [ pkgs.gsl ];
+    RcppOctave = [ pkgs.zlib pkgs.bzip2 pkgs.icu pkgs.lzma pkgs.pcre pkgs.octave ];
+    RcppZiggurat = [ pkgs.gsl ];
+    rgdal = [ pkgs.proj pkgs.gdal ];
+    rgeos = [ pkgs.geos ];
+    rgl = [ pkgs.mesa pkgs.x11 ];
+    Rglpk = [ pkgs.glpk ];
+    rggobi = [ pkgs.ggobi pkgs.gtk2 pkgs.libxml2 ];
+    RGtk2 = [ pkgs.gtk2 ];
+    Rhpc = [ pkgs.zlib pkgs.bzip2 pkgs.icu pkgs.lzma pkgs.openmpi pkgs.pcre ];
+    ridge = [ pkgs.gsl ];
+    RJaCGH = [ pkgs.zlib ];
+    rjags = [ pkgs.jags ];
+    rJava = [ pkgs.zlib pkgs.bzip2 pkgs.icu pkgs.lzma pkgs.pcre pkgs.jdk pkgs.libzip ];
+    Rlibeemd = [ pkgs.gsl ];
+    rmatio = [ pkgs.zlib ];
+    Rmpfr = [ pkgs.gmp pkgs.mpfr ];
+    Rmpi = [ pkgs.openmpi ];
+    RMySQL = [ pkgs.zlib pkgs.mysql ];
+    RNetCDF = [ pkgs.netcdf pkgs.udunits ];
+    RODBCext = [ pkgs.libiodbc ];
+    RODBC = [ pkgs.libiodbc ];
+    rpg = [ pkgs.postgresql ];
+    rphast = [ pkgs.pcre pkgs.zlib pkgs.bzip2 pkgs.gzip pkgs.readline ];
+    Rpoppler = [ pkgs.poppler ];
+    RPostgreSQL = [ pkgs.postgresql ];
+    RProtoBuf = [ pkgs.protobuf ];
+    rpud = [ pkgs.linuxPackages.nvidia_x11 ];
+    rPython = [ pkgs.python ];
     RSclient = [ pkgs.openssl ];
     Rserve = [ pkgs.openssl ];
-    Rpoppler = [ pkgs.poppler ];
-    audio = [ pkgs.portaudio ];
-    rpg = [ pkgs.postgresql ];
-    RPostgreSQL = [ pkgs.postgresql ];
-    ssanv = [ pkgs.proj ];
-    proj4 = [ pkgs.proj ];
-    rgdal = [ pkgs.proj pkgs.gdal ];
-    RProtoBuf = [ pkgs.protobuf ];
-    rPython = [ pkgs.python ];
-    qtpaint = [ pkgs.qt4 ];
-    qtbase = [ pkgs.qt4 ];
-    BayesXsrc = [ pkgs.readline pkgs.ncurses ];
-    udunits2 = [ pkgs.udunits pkgs.expat ];
-    tkrplot = [ pkgs.xlibs.libX11 ];
-    rzmq = [ pkgs.zeromq3 ];
-    PopGenome = [ pkgs.zlib ];
-    RJaCGH = [ pkgs.zlib ];
-    RcppCNPy = [ pkgs.zlib ];
-    rbamtools = [ pkgs.zlib ];
-    rmatio = [ pkgs.zlib ];
-    RVowpalWabbit = [ pkgs.zlib pkgs.boost ];
-    seqminer = [ pkgs.zlib pkgs.bzip2 ];
-    seqinr = [ pkgs.zlib ];
-    rphast = [ pkgs.pcre pkgs.zlib pkgs.bzip2 pkgs.gzip pkgs.readline ];
+    Rssa = [ pkgs.fftw ];
     rtfbs = [ pkgs.zlib pkgs.pcre pkgs.bzip2 pkgs.gzip pkgs.readline ];
-    Rhpc = [ pkgs.zlib pkgs.bzip2 pkgs.icu pkgs.lzma pkgs.openmpi pkgs.pcre ];
+    rtiff = [ pkgs.libtiff ];
+    runjags = [ pkgs.jags ];
+    RVowpalWabbit = [ pkgs.zlib pkgs.boost ];
+    rzmq = [ pkgs.zeromq3 ];
     SAVE = [ pkgs.zlib pkgs.bzip2 pkgs.icu pkgs.lzma pkgs.pcre ];
-    RcppOctave = [ pkgs.zlib pkgs.bzip2 pkgs.icu pkgs.lzma pkgs.pcre pkgs.octave ];
-    rJava = [ pkgs.zlib pkgs.bzip2 pkgs.icu pkgs.lzma pkgs.pcre pkgs.jdk pkgs.libzip ];
-    R2SWF = [ pkgs.zlib pkgs.libpng pkgs.freetype ];
-    sysfonts = [ pkgs.zlib pkgs.libpng pkgs.freetype ];
+    sdcTable = [ pkgs.gmp pkgs.glpk ];
+    seewave = [ pkgs.fftw pkgs.libsndfile ];
+    SemiCompRisks = [ pkgs.gsl ];
+    seqinr = [ pkgs.zlib ];
+    seqminer = [ pkgs.zlib pkgs.bzip2 ];
     showtext = [ pkgs.zlib pkgs.libpng pkgs.icu pkgs.freetype ];
+    simplexreg = [ pkgs.gsl ];
+    SOD = [ pkgs.cudatoolkit ]; # requres CL/cl.h
+    spate = [ pkgs.fftw ];
+    sprint = [ pkgs.openmpi ];
+    ssanv = [ pkgs.proj ];
+    stsm = [ pkgs.gsl ];
+    survSNP = [ pkgs.gsl ];
+    sysfonts = [ pkgs.zlib pkgs.libpng pkgs.freetype ];
+    TAQMNGR = [ pkgs.zlib ];
+    tiff = [ pkgs.libtiff ];
+    TKF = [ pkgs.gsl ];
+    tkrplot = [ pkgs.xlibs.libX11 ];
+    topicmodels = [ pkgs.gsl ];
+    udunits2 = [ pkgs.udunits pkgs.expat ];
+    V8 = [ pkgs.v8 ];
+    VBLPCM = [ pkgs.gsl ];
+    VBmix = [ pkgs.gsl pkgs.fftw pkgs.qt4 ];
+    WhopGenome = [ pkgs.zlib ];
     XBRL = [ pkgs.zlib pkgs.libxml2 ];
-    RMySQL = [ pkgs.zlib pkgs.mysql ];
+    XML = [ pkgs.libtool pkgs.libxml2 pkgs.xmlsec pkgs.libxslt ];
   };
 
   packagesWithBuildInputs = {
@@ -339,6 +340,7 @@ let
     WideLM = [ pkgs.cudatoolkit ];
     RCurl = [ pkgs.curl ];
     R2SWF = [ pkgs.pkgconfig ];
+    rggobi = [ pkgs.pkgconfig ];
     RGtk2 = [ pkgs.pkgconfig ];
     RProtoBuf = [ pkgs.pkgconfig ];
     Rpoppler = [ pkgs.pkgconfig ];
@@ -434,6 +436,7 @@ let
     "PBSadmb"
     "PBSmodelling"
     "PCPS"
+    "PKgraph"
     "PopGenReport"
     "PredictABEL"
     "PrevMap"
@@ -606,7 +609,6 @@ let
     "ripa"
     "rite"
     "rnbn"
-    "rriskDistributions"
     "rsgcc"
     "sdcMicroGUI"
     "sharpshootR"
@@ -641,7 +643,6 @@ let
   packagesToSkipCheck = [
     "Rmpi" # tries to run MPI processes
     "gmatrix" # requires CUDA runtime
-    "npRmpi" # tries to run MPI processes
     "sprint" # tries to run MPI processes
     "pbdMPI" # tries to run MPI processes
   ];
@@ -663,11 +664,10 @@ let
     "ArrayBin" # requires SAGx
     "babel" # requires edgeR
     "BACA" # requires RDAVIDWebService
-    "bamboo" # depends on broken jvmr
     "BcDiag" # requires fabia
+    "beadarrayMSV" # requires Biobase, geneplotter, andlimma
     "bdvis" # requres taxize
     "beadarrayFilter" # requires beadarray
-    "beadarrayMSV" # requires rggobi
     "bigGP" # requires MPI running. HELP WANTED!
     "bigpca" # requires NCmisc
     "Biograph" # requires mvna
@@ -681,19 +681,19 @@ let
     "CARrampsOcl" # depends on OpenCL
     "CHAT" # requires DNAcopy
     "ChemoSpec" # depends on broken speaq
+    "Crossover" # fails self-test
     "classGraph" # requires graph, and Rgraphviz
     "clpAPI" # requires clp
-    "clusterfly" # requires rggobi
     "compendiumdb" # requires Biobase
     "CORM" # requires limma
     "cplexAPI" # requires CPLEX
-    "cqrReg" # requires Rmosek
     "crmn" # requires pcaMethods, and Biobase
     "CrypticIBDcheck" # requires rJPSGCS
     "cudaBayesreg" # requres Rmath
     "curvHDR" # requires flowCore
     "D2C" # requires gRbase
     "DAAGbio" # requires limma
+    "daff" # requires V8 to build
     "dagbag" # requires Rlapack
     "DBKGrad" # requires SDD
     "dbmss" # requires spatstat
@@ -701,6 +701,7 @@ let
     "dcGOR" # requires dnet
     "demi" # requires affy, affxparser, and oligo
     "DepthProc" # requires samr
+    "DiagrammeR" # requires V8 to build
     "Digiroo2" # requires spatstat
     "dixon" # requires spatstat
     "dnet" # requires supraHex, graph, Rgraphviz, and Biobase
@@ -731,9 +732,11 @@ let
     "GeneticTools" # requires snpStats
     "GExMap" # requires Biobase and multtest
     "gitter" # requires EBImage
+    "glmgraph" # test suite says: "undefined symbol: dgemv_"
     "gmatrix" # depends on proprietary cudatoolkit
     "GOGANPA" # requires WGCNA
     "gputools" # depends on proprietary cudatoolkit
+    "gMCP" # fails self-test
     "gRain" # requires gRbase
     "gRapHD" # requires graph
     "gRbase" # requires RBGL, and graph
@@ -761,7 +764,6 @@ let
     "isva" # requires qvalue
     "jomo" # linking errors
     "js" # requires broken V8
-    "jvmr" # tries to download files during its build
     "KANT" # requires affy, and Biobase
     "ktspair" # requires Biobase
     "latticeDensity" # requires spatstat
@@ -799,6 +801,7 @@ let
     "NCmisc" # requires BiocInstaller
     "netClass" # requires samr
     "nettools" # requires WGCNA
+    "NORRRM" # can't load SDMTools properly
     "netweavers" # requires BiocGenerics, Biobase, and limma
     "NLPutils" # requires qdap
     "NSA" # requires aroma_core
@@ -806,6 +809,9 @@ let
     "optBiomarker" # requires rpanel
     "ora" # requires ROracle
     "orQA" # requires genefilter
+    "pRF" # requires multtest
+    "PBSmapping" # fails its test suite for unclear reasons
+    "PBSddesolve" # fails its test suite for unclear reasons
     "PairViz" # requires graph
     "PANDA" # requires GO.db
     "ParDNAcopy" # requires DNAcopy
@@ -824,7 +830,6 @@ let
     "permGPU" # requires Biobase
     "PhViD" # requires LBE
     "pi0" # requires qvalue
-    "PKgraph" # requires rggobi
     "plmDE" # requires limma
     "plsRcox" # requires survcomp
     "PMA" # requires impute
@@ -847,8 +852,9 @@ let
     "rainfreq" # SDMTools.so: undefined symbol: X
     "RAM" # requires Heatplus
     "RAPIDR" # requires Biostrings, Rsamtools, and GenomicRanges
+    "RapidPolygonLookup" # depends on broken PBSmapping
     "RbioRXN" # requires fmcsR, and KEGGREST
-    "Rcell" # requires EBImage
+    "RcppAPT" # configure script depends on /bin/sh
     "RcmdrPlugin_seeg" # requires seeg
     "Rcplex" # requires cplexAPI
     "RcppRedis" # requires Hiredis
@@ -858,8 +864,8 @@ let
     "REBayes" # requires Rmosek
     "RefFreeEWAS" # requires isva
     "retistruct" # depends on broken RImageJROI
-    "rggobi" # requires GGobi
     "RImageJROI" # requires spatstat
+    "rjade" # requires V8 to build
     "rJPSGCS" # requires chopsticks
     "rLindo" # requires LINDO API
     "Rmosek" # requires mosek
@@ -874,6 +880,8 @@ let
     "rpanel" # I could not make Tcl to recognize BWidget. HELP WANTED!
     "RQuantLib" # requires QuantLib
     "RSAP" # requires SAPNWRFCSDK
+    "rgp" # fails self-test
+    "rgpui" # depends on broken rgp
     "RSeed" # requires RBGL, and graph
     "rsig" # requires survcomp
     "RSNPset" # requires qvalue
@@ -888,10 +896,10 @@ let
     "selectspm" # depends on broken ecespa
     "semiArtificial" # requires RSNNS
     "SeqFeatR" # requires Biostrings, qvalue, and widgetTools
-    "SeqGrapheR" # requires rggobi
     "sequenza" # requires copynumber
     "SGCS" # requires spatstat
     "siar" # requires spatstat
+    "SID" # requires pcalg
     "SimRAD" # requires Biostrings, and ShortRead
     "SimSeq" # requires edgeR
     "siplab" # requires spatstat
@@ -909,7 +917,8 @@ let
     "spocc" # requires leafletR
     "SQDA" # requires limma
     "Statomica" # requires Biobase, multtest
-    "StochKit2R" # tarball is invalid on server
+    "stagePop" # depends on broken PBSddesolve
+    "SeqGrapheR" # depends on Biostrings
     "stpp" # requires spatstat
     "structSSI" # requires multtest
     "strum" # requires Rgraphviz
@@ -925,6 +934,7 @@ let
     "ttScreening" # requires sva, and limma
     "V8" # compilation error
     "vows" # requires rpanel
+    "vmsbase" # depends on broken PBSmapping
     "WGCNA" # requires impute
     "wgsea" # requires snpStats
     "WideLM" # depends on proprietary cudatoolkit
@@ -982,12 +992,6 @@ let
       ];
     });
 
-    npRmpi = old.npRmpi.overrideDerivation (attrs: {
-      configureFlags = [
-        "--with-Rmpi-type=OPENMPI"
-      ];
-    });
-
     Rmpfr = old.Rmpfr.overrideDerivation (attrs: {
       configureFlags = [
         "--with-mpfr-include=${pkgs.mpfr}/include"
@@ -1002,7 +1006,7 @@ let
 
     RAppArmor = old.RAppArmor.overrideDerivation (attrs: {
       patches = [ ./patches/RAppArmor.patch ];
-      LIBAPPARMOR_HOME = "${pkgs.apparmor}";
+      LIBAPPARMOR_HOME = "${pkgs.libapparmor}";
     });
 
     RMySQL = old.RMySQL.overrideDerivation (attrs: {

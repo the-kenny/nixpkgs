@@ -59,10 +59,10 @@ in
 
     virtualisation.xen.stored =
       mkOption {
-        default = "${pkgs.xen}/bin/oxenstored";
+        type = types.path;
         description =
           ''
-            Xen Store daemon to use.
+            Xen Store daemon to use. Defaults to oxenstored of the xen package.
           '';
       };
 
@@ -87,6 +87,8 @@ in
       assertion = config.boot.loader.grub.enable && (config.boot.loader.grub.efiSupport == false);
       message = "Xen currently does not support EFI boot";
     } ];
+
+    virtualisation.xen.stored = mkDefault "${xen}/bin/oxenstored";
 
     environment.systemPackages = [ xen ];
 
