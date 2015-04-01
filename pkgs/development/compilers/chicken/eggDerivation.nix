@@ -69,4 +69,9 @@ stdenv.mkDerivation ({
 
     runHook postInstall
   '';
+
+
+  meta = {
+    platforms = lib.platforms.all;
+  };
 } // (builtins.removeAttrs args ["name" "buildInputs"]) // override)
