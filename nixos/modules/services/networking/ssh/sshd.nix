@@ -234,7 +234,7 @@ in
         ];
         options = {
           hostNames = mkOption {
-            type = types.listOf types.string;
+            type = types.listOf types.str;
             default = [];
             description = ''
               A list of host names and/or IP numbers used for accessing
@@ -268,6 +268,16 @@ in
         };
       };
 
+      moduliFile = mkOption {
+        example = "services.openssh.moduliFile = /etc/my-local-ssh-moduli;";
+        type = types.path;
+        description = ''
+          Path to <literal>moduli</literal> file to install in
+          <literal>/etc/ssh/moduli</literal>. If this option is unset, then
+          the <literal>moduli</literal> file shipped with OpenSSH will be used.
+        '';
+      };
+
     };
 
     users.extraUsers = mkOption {
@@ -281,15 +291,15 @@ in
 
   config = mkIf cfg.enable {
 
-    users.extraUsers = singleton
-      { name = "sshd";
-        uid = config.ids.uids.sshd;
+    users.extraUsers.sshd =
+      { isSystemUser = true;
         description = "SSH privilege separation user";
-        home = "/var/empty";
       };
 
+    services.openssh.moduliFile = mkDefault "${cfgc.package}/etc/ssh/moduli";
+
     environment.etc = authKeysFiles ++ [
-      { source = "${cfgc.package}/etc/ssh/moduli";
+      { source = cfg.moduliFile;
         target = "ssh/moduli";
       }
       { text = knownHostsText;
@@ -379,7 +389,7 @@ in
           Port ${toString port}
         '') cfg.ports}
 
-        ${concatMapStrings ({ port, addr }: ''
+        ${concatMapStrings ({ port, addr, ... }: ''
           ListenAddress ${addr}${if port != null then ":" + toString port else ""}
         '') cfg.listenAddresses}
 
@@ -418,7 +428,7 @@ in
                     (data.publicKey != null && data.publicKeyFile == null);
         message = "knownHost ${name} must contain either a publicKey or publicKeyFile";
       })
-      ++ flip map cfg.listenAddresses ({ addr, port }: {
+      ++ flip map cfg.listenAddresses ({ addr, port, ... }: {
         assertion = addr != null;
         message = "addr must be specified in each listenAddresses entry";
       });

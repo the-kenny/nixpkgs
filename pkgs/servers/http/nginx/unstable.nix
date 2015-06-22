@@ -10,10 +10,10 @@
 with stdenv.lib;
 
 let
-  version = "1.7.10";
+  version = "1.9.1";
   mainSrc = fetchurl {
     url = "http://nginx.org/download/nginx-${version}.tar.gz";
-    sha256 = "0q24rwwlw3xas0ar4jygyb6czwjzsjz11sax199z7fnfd2sc2wyz";
+    sha256 = "1b8xikrr19p07n28xnar8p8l0vgm7795lmrb2x7r9h4lwvx5bx89";
   };
 
   rtmp-ext = fetchFromGitHub {

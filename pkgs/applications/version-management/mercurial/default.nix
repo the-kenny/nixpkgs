@@ -1,8 +1,8 @@
 { stdenv, fetchurl, python, makeWrapper, docutils, unzip
-, guiSupport ? false, tk ? null, curses }:
+, guiSupport ? false, tk ? null, curses, cacert }:
 
 let
-  version = "3.3.2";
+  version = "3.3.3";
   name = "mercurial-${version}";
 in
 
@@ -11,7 +11,7 @@ stdenv.mkDerivation {
 
   src = fetchurl {
     url = "http://mercurial.selenic.com/release/${name}.tar.gz";
-    sha256 = "1yi72lv05p6hr8ngplz56rncs9wv6c16z8ki6f96yw5c833igik7";
+    sha256 = "04xfzwb7jabzsfv2r18c3w6vwag7cjrl79xzg5i3mbyb1mzkcid4";
   };
 
   inherit python; # pass it so that the same version can be used in hg2git
@@ -44,13 +44,16 @@ stdenv.mkDerivation {
       mkdir -p $out/etc/mercurial
       cat >> $out/etc/mercurial/hgrc << EOF
       [web]
-      cacerts = /etc/ssl/certs/ca-bundle.crt
+      cacerts = ${cacert}/etc/ssl/certs/ca-bundle.crt
       EOF
 
       # copy hgweb.cgi to allow use in apache
       mkdir -p $out/share/cgi-bin
       cp -v hgweb.cgi contrib/hgweb.wsgi $out/share/cgi-bin
       chmod u+x $out/share/cgi-bin/hgweb.cgi
+
+      # install bash completion
+      install -D -v contrib/bash_completion $out/share/bash-completion/completions/mercurial
     '';
 
   meta = {

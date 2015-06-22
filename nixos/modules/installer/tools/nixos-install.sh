@@ -45,7 +45,9 @@ while [ "$#" -gt 0 ]; do
             ;;
         --chroot)
             runChroot=1
-            chrootCommand=("$@")
+            if [[ "$@" != "" ]]; then
+                chrootCommand=("$@")
+            fi
             break
             ;;
         --help)
@@ -133,7 +135,7 @@ mkdir -m 0755 -p \
     $mountPoint/nix/var/nix/db \
     $mountPoint/nix/var/log/nix/drvs
 
-mkdir -m 1735 -p $mountPoint/nix/store
+mkdir -m 1775 -p $mountPoint/nix/store
 chown root:nixbld $mountPoint/nix/store
 
 
@@ -254,8 +256,14 @@ NIXOS_INSTALL_GRUB=1 chroot $mountPoint \
 chroot $mountPoint /nix/var/nix/profiles/system/activate
 
 
+# Some systems may not be prepared to use NixOS' paths.
+export PATH=/run/current-system/sw/bin:/run/current-system/sw/sbin:$PATH
+export NIX_PATH=/nix/var/nix/profiles/per-user/root/channels/nixos:nixpkgs=/etc/nixos/nixpkgs
+export NIX_PATH=$NIX_PATH:nixos-config=/etc/nixos/configuration.nix:/nix/var/nix/profiles/per-user/root/channels
+
+
 # Ask the user to set a root password.
-if [ "$(chroot $mountPoint nix-instantiate --eval '<nixos>' -A config.users.mutableUsers)" = true ] && [ -t 0 ] ; then
+if [ "$(chroot $mountPoint nix-instantiate --eval '<nixpkgs/nixos>' -A config.users.mutableUsers)" = true ] && [ -t 0 ] ; then
     echo "setting root password..."
     chroot $mountPoint /var/setuid-wrappers/passwd
 fi

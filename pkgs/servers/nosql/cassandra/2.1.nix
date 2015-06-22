@@ -10,8 +10,8 @@
 
 let
 
-  version = "2.1.3";
-  sha256 = "1hzb7h73vr28v9axw85c1987l2i5g4i9ivmgq5mqlv3cv1ng0knz";
+  version = "2.1.7";
+  sha256 = "12chnxcl9zg20d0l4rlzp13cnxvdqr8bx3bbvwbcpnh7ir5s7ldd";
 
 in
 
@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
     url = "http://apache.cs.utah.edu/cassandra/${version}/apache-${name}-bin.tar.gz";
   };
 
-  buildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ makeWrapper ];
 
   installPhase = ''
     mkdir $out
@@ -44,7 +44,7 @@ stdenv.mkDerivation rec {
     homepage = http://cassandra.apache.org/;
     description = "A massively scalable open source NoSQL database";
     platforms = with platforms; all;
-    license = with licenses; asl20;
+    license = licenses.asl20;
     maintainers = with maintainers; [ nckx rushmorem ];
   };
 }

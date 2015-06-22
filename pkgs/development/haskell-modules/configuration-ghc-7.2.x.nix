@@ -39,17 +39,21 @@ self: super: {
 
   # transformers is not a core library for this compiler.
   transformers = self.transformers_0_4_3_0;
-  mtl = self.mtl_2_2_1;
-  transformers-compat = disableCabalFlag super.transformers-compat "three";
 
   # https://github.com/haskell/cabal/issues/2322
-  Cabal_1_22_2_0 = super.Cabal_1_22_2_0.override { binary = self.binary_0_7_4_0; process = self.process_1_2_3_0; };
+  Cabal_1_22_4_0 = super.Cabal_1_22_4_0.override { binary = self.binary_0_7_5_0; process = self.process_1_2_3_0; };
+
+  # Newer versions don't compile.
+  Cabal_1_18_1_6 = dontJailbreak super.Cabal_1_18_1_6;
+  cabal-install = self.cabal-install_1_18_1_0;
 
   # https://github.com/tibbe/hashable/issues/85
   hashable = dontCheck super.hashable;
 
-  # Needs Cabal >= 1.18.x.
-  jailbreak-cabal = super.jailbreak-cabal.override { Cabal = self.Cabal_1_18_1_6; };
+  # https://github.com/peti/jailbreak-cabal/issues/9
+  jailbreak-cabal = super.jailbreak-cabal.override {
+    Cabal = dontJailbreak (self.Cabal_1_20_0_3.override { deepseq = dontJailbreak self.deepseq_1_3_0_1; });
+  };
 
   # Haddock chokes on the prologue from the cabal file.
   ChasingBottoms = dontHaddock super.ChasingBottoms;
@@ -62,5 +66,8 @@ self: super: {
 
   # Setup: Can't find transitive deps for haddock
   doctest = dontHaddock super.doctest;
+
+  # Needs hashable on pre 7.10.x compilers.
+  nats = addBuildDepend super.nats self.hashable;
 
 }

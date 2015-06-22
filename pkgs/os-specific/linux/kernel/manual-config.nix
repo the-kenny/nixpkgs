@@ -49,7 +49,8 @@ let
 
   commonMakeFlags = [
     "O=$(buildRoot)"
-  ];
+  ] ++ stdenv.lib.optionals (stdenv.platform ? kernelMakeFlags)
+    stdenv.platform.kernelMakeFlags;
 
   drvAttrs = config_: platform: kernelPatches: configfile:
     let
@@ -116,13 +117,16 @@ let
       ++ optional installsFirmware "INSTALL_FW_PATH=$(out)/lib/firmware";
 
       # Some image types need special install targets (e.g. uImage is installed with make uinstall)
-      installTargets = [ (if platform.kernelTarget == "uImage" then "uinstall" else "install") ];
+      installTargets = [ (if platform.kernelTarget == "uImage" then "uinstall" else
+                          if platform.kernelTarget == "zImage" then "zinstall" else
+                          "install") ];
 
       postInstall = (optionalString installsFirmware ''
         mkdir -p $out/lib/firmware
       '') + (if (platform ? kernelDTB && platform.kernelDTB) then ''
  	make $makeFlags "''${makeFlagsArray[@]}" dtbs
-        cp $buildRoot/arch/$karch/boot/dts/*dtb $out
+        mkdir -p $out/dtbs
+        cp $buildRoot/arch/$karch/boot/dts/*.dtb $out/dtbs
       '' else "") + (if isModular then ''
         make modules_install $makeFlags "''${makeFlagsArray[@]}" \
           $installFlags "''${installFlagsArray[@]}"

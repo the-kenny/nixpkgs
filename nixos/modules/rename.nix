@@ -135,6 +135,8 @@ in zipModules ([]
 
 ++ obsolete [ "services" "mysql55" ] [ "services" "mysql" ]
 
+++ alias    [ "environment" "checkConfigurationOptions" ] [ "_module" "check" ]
+
 # XBMC
 ++ obsolete [ "services" "xserver" "windowManager" "xbmc" ] [ "services" "xserver" "desktopManager" "kodi" ]
 ++ obsolete [ "services" "xserver" "desktopManager" "xbmc" ] [ "services" "xserver" "desktopManager" "kodi" ]

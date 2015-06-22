@@ -2,15 +2,16 @@
 , libnetfilter_conntrack, libnl, libpcap, libsodium, liburcu, ncurses, perl
 , pkgconfig, zlib }:
 
-stdenv.mkDerivation rec {
-  version = "v0.5.9-rc4-53-gdd5d906";
+let version = "0.5.9-10-gb7ece46"; in
+stdenv.mkDerivation {
   name = "netsniff-ng-${version}";
 
-  src = fetchFromGitHub rec { # Upstream recommends and supports git
+  # Upstream recommends and supports git
+  src = fetchFromGitHub rec {
     repo = "netsniff-ng";
     owner = repo;
-    rev = "dd5d906c40db5264d8d33c37565b39540f0258c8";
-    sha256 = "0iwnfjbxiv10zk5mfpnvs2xb88f14hv1a156kn9mhasszknp0a57";
+    rev = "b7ece46f62b1fbece160cc7bd2905a6d0d3970a9";
+    sha256 = "1m44ssvkzp4xrkwc61gsmn2vkbmf9r5mp1zjz8cj8w120703cljj";
   };
 
   buildInputs = [ bison flex geoip geolite-legacy libcli libnet libnl
@@ -40,6 +41,7 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with stdenv.lib; {
+    inherit version;
     description = "Swiss army knife for daily Linux network plumbing";
     longDescription = ''
       netsniff-ng is a free Linux networking toolkit. Its gain of performance
@@ -49,7 +51,7 @@ stdenv.mkDerivation rec {
       development and analysis, debugging, auditing or network reconnaissance.
     '';
     homepage = http://netsniff-ng.org/;
-    license = with licenses; gpl2;
+    license = licenses.gpl2;
     platforms = with platforms; linux;
     maintainers = with maintainers; [ nckx ];
   };

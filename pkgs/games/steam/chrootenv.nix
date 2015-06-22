@@ -13,6 +13,7 @@ buildFHSUserEnv {
       pkgs.python
       pkgs.gnome2.zenity
       pkgs.xdg_utils
+      pkgs.xlibs.xrandr
     ]
     ++ lib.optional (config.steam.java or false) pkgs.jdk
     ++ lib.optional (config.steam.primus or false) pkgs.primus
@@ -56,7 +57,7 @@ buildFHSUserEnv {
       pkgs.alsaLib
       pkgs.libvorbis
       pkgs.openal
-      pkgs.pulseaudio
+      pkgs.libpulseaudio
 
       pkgs.flashplayer
 
@@ -73,5 +74,5 @@ buildFHSUserEnv {
     export LD_PRELOAD=/lib32/libpulse.so:/lib64/libpulse.so:/lib32/libasound.so:/lib64/libasound.so
   '';
 
-  runScript = "exec steam";
+  runScript = "steam";
 }

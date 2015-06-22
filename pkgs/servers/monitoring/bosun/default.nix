@@ -3,14 +3,14 @@
 with goPackages;
 
 buildGoPackage rec {
-  rev = "20150311224711";
+  rev = "0.2.0";
   name = "bosun-${rev}";
   goPackagePath = "bosun.org";
   src = fetchFromGitHub {
     inherit rev;
     owner = "bosun-monitor";
     repo = "bosun";
-    sha256 = "1nzzmlbiah7lpkm5n7yzxv1wmcxg8pszlzzsdvb7ccy0agpihxjg";
+    sha256 = "146k37zg4l01l10vwhnhjs6jv8d35zf5l5rljmvy9ydq2npadsjd";
   };
   subPackages = [ "cmd/bosun" ];
 

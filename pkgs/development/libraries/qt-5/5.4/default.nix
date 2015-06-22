@@ -20,6 +20,7 @@
 
 # options
 , developerBuild ? false
+, decryptSslTraffic ? false
 }:
 
 with autonix;
@@ -30,7 +31,7 @@ let
     importManifest ./manifest.nix { mirror = "http://download.qt.io"; };
   srcs = mapAttrs (name: manifest: manifest.src) manifest;
 
-  version = "5.4.0";
+  version = "5.4.2";
 
   callPackage = newScope (self // { inherit qtSubmodule; });
 
@@ -41,8 +42,6 @@ let
 
   self =
     {
-
-      qmake = callPackage ./qmake.nix { inherit (self) base; };
 
       activeqt = callPackage
         (
@@ -63,7 +62,7 @@ let
         # GNOME dependencies are not used unless gtkStyle == true
         inherit (gnome) libgnomeui GConf gnome_vfs;
         bison = bison2; # error: too few arguments to function 'int yylex(...
-        inherit developerBuild srcs version;
+        inherit developerBuild srcs version decryptSslTraffic;
       };
 
       connectivity = callPackage
@@ -149,14 +148,14 @@ let
       multimedia = callPackage
         (
           { qtSubmodule, base, declarative
-          , alsaLib, gstreamer, gst_plugins_base, pulseaudio
+          , alsaLib, gstreamer, gst_plugins_base, libpulseaudio
           }:
 
           qtSubmodule {
             name = "qtmultimedia";
             qtInputs = [ base declarative ];
             buildInputs = [
-              alsaLib gstreamer gst_plugins_base pulseaudio
+              alsaLib gstreamer gst_plugins_base libpulseaudio
             ];
           }
         )

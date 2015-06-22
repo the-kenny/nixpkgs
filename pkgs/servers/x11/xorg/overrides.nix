@@ -1,7 +1,7 @@
 { args, xorg }:
 
 let
-  inherit (args) stdenv;
+  inherit (args) stdenv makeWrapper;
   inherit (stdenv) lib isDarwin;
   inherit (lib) overrideDerivation;
 
@@ -80,7 +80,7 @@ in
   };
 
   libxkbfile = attrs: attrs // {
-    patches = lib.optional (stdenv.cc.cc.isClang or false) ./libxkbfile-clang36.patch;
+    patches = lib.optional stdenv.cc.isClang ./libxkbfile-clang36.patch;
   };
 
   libpciaccess = attrs : attrs // {
@@ -189,6 +189,10 @@ in
     buildInputs = attrs.buildInputs ++ [ args.freetype args.fontconfig ];
   };
 
+  xcbutilcursor = attrs: attrs // {
+    meta.maintainers = [ stdenv.lib.maintainers.lovek323 ];
+  };
+
   xf86inputevdev = attrs: attrs // {
     preBuild = "sed -e '/motion_history_proc/d; /history_size/d;' -i src/*.c";
     installFlags = "sdkdir=\${out}/include/xorg";
@@ -200,6 +204,11 @@ in
   };
 
   xf86inputjoystick = attrs: attrs // {
+    installFlags = "sdkdir=\${out}/include/xorg";
+  };
+
+  xf86inputlibinput = attrs: attrs // {
+    buildInputs = attrs.buildInputs ++ [ args.libinput ];
     installFlags = "sdkdir=\${out}/include/xorg";
   };
 
@@ -300,13 +309,14 @@ in
     in
       if (!isDarwin)
       then {
-        buildInputs = commonBuildInputs;
+        buildInputs = [ makeWrapper ] ++ commonBuildInputs;
         propagatedBuildInputs = commonPropagatedBuildInputs ++ lib.optionals stdenv.isLinux [
           args.udev
         ];
         patches = commonPatches;
         configureFlags = [
           "--enable-kdrive"             # not built by default
+          "--enable-xephyr"
           "--enable-xcsecurity"         # enable SECURITY extension
           "--with-default-font-path="   # there were only paths containing "${prefix}",
                                         # and there are no fonts in this package anyway
@@ -314,6 +324,9 @@ in
         postInstall = ''
           rm -fr $out/share/X11/xkb/compiled
           ln -s /var/tmp $out/share/X11/xkb/compiled
+          wrapProgram $out/bin/Xephyr \
+            --set XKB_BINDIR "${xorg.xkbcomp}/bin" \
+            --add-flags "-xkbdir ${xorg.xkeyboardconfig}/share/X11/xkb"
         '';
         passthru.version = version; # needed by virtualbox guest additions
       } else {
@@ -404,6 +417,7 @@ in
 
   xf86videointel = attrs: attrs // {
     buildInputs = attrs.buildInputs ++ [xorg.libXfixes];
+    patches = [ ./xf86-video-intel-2.99.917-libdrm-kernel-4_0-crash.patch ];
   };
 
   xwd = attrs: attrs // {

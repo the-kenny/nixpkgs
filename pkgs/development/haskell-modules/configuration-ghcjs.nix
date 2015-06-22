@@ -7,7 +7,7 @@ self: super: {
   # LLVM is not supported on this GHC; use the latest one.
   inherit (pkgs) llvmPackages;
 
-  jailbreak-cabal = pkgs.haskell-ng.packages.ghc7101.jailbreak-cabal;
+  inherit (pkgs.haskell-ng.packages.ghc7101) jailbreak-cabal alex happy;
 
   # Many packages fail with:
   #   haddock: internal error: expectJust getPackageDetails
@@ -66,19 +66,6 @@ self: super: {
     '';
   });
 
-  reactive-banana = overrideCabal super.reactive-banana (drv: {
-    patchPhase = ''
-      cat >> src/Reactive/Banana/Switch.hs <<EOF
-      instance Functor (AnyMoment Identity) where
-        fmap = liftM
-        
-      instance Applicative (AnyMoment Identity) where
-        pure = return
-        (<*>) = ap
-      EOF
-    '';
-  });
-
   transformers-compat = overrideCabal super.transformers-compat (drv: {
     configureFlags = [];
   });
@@ -95,16 +82,20 @@ self: super: {
     '';
   });
 
-  "ghcjs-dom" = self.callPackage
-    ({ mkDerivation, base, mtl, text, ghcjs-base
-     }:
-     mkDerivation {
-       pname = "ghcjs-dom";
-       version = "0.1.1.3";
-       sha256 = "0pdxb2s7fflrh8sbqakv0qi13jkn3d0yc32xhg2944yfjg5fvlly";
-       buildDepends = [ base mtl text ghcjs-base ];
-       description = "DOM library that supports both GHCJS and WebKitGTK";
-       license = pkgs.stdenv.lib.licenses.mit;
-       hydraPlatforms = pkgs.stdenv.lib.platforms.none;
-     }) {};
+  ghcjs-dom = overrideCabal super.ghcjs-dom (drv: {
+    buildDepends = [ self.base self.mtl self.text self.ghcjs-base ];
+  });
+
+  ghc-paths = overrideCabal super.ghc-paths (drv: {
+    patches = [ ./ghc-paths-nix-ghcjs.patch ];
+  });
+
+  reflex-dom = overrideCabal super.reflex-dom (drv: {
+    buildDepends = [
+      self.aeson self.base self.bytestring self.containers self.data-default
+      self.dependent-map self.dependent-sum self.ghcjs-dom self.lens self.mtl
+      self.ref-tf self.reflex self.safe self.semigroups self.text self.these
+      self.time self.transformers
+    ];
+  });
 }

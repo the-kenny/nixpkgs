@@ -51,12 +51,13 @@ assert editedCabalFile != null -> revision != null;
 let
 
   inherit (stdenv.lib) optional optionals optionalString versionOlder
-                       concatStringsSep enableFeature optionalAttrs;
+                       concatStringsSep enableFeature optionalAttrs toUpper;
 
   isGhcjs = ghc.isGhcjs or false;
 
+  newCabalFileUrl = "http://hackage.haskell.org/package/${pname}-${version}/revision/${revision}.cabal";
   newCabalFile = fetchurl {
-    url = "http://hackage.haskell.org/package/${pname}-${version}/revision/${revision}.cabal";
+    url = newCabalFileUrl;
     sha256 = editedCabalFile;
     name = "${pname}-${version}-r${revision}.cabal";
   };
@@ -71,6 +72,9 @@ let
 
   hasActiveLibrary = isLibrary && (enableStaticLibraries || enableSharedLibraries || enableLibraryProfiling);
 
+  # We cannot enable -j<n> parallelism for libraries because GHC is far more
+  # likely to generate a non-determistic library ID in that case. Further
+  # details are at <https://github.com/peti/ghc-library-id-bug>.
   enableParallelBuilding = versionOlder "7.8" ghc.version && !hasActiveLibrary;
 
   defaultConfigureFlags = [
@@ -113,8 +117,9 @@ let
 
   ghcEnv = ghc.withPackages (p: haskellBuildInputs);
 
-  setupBuilder = if isGhcjs then "${ghc.nativeGhc}/bin/ghc" else "ghc";
+  setupCommand = if isGhcjs then "${ghc.nodejs}/bin/node ./Setup.jsexe/all.js" else "./Setup";
   ghcCommand = if isGhcjs then "ghcjs" else "ghc";
+  ghcCommandCaps = toUpper ghcCommand;
 
 in
 stdenv.mkDerivation ({
@@ -134,17 +139,19 @@ stdenv.mkDerivation ({
   LANG = "en_US.UTF-8";         # GHC needs the locale configured during the Haddock phase.
 
   prePatch = optionalString (editedCabalFile != null) ''
-    echo "Replacing Cabal file with edited version ${newCabalFile}."
+    echo "Replace Cabal file with edited version from ${newCabalFileUrl}."
     cp ${newCabalFile} ${pname}.cabal
-  '' + optionalString jailbreak ''
-    echo "Running jailbreak-cabal to lift version restrictions on build inputs."
-    ${jailbreak-cabal}/bin/jailbreak-cabal ${pname}.cabal
   '' + prePatch;
+
+  postPatch = optionalString jailbreak ''
+    echo "Run jailbreak-cabal to lift version restrictions on build inputs."
+    ${jailbreak-cabal}/bin/jailbreak-cabal ${pname}.cabal
+  '' + postPatch;
 
   setupCompilerEnvironmentPhase = ''
     runHook preSetupCompilerEnvironment
 
-    echo "Building with ${ghc}."
+    echo "Build with ${ghc}."
     export PATH="${ghc}/bin:$PATH"
     ${optionalString (hasActiveLibrary && hyperlinkSource) "export PATH=${hscolour}/bin:$PATH"}
 
@@ -183,7 +190,7 @@ stdenv.mkDerivation ({
     done
 
     echo setupCompileFlags: $setupCompileFlags
-    ${setupBuilder} $setupCompileFlags --make -o Setup -odir $TMPDIR -hidir $TMPDIR $i
+    ${ghcCommand} $setupCompileFlags --make -o Setup -odir $TMPDIR -hidir $TMPDIR $i
 
     runHook postCompileBuildDriver
   '';
@@ -194,7 +201,7 @@ stdenv.mkDerivation ({
     unset GHC_PACKAGE_PATH      # Cabal complains if this variable is set during configure.
 
     echo configureFlags: $configureFlags
-    ./Setup configure $configureFlags 2>&1 | ${coreutils}/bin/tee "$NIX_BUILD_TOP/cabal-configure.log"
+    ${setupCommand} configure $configureFlags 2>&1 | ${coreutils}/bin/tee "$NIX_BUILD_TOP/cabal-configure.log"
     if ${gnugrep}/bin/egrep -q '^Warning:.*depends on multiple versions' "$NIX_BUILD_TOP/cabal-configure.log"; then
       echo >&2 "*** abort because of serious configure-time warning from Cabal"
       exit 1
@@ -207,20 +214,20 @@ stdenv.mkDerivation ({
 
   buildPhase = ''
     runHook preBuild
-    ./Setup build ${buildTarget}
+    ${setupCommand} build ${buildTarget}
     runHook postBuild
   '';
 
   checkPhase = ''
     runHook preCheck
-    ./Setup test ${testTarget}
+    ${setupCommand} test ${testTarget}
     runHook postCheck
   '';
 
   haddockPhase = ''
     runHook preHaddock
     ${optionalString (doHaddock && hasActiveLibrary) ''
-      ./Setup haddock --html \
+      ${setupCommand} haddock --html \
         ${optionalString doHoogle "--hoogle"} \
         ${optionalString (hasActiveLibrary && hyperlinkSource) "--hyperlink-source"}
     ''}
@@ -230,17 +237,17 @@ stdenv.mkDerivation ({
   installPhase = ''
     runHook preInstall
 
-    ${if !hasActiveLibrary then "./Setup install" else ''
-      ./Setup copy
+    ${if !hasActiveLibrary then "${setupCommand} install" else ''
+      ${setupCommand} copy
       local packageConfDir="$out/lib/${ghc.name}/package.conf.d"
       local packageConfFile="$packageConfDir/${pname}-${version}.conf"
       mkdir -p "$packageConfDir"
-      ./Setup register --gen-pkg-config=$packageConfFile
+      ${setupCommand} register --gen-pkg-config=$packageConfFile
       local pkgId=$( ${gnused}/bin/sed -n -e 's|^id: ||p' $packageConfFile )
       mv $packageConfFile $packageConfDir/$pkgId.conf
     ''}
 
-    ${optionalString (enableSharedExecutables && isExecutable && stdenv.isDarwin && stdenv.lib.versionOlder ghc.version "7.10") ''
+    ${optionalString (enableSharedExecutables && isExecutable && !isGhcjs && stdenv.isDarwin && stdenv.lib.versionOlder ghc.version "7.10") ''
       for exe in "$out/bin/"* ; do
         install_name_tool -add_rpath "$out/lib/ghc-${ghc.version}/${pname}-${version}" "$exe"
       done
@@ -261,16 +268,10 @@ stdenv.mkDerivation ({
       LANG = "en_US.UTF-8";
       LOCALE_ARCHIVE = optionalString stdenv.isLinux "${glibcLocales}/lib/locale/locale-archive";
       shellHook = ''
-        export NIX_GHC="${ghcEnv}/bin/${ghcCommand}"
-        export NIX_GHCPKG="${ghcEnv}/bin/${ghcCommand}-pkg"
-        export NIX_GHC_DOCDIR="${ghcEnv}/share/doc/ghc/html"
-        export NIX_GHC_LIBDIR="${ghcEnv}/lib/${ghcEnv.name}"
-      '';
-      buildCommand = ''
-        echo >&2 ""
-        echo >&2 "*** Haskell 'env' attributes are intended for interactive nix-shell sessions, not for building! ***"
-        echo >&2 ""
-        exit 1
+        export NIX_${ghcCommandCaps}="${ghcEnv}/bin/${ghcCommand}"
+        export NIX_${ghcCommandCaps}PKG="${ghcEnv}/bin/${ghcCommand}-pkg"
+        export NIX_${ghcCommandCaps}_DOCDIR="${ghcEnv}/share/doc/ghc/html"
+        export NIX_${ghcCommandCaps}_LIBDIR="${ghcEnv}/lib/${ghcEnv.name}"
       '';
     };
 
