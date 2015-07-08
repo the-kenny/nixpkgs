@@ -47,9 +47,6 @@ in stdenv.mkDerivation {
 
   patches = if stdenv.isDarwin then [ ./no-xcode.patch ] else null;
 
-  postPatch = if stdenv.isDarwin then ''
-    (cd tools/gyp; patch -Np1 -i ${../../python-modules/gyp/no-darwin-cflags.patch})
-  '' else null;
 
   buildInputs = [ python which ]
     ++ (optional stdenv.isLinux utillinux)
@@ -62,7 +59,7 @@ in stdenv.mkDerivation {
     description = "Event-driven I/O framework for the V8 JavaScript engine";
     homepage = http://nodejs.org;
     license = licenses.mit;
-    maintainers = [ maintainers.goibhniu maintainers.shlevy maintainers.havvy ];
+    maintainers = [ maintainers.goibhniu maintainers.havvy ];
     platforms = platforms.linux ++ platforms.darwin;
   };
 }

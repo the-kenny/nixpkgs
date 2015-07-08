@@ -2,7 +2,7 @@
 , libnetfilter_conntrack, libnl, libpcap, libsodium, liburcu, ncurses, perl
 , pkgconfig, zlib }:
 
-let version = "0.5.9-10-gb7ece46"; in
+let version = "0.5.9-21-g8c75168"; in
 stdenv.mkDerivation {
   name = "netsniff-ng-${version}";
 
@@ -10,8 +10,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub rec {
     repo = "netsniff-ng";
     owner = repo;
-    rev = "b7ece46f62b1fbece160cc7bd2905a6d0d3970a9";
-    sha256 = "1m44ssvkzp4xrkwc61gsmn2vkbmf9r5mp1zjz8cj8w120703cljj";
+    rev = "8c75168ed5005f70955dd4ade93dec6abf481852";
+    sha256 = "10awwwmpm555wl1z07pz20cq1lsy37r36m0aamck9ri5vyq6fdzw";
   };
 
   buildInputs = [ bison flex geoip geolite-legacy libcli libnet libnl
