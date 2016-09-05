@@ -6,8 +6,8 @@ rec {
     shortVersion = "master-1.13.0";
     forceBundledLLVM = false;
     configureFlags = [ "--release-channel=nightly" ];
-    srcRev = "308824acecf902f2b6a9c1538bde0324804ba68e";
-    srcSha = "17zv1a27a7w6n3a22brriqx5m6i4s3nsj7mlnpliwghlbz8q7384";
+    srcRev = "2dbf600d159a5c65b53419f1669834d1f81496a7";
+    srcSha = "0mc4pjjz5pdrxwhsva815xp0zsvgpb6d5accxzbzl2f2isaaxnbm";
     patches = [
       ./patches/disable-lockfile-check.patch
     ] ++ stdenv.lib.optional stdenv.needsPax ./patches/grsec.patch;
